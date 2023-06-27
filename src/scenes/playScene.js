@@ -3,6 +3,7 @@ import { Scene } from "../templates/scene/scene";
 import { Entity, LIGHTTYPE_DIRECTIONAL, Color } from "playcanvas";
 import { Plane1 } from "../templates/entity/plane1";
 import { MainCamera } from "../templates/camera/mainCamera";
+import { Light } from "../templates/object/light";
 
 export class PlayScene extends Scene {
   constructor() {
@@ -29,20 +30,7 @@ export class PlayScene extends Scene {
   }
 
   _initLight() {
-    this.directionalLight = new Entity("light-directional");
-    this.addChild(this.directionalLight);
-
-    this.directionalLight.addComponent("light", {
-      type: LIGHTTYPE_DIRECTIONAL,
-      color: new Color(1, 1, 1),
-      castShadows: true,
-      shadowBias: 0.2,
-      shadowDistance: 10,
-      normalOffsetBias: 0.05,
-      shadowResolution: 2048,
-    });
-    this.directionalLight.setLocalPosition(2, 30, -2);
-    this.directionalLight.setLocalEulerAngles(45, 135, 0);
+    this.directionalLight = new Light();
     this.addChild(this.directionalLight);
   }
 
@@ -81,7 +69,7 @@ export class PlayScene extends Scene {
     this.ground.addComponent("model", {
       type: "plane",
     });
-    this.ground.setLocalScale(100, 1, 100);
+    this.ground.setLocalScale(100, 1, 10000);
     this.ground.setLocalPosition(0, 0, 0);
     this.addChild(this.ground);
 
@@ -92,6 +80,13 @@ export class PlayScene extends Scene {
     this.ground.addComponent("rigidbody", {
       type: "static",
     });
+
+    // add material to ground
+    this.groundMaterial = new pc.StandardMaterial();
+    this.groundMaterial.diffuse.
+    this.groundMaterial.update();
+    this.ground.model.material = this.groundMaterial;
+
 
     // plane
     this.plane = new Plane1();
