@@ -4,6 +4,7 @@ import { Entity, LIGHTTYPE_DIRECTIONAL, Color } from "playcanvas";
 import { Plane1 } from "../templates/entity/plane1";
 import { MainCamera } from "../templates/camera/mainCamera";
 import { Light } from "../templates/object/light";
+import { assets } from "../assetLoader/assets";
 
 export class PlayScene extends Scene {
   constructor() {
@@ -69,6 +70,15 @@ export class PlayScene extends Scene {
     this.ground.addComponent("model", {
       type: "plane",
     });
+    this.groundMaterial = new pc.StandardMaterial();
+    this.groundMaterial.diffuseMap = assets.groundTexture.resource;
+    
+    // make ground material repeat in ground
+    this.groundMaterial.diffuseMapTiling = new pc.Vec2(1, 100);
+    this.groundMaterial.update();
+    this.ground.model.material = this.groundMaterial;
+
+
     this.ground.setLocalScale(100, 1, 10000);
     this.ground.setLocalPosition(0, 0, 0);
     this.addChild(this.ground);
@@ -82,11 +92,6 @@ export class PlayScene extends Scene {
     });
 
     // add material to ground
-    this.groundMaterial = new pc.StandardMaterial();
-    this.groundMaterial.diffuse.
-    this.groundMaterial.update();
-    this.ground.model.material = this.groundMaterial;
-
 
     // plane
     this.plane = new Plane1();
