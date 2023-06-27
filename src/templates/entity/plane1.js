@@ -10,7 +10,7 @@ export class Plane1 extends Entity {
       asset: assets.planeModel,
     });
 
-    this.setLocalScale(5, 5, 5);
+    this.setLocalScale(2, 2, 2);
     this.setLocalPosition(0, 0, 0);
 
     this.addComponent("animation", {
@@ -34,5 +34,7 @@ export class Plane1 extends Entity {
     PlaneControl();
     this.addComponent("script");
     this.script.create("planeControl");
+
+    this.speed = 10;
   }
 }

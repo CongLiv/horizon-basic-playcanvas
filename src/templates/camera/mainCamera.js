@@ -11,7 +11,7 @@ export class MainCamera extends Entity {
       fov: 60,
       nearClip: 0.1,
     });
-    this.setLocalPosition(0, 20, -50);
+    this.setLocalPosition(0, 0, -50);
     this.setLocalEulerAngles(-30, 180, 0);
 
     Follow();
@@ -19,7 +19,7 @@ export class MainCamera extends Entity {
     this.script.create("follow", {
         attributes: {
             targetEntity: this.targetEntity,
-            offset: new pc.Vec3(0, 3, -7),
+            offset: new pc.Vec3(0, 3, -5),
         },
 
     });
