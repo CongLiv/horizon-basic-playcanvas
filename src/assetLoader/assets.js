@@ -8,6 +8,6 @@ export const assets = {
 
     groundTexture: new Asset("groundTexture", "texture", {url: "assets/textures/ground.png"}),
 
-
+    skybox1: new Asset("skybox1", "texture", {url: "assets/cubemaps/skybox1.png"}),
 
 };

@@ -6,7 +6,7 @@ export function PlaneControl() {
   control.prototype.initialize = function () {
     this.waveCounter = 1;
     this.leanAngle = 0; // Góc nghiêng hiện tại của máy bay
-    this.leanSpeed = 6; // Tốc độ nghiêng (tùy chỉnh theo nhu cầu)
+    this.leanSpeed = 15; // Tốc độ nghiêng (tùy chỉnh theo nhu cầu)
     this.maxLean = 2.5; // Góc nghiêng tối đa (tùy chỉnh theo nhu cầu)
     this.flyHeight = 10; // Độ cao khi máy bay bay
     this.entity.setPosition(0, this.flyHeight, 0);
@@ -26,12 +26,12 @@ export function PlaneControl() {
     // use direction from input to apply a force to the character
     if (x !== 0) {
       // TODO un-optimized code!
-      const movement = new pc.Vec3(x, 0, 0).normalize().scale(dt * this.entity.speed);
+      const movement = new pc.Vec3(x, 0, 0).normalize().scale(dt * this.entity.turnSpeed);
       this.entity.translate(movement);
     }
 
     // make plane always fly forward
-    this.entity.translate(0, 0, dt * this.entity.speed);
+    this.entity.translate(0, 0, dt * this.entity.forwardSpeed);
 
     // make plane fly wave pattern
     let pos = this.entity.getPosition();

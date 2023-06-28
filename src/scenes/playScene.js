@@ -5,7 +5,7 @@ import { Plane1 } from "../templates/entity/plane1";
 import { MainCamera } from "../templates/camera/mainCamera";
 import { Light } from "../templates/object/light";
 import { assets } from "../assetLoader/assets";
-
+import { Game } from "../game";
 export class PlayScene extends Scene {
   constructor() {
     super(GameConstant.SCENE_PLAY);
@@ -28,12 +28,22 @@ export class PlayScene extends Scene {
     } else {
       this._initCamera();
     }
+    // this._initSkybox();
   }
 
   _initLight() {
     this.directionalLight = new Light();
     this.addChild(this.directionalLight);
   }
+
+  // _initSkybox() {
+  //   this.skybox1 = new Entity();
+  //   this.skybox1.addComponent("skybox", {
+  //     type: "cubemap",
+  //     cubemap: assets.skybox1.resource,
+  //   });
+  //   Game.app.root.addChild(this.skybox1);
+  // }
 
   _initOrbitCamera() {
     this.camera = new Entity();
@@ -46,7 +56,7 @@ export class PlayScene extends Scene {
     this.camera.script.create("orbitCamera", {
       attributes: {
         inertiaFactor: 0.2,
-        focusEntity: null,
+        focusEntity: this.plane,
         distanceMin: 0.5,
         distanceMax: Infinity,
         pitchAngleMin: -90,
@@ -72,12 +82,11 @@ export class PlayScene extends Scene {
     });
     this.groundMaterial = new pc.StandardMaterial();
     this.groundMaterial.diffuseMap = assets.groundTexture.resource;
-    
+
     // make ground material repeat in ground
     this.groundMaterial.diffuseMapTiling = new pc.Vec2(1, 100);
     this.groundMaterial.update();
     this.ground.model.material = this.groundMaterial;
-
 
     this.ground.setLocalScale(100, 1, 10000);
     this.ground.setLocalPosition(0, 0, 0);
