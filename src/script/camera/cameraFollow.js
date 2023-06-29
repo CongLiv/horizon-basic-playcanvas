@@ -1,7 +1,7 @@
 import { Vec3 } from "playcanvas";
 
 export function Follow() {
-  let follow = pc.createScript("follow");
+  var follow = pc.createScript("follow");
   follow.attributes.add("targetEntity", {
     type: "entity",
     title: "Target Entity",

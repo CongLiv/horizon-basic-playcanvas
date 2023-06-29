@@ -3,7 +3,7 @@
 export function ObjectScript(){
 
 
-    let objectScript = new pc.createScript('objectScript');
+    var objectScript = new pc.createScript('objectScript');
 
     objectScript.attributes.add('player', {
         type: 'entity',

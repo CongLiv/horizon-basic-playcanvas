@@ -27,9 +27,12 @@ export class Plane1 extends Entity {
       type: "mesh",
       asset: assets.planeModel,
     });
-    this.addComponent("rigidbody", {
-      type: "static",
-    });
+    
+    // this.addComponent("rigidbody", {
+    //   type: "static",
+    //   restitution: 0.5,
+
+    // });
     // this.rigidbody.angularFactor = pc.Vec3.ZERO;
     // this.rigidbody.linearFactor = pc.Vec3.ZERO;
 
@@ -38,7 +41,7 @@ export class Plane1 extends Entity {
     this.script.create("planeControl");
 
     this.turnSpeed = 15;
-    this.forwardSpeed = 10;
+    this.forwardSpeed = 30;
   }
 
   update(dt) {}

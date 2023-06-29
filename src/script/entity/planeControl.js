@@ -1,5 +1,5 @@
 export function PlaneControl() {
-  let control = pc.createScript("planeControl");
+  var control = pc.createScript("planeControl");
 
  
   // initialize code called once per entity
@@ -10,6 +10,7 @@ export function PlaneControl() {
     this.maxLean = 2.5; // Góc nghiêng tối đa (tùy chỉnh theo nhu cầu)
     this.flyHeight = 5; // Độ cao khi máy bay bay
     this.entity.setPosition(0, this.flyHeight, 0);
+    this.entity.collision.on("triggerenter", this.onTriggerEnter, this);
   };
 
   // update code called every frame
@@ -62,5 +63,11 @@ export function PlaneControl() {
 
     rot.z = this.leanAngle * 0.1;
     this.entity.setRotation(rot);
+  };
+
+  control.prototype.onTriggerEnter = function (env) {
+    if (env.tags.has("obstacle")) {
+      this.entity.destroyPlayer();
+    }
   };
 }

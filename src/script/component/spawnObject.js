@@ -3,7 +3,7 @@ import { Ground1 } from "../../templates/object/ground/groud1";
 import { Utils } from "../../utils/utils";
 import { Obstacle1 } from "../../templates/object/obstacle/obstacle1";
 export function SpawnObject() {
-  let spawnObject = new pc.createScript("spawnObject");
+  var spawnObject = new pc.createScript("spawnObject");
 
   spawnObject.attributes.add("player", {
     type: "entity",
@@ -31,7 +31,7 @@ export function SpawnObject() {
 
     if (this._spawnGroundCounter <= 0) {
       this._spawnGround();
-      this._spawnGroundCounter = 10;
+      this._spawnGroundCounter = 3;
     }
 
     if (this._spawnObstacleCounter <= 0) {

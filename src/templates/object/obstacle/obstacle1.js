@@ -20,7 +20,9 @@ export class Obstacle1 extends SuperObject {
 
     this.addComponent("rigidbody", {
       type: "dynamic",
+      restitution: 0.5,
     });
+   
     this.rigidbody.angularFactor = pc.Vec3.ZERO;
     this.rigidbody.linearFactor = pc.Vec3.ZERO;
 
@@ -31,6 +33,7 @@ export class Obstacle1 extends SuperObject {
   }
 
   spawnToPosition(position) {
+
     this.setLocalPosition(position);
     Game.app.root.addChild(this);
   }
