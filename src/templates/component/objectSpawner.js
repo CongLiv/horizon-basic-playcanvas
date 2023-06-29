@@ -8,20 +8,19 @@ export class ObjectSpawner extends Entity{
         super();
         this.player = player;
         this.spawnDistance = 150;
-        this.addComponent('model', {   
-            type: 'box'
-        });
+        // this.addComponent('model', {   
+        //     type: 'box'
+        // });
         
         this.setLocalScale(500, 50, 1);
  
         // add material to object
-        this.material = new pc.StandardMaterial();
-        this.material.diffuse = new pc.Color(0.6, 0.3, 0);
-        this.material.update();
+        // this.material = new pc.StandardMaterial();
+        // this.material.diffuse = new pc.Color(0.6, 0.3, 0);
+        // this.material.update();
         
-        this.model.material = this.material;
+        // this.model.material = this.material;
 
-        SpawnObject();
         this.addComponent('script');
         this.script.create('spawnObject', {
             attributes: {

@@ -95,7 +95,6 @@ export class PlayScene extends Scene {
   update(dt) {
     super.update(dt);
     this._debugListener();
-    console.log(this.obstacle)
   }
 
   _debugListener() {

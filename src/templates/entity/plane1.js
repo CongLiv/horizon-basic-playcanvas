@@ -16,7 +16,7 @@ export class Plane1 extends Entity {
 
     this.addComponent("animation", {
       assets: [assets.flyAnim],
-      speed: 2,
+      speed: 1.5,
       loop: true,
       activate: true,
     });
@@ -30,14 +30,22 @@ export class Plane1 extends Entity {
     this.addComponent("rigidbody", {
       type: "static",
     });
+    // this.rigidbody.angularFactor = pc.Vec3.ZERO;
+    // this.rigidbody.linearFactor = pc.Vec3.ZERO;
 
-    PlaneControl();
+   
     this.addComponent("script");
     this.script.create("planeControl");
 
     this.turnSpeed = 15;
-    this.forwardSpeed = 50;
+    this.forwardSpeed = 10;
   }
 
   update(dt) {}
+
+  destroyPlayer() {
+    let parent = this.getParent();
+    parent.removeChild(this);
+    this.destroy();
+  }
 }

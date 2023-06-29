@@ -31,12 +31,12 @@ export function SpawnObject() {
 
     if (this._spawnGroundCounter <= 0) {
       this._spawnGround();
-      this._spawnGroundCounter = Utils.getRandomFloat(0.5, 1);
+      this._spawnGroundCounter = 10;
     }
 
     if (this._spawnObstacleCounter <= 0) {
       this._spawnObstacle();
-      this._spawnObstacleCounter = Utils.getRandomFloat(0.5, 1);;
+      this._spawnObstacleCounter = Utils.getRandomFloat(2, 3);;
     }
   };
 
@@ -45,7 +45,7 @@ export function SpawnObject() {
     let position = new Vec3(
       this.player.getPosition().x,
       0,
-      this.player.getPosition().z + this.entity.spawnDistance
+      this.player.getPosition().z + this.entity.spawnDistance * 2
     );
     ground.spawnToPosition(position);
   };

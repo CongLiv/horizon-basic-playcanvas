@@ -16,6 +16,12 @@ export class Ground1 extends SuperObject {
     this.setLocalScale(500, 1, 500);
 
     this.groundMaterial = new pc.StandardMaterial();
+    this.groundMaterial.diffuseMap = assets.sandTexture.resource;
+    this.groundMaterial.diffuseMapTiling = new pc.Vec2(10, 10);
+    this.groundMaterial.update();
+    this.model.material = this.groundMaterial;
+    // make sand texture repeat
+
 
     this.addComponent("collision", {
       type: "box",
@@ -23,12 +29,12 @@ export class Ground1 extends SuperObject {
     });
 
     this.addComponent("rigidbody", {
-      type: "dynamic",
+      type: "static",
     });
 
-    //make rigidbody dont fall down
-    this.rigidbody.angularFactor = pc.Vec3.ZERO;
-    this.rigidbody.linearFactor = pc.Vec3.ZERO;
+    // //make rigidbody dont fall down
+    // this.rigidbody.angularFactor = pc.Vec3.ZERO;
+    // this.rigidbody.linearFactor = pc.Vec3.ZERO;
   }
 
   spawnToPosition(position) {

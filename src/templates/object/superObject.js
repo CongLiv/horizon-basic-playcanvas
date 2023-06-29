@@ -15,7 +15,7 @@ export class SuperObject extends Entity {
   }
 
   addObjectScript() {
-    ObjectScript();
+    
     this.addComponent("script");
     this.script.create("objectScript", {
       attributes: {

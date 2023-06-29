@@ -13,6 +13,10 @@ import { InputManager } from "./system/inputManager.js";
 import { loadObitCameraPlugin } from "./script/camera/orbit-camera.js";
 import { SceneManager } from "./templates/scene/sceneManager.js";
 import { PlayScene } from "./scenes/playScene.js";
+import { ObjectScript } from "./script/object/objectScript.js";
+import { PlaneControl } from "./script/entity/planeControl.js";
+import { SpawnObject } from "./script/component/spawnObject.js";
+import { Follow } from "./script/camera/cameraFollow.js";
 
 export class Game {
   static init() {
@@ -37,8 +41,12 @@ export class Game {
       fallbackUrl: "assets/libs/ammo.js",
     });
 
-    // load obit camera plugin
+    // load all script
     loadObitCameraPlugin();
+    ObjectScript();
+    PlaneControl();
+    SpawnObject();
+    Follow();
 
     WasmModule.getInstance("Ammo", () => {
       AssetLoader.loadAssets(this.app, () => {

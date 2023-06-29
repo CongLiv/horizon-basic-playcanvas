@@ -14,7 +14,7 @@ export class MainCamera extends Entity {
     this.setLocalPosition(0, 0, this.targetEntity.getLocalPosition().z - 50);
     this.setLocalEulerAngles(-30, 180, 0);
 
-    Follow();
+    
     this.addComponent("script");
     this.script.create("follow", {
         attributes: {

@@ -1,13 +1,11 @@
 import { SuperObject } from "../superObject";
 import { Game } from "../../../game";
-
 export class Obstacle1 extends SuperObject {
   constructor(player) {
     super(player);
     this.player = player;
     this.addObjectScript();
     this.tags.add("obstacle");
-
 
     this.addComponent("model", {
       type: "box",
@@ -21,15 +19,15 @@ export class Obstacle1 extends SuperObject {
     });
 
     this.addComponent("rigidbody", {
-      type: "static",
+      type: "dynamic",
     });
-    
+    this.rigidbody.angularFactor = pc.Vec3.ZERO;
+    this.rigidbody.linearFactor = pc.Vec3.ZERO;
+
     this.obstacleMaterial = new pc.StandardMaterial();
     this.obstacleMaterial.diffuse = new pc.Color(0.6, 0.3, 0);
     this.obstacleMaterial.update();
     this.model.material = this.obstacleMaterial;
-    
-
   }
 
   spawnToPosition(position) {

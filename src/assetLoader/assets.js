@@ -7,6 +7,7 @@ export const assets = {
     waverAnim: new Asset("waverAnim", "animation", {url: "assets/anims/waver.glb"}),
 
     groundTexture: new Asset("groundTexture", "texture", {url: "assets/textures/ground.png"}),
+    sandTexture: new Asset("sandTexture", "texture", {url: "assets/textures/sand.jpg"}),
 
     skybox1: new Asset("skybox1", "texture", {url: "assets/cubemaps/skybox1.png"}),
 
