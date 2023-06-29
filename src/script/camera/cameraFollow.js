@@ -79,7 +79,7 @@ export function Follow() {
       let plusCameraSpeed = 1;
       let currentDistanceToTarget = Math.abs(this.entity.getPosition().x - this.targetEntity.getPosition().x);
       if (currentDistanceToTarget > 0.1) {
-        plusCameraSpeed = 1.05;
+        plusCameraSpeed = 1;
         // this.lastX = this.entity.getPosition().x;
       }
 

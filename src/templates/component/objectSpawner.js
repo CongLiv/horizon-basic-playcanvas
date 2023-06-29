@@ -1,5 +1,5 @@
 import { Entity} from "playcanvas";
-import { SpawnObject } from "../../script/spawnObject";
+import { SpawnObject } from "../../script/component/spawnObject";
 
 
 export class ObjectSpawner extends Entity{
@@ -7,7 +7,7 @@ export class ObjectSpawner extends Entity{
     constructor(player) {
         super();
         this.player = player;
-        
+        this.spawnDistance = 150;
         this.addComponent('model', {   
             type: 'box'
         });
@@ -19,9 +19,13 @@ export class ObjectSpawner extends Entity{
             halfExtents: new pc.Vec3(250, 25, 0.5)
         });
 
-        this.addComponent('rigidbody', {
-            type: 'static'
-        }); 
+        
+        // add material to object
+        this.material = new pc.StandardMaterial();
+        this.material.diffuse = new pc.Color(0.6, 0.3, 0);
+        this.material.update();
+        
+        this.model.material = this.material;
 
         SpawnObject();
         this.addComponent('script');
@@ -30,7 +34,6 @@ export class ObjectSpawner extends Entity{
                 player: this.player
             }
         });
-        
     }
 
 }

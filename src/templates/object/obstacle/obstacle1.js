@@ -1,10 +1,12 @@
+import { Object } from "../object";
+import { ObjectScript } from "../../../script/object/objectScript";
+export class Obstacle1 extends Object {
+  constructor(player) {
+    super(player);
+    this.player = player;
+    this.addObjectScript();
 
-import { ObjectModel } from "../objectModel";
-
-export class Obstacle1 extends ObjectModel{
-  constructor() {
-    super();
-
+    this.tags.add("obstacle");
     this.addComponent("model", {
       type: "box",
     });
@@ -17,13 +19,12 @@ export class Obstacle1 extends ObjectModel{
     });
 
     this.addComponent("rigidbody", {
-        type: "static",
+      type: "static",
     });
+
   }
 
   spawnToPosition(position) {
-    this.setLocalPosition(position.x, this.collision.halfExtents.y , position.z);
+    this.setLocalPosition(position.x, this.collision.halfExtents.y, position.z);
   }
-
-  
 }

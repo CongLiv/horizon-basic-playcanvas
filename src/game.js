@@ -10,7 +10,7 @@ import {
 } from "playcanvas";
 import { AssetLoader } from "./assetLoader/assetLoader.js";
 import { InputManager } from "./system/inputManager.js";
-import { loadObitCameraPlugin } from "./orbit-camera.js";
+import { loadObitCameraPlugin } from "./script/camera/orbit-camera.js";
 import { SceneManager } from "./templates/scene/sceneManager.js";
 import { PlayScene } from "./scenes/playScene.js";
 

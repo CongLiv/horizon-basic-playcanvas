@@ -1,10 +1,11 @@
 import { Entity } from "playcanvas";
 import { assets } from "../../assetLoader/assets";
-import { PlaneControl } from "../../script/planeControl";
+import { PlaneControl } from "../../script/entity/planeControl";
 
 export class Plane1 extends Entity {
   constructor() {
     super();
+    this.tags.add("player");
     this.addComponent("model", {
       type: "asset",
       asset: assets.planeModel,
@@ -30,19 +31,13 @@ export class Plane1 extends Entity {
       type: "static",
     });
 
-
     PlaneControl();
     this.addComponent("script");
     this.script.create("planeControl");
 
     this.turnSpeed = 10;
     this.forwardSpeed = 5;
-
-  
   }
 
-  update(dt) {
-
-
-  }
+  update(dt) {}
 }

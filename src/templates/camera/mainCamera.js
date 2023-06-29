@@ -1,5 +1,5 @@
 import { Entity, Color } from "playcanvas";
-import { Follow } from "../../script/cameraFollow";
+import { Follow } from "../../script/camera/cameraFollow";
 
 export class MainCamera extends Entity {
   constructor(targetEntity) {

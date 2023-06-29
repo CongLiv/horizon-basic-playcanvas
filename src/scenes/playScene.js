@@ -8,7 +8,7 @@ import { assets } from "../assetLoader/assets";
 import { Game } from "../game";
 import { Ground1 } from "../templates/object/ground/groud1";
 import { ObjectSpawner } from "../templates/component/objectSpawner";
-import { ObjectDestroyer } from "../templates/component/objectDestroyer";
+
 export class PlayScene extends Scene {
   constructor() {
     super(GameConstant.SCENE_PLAY);
@@ -26,7 +26,7 @@ export class PlayScene extends Scene {
 
   _initialize() {
     this._initLight();
-    this._initModel();
+    this._initObject();
     this._initCamera();
     this._initOrbitCamera();
     // this._initSkybox();
@@ -57,7 +57,7 @@ export class PlayScene extends Scene {
     this.camera.script.create("orbitCamera", {
       attributes: {
         inertiaFactor: 0.2,
-        focusEntity: this.plane,
+        focusEntity: this.player,
         distanceMin: 0.5,
         distanceMax: Infinity,
         pitchAngleMin: -90,
@@ -67,28 +67,29 @@ export class PlayScene extends Scene {
     });
     this.camera.script.create("orbitCameraInputMouse");
     this.camera.script.create("orbitCameraInputTouch");
+    this.camera.setLocalPosition(-350, 80, -20);
 
     this.addChild(this.camera);
   }
   _initCamera() {
-    this.mainCamera = new MainCamera(this.plane);
+    this.mainCamera = new MainCamera(this.player);
     this.addChild(this.mainCamera);
   }
 
-  _initModel() {
+  _initObject() {
+    // plane
+    this.player = new Plane1();
+    this.addChild(this.player);
     // ground
-    this.ground = new Ground1();
+    this.ground = new Ground1(this.player);
+    this.ground.spawnToPosition(new pc.Vec3(0, 0, 0));
     this.addChild(this.ground);
 
-    // plane
-    this.plane = new Plane1();
-    this.addChild(this.plane);
     
-    this.objectSpawner = new ObjectSpawner(this.plane);
+    
+    this.objectSpawner = new ObjectSpawner(this.player);
     this.addChild(this.objectSpawner);
 
-    this.objectDestroyer = new ObjectDestroyer(this.plane);
-    this.addChild(this.objectDestroyer);
   }
 
   update(dt) {

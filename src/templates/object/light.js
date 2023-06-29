@@ -13,7 +13,7 @@ export class Light extends Entity {
       normalOffsetBias: 0.05,
       shadowResolution: 2048,
     });
-    this.setLocalPosition(2, 30, -2);
+    this.setLocalPosition(2, 80, -2);
     this.setLocalEulerAngles(45, 135, 0);
   }
 }

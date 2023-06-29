@@ -1,36 +1,66 @@
 import { assets } from "../../../assetLoader/assets";
-import { ObjectModel } from "../objectModel";
+import { ObjectScript } from "../../../script/object/objectScript";
+import { Object } from "../object";
+import { Game } from "../../../game";
 
-export class Ground1 extends ObjectModel{
-  constructor() {
+export class Ground1 extends Object {
+  constructor(player) {
     super();
-
+    this.player = player;
+    this.addObjectScript();  
+    this.tags.add("ground");
     this.addComponent("model", {
       type: "plane",
     });
 
-    this.setLocalScale(300, 1, 300);
+    this.setLocalScale(500, 1, 500);
+    
     this.groundMaterial = new pc.StandardMaterial();
-    this.groundMaterial.diffuseMap = assets.groundTexture.resource;
-
-    // make ground material repeat in ground
-    this.groundMaterial.diffuseMapTiling = new pc.Vec2(15, 15);
+    this.groundMaterial.diffuse = new pc.Color(0.78, 0.89, 0.9)
     this.groundMaterial.update();
     this.model.material = this.groundMaterial;
 
     this.addComponent("collision", {
       type: "box",
-      halfExtents: new pc.Vec3(150, 0.5, 150),
+      halfExtents: new pc.Vec3(250, 0.5, 250),
     });
 
     this.addComponent("rigidbody", {
-        type: "static",
+      type: "dynamic",
     });
+
+    //make rigidbody dont fall down
+    this.rigidbody.angularFactor = pc.Vec3.ZERO;
+    this.rigidbody.linearFactor = pc.Vec3.ZERO;
+
+
+
   }
 
   spawnToPosition(position) {
-    this.setLocalPosition(position.x, this.collision.halfExtents.y , position.z);
+    this.initPosition = new pc.Vec3(
+      position.x,
+      this.collision.halfExtents.y,
+      position.z
+    );
+   
+    this.setLocalPosition(position.x, this.collision.halfExtents.y, position.z);
+    Game.app.root.addChild(this);
+
+    // if (!this.addedScript) {
+    //   this._addGroundScript();
+    //   this.addedScript = true;
+    // }
   }
 
-  
+  _addGroundScript() {
+    ObjectScript();
+    this.addComponent("script");
+    this.script.create("groundScript", {
+      attributes: {
+        initPosition : this.initPosition,
+      },
+    });
+  }
+
 }
