@@ -37,5 +37,12 @@ export class Plane1 extends Entity {
 
     this.turnSpeed = 10;
     this.forwardSpeed = 5;
+
+  
+  }
+
+  update(dt) {
+
+
   }
 }

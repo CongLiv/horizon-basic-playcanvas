@@ -6,10 +6,14 @@ import { MainCamera } from "../templates/camera/mainCamera";
 import { Light } from "../templates/object/light";
 import { assets } from "../assetLoader/assets";
 import { Game } from "../game";
+import { Ground1 } from "../templates/object/ground/groud1";
+import { ObjectSpawner } from "../templates/component/objectSpawner";
+import { ObjectDestroyer } from "../templates/component/objectDestroyer";
 export class PlayScene extends Scene {
   constructor() {
     super(GameConstant.SCENE_PLAY);
     this._initialize();
+    this.onDebug = false;
   }
 
   create() {
@@ -23,11 +27,8 @@ export class PlayScene extends Scene {
   _initialize() {
     this._initLight();
     this._initModel();
-    if (GameConstant.DEBUG_CAMERA) {
-      this._initOrbitCamera();
-    } else {
-      this._initCamera();
-    }
+    this._initCamera();
+    this._initOrbitCamera();
     // this._initSkybox();
   }
 
@@ -76,38 +77,32 @@ export class PlayScene extends Scene {
 
   _initModel() {
     // ground
-    this.ground = new Entity();
-    this.ground.addComponent("model", {
-      type: "plane",
-    });
-    this.groundMaterial = new pc.StandardMaterial();
-    this.groundMaterial.diffuseMap = assets.groundTexture.resource;
-
-    // make ground material repeat in ground
-    this.groundMaterial.diffuseMapTiling = new pc.Vec2(1, 100);
-    this.groundMaterial.update();
-    this.ground.model.material = this.groundMaterial;
-
-    this.ground.setLocalScale(100, 1, 10000);
-    this.ground.setLocalPosition(0, 0, 0);
+    this.ground = new Ground1();
     this.addChild(this.ground);
-
-    this.ground.addComponent("collision", {
-      type: "box",
-      halfExtents: new pc.Vec3(50, 0.5, 50),
-    });
-    this.ground.addComponent("rigidbody", {
-      type: "static",
-    });
-
-    // add material to ground
 
     // plane
     this.plane = new Plane1();
     this.addChild(this.plane);
+    
+    this.objectSpawner = new ObjectSpawner(this.plane);
+    this.addChild(this.objectSpawner);
+
+    this.objectDestroyer = new ObjectDestroyer(this.plane);
+    this.addChild(this.objectDestroyer);
   }
 
   update(dt) {
     super.update(dt);
+    this._debugListener();
+  }
+
+  _debugListener() {
+    this.camera.enabled = this.onDebug;
+    this.mainCamera.enabled = !this.camera.enabled;
+
+    if (Game.app.keyboard.isPressed(pc.KEY_P)) {
+      this.onDebug = !this.onDebug;
+    }
+  
   }
 }
