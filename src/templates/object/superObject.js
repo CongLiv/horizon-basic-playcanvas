@@ -1,7 +1,7 @@
 import { Entity } from "playcanvas";
 import { ObjectScript } from "../../script/object/objectScript";
 
-export class Object extends Entity {
+export class SuperObject extends Entity {
   constructor(player) {
     super();
     this.player = player;

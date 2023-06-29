@@ -8,7 +8,7 @@ export function PlaneControl() {
     this.leanAngle = 0; // Góc nghiêng hiện tại của máy bay
     this.leanSpeed = 15; // Tốc độ nghiêng (tùy chỉnh theo nhu cầu)
     this.maxLean = 2.5; // Góc nghiêng tối đa (tùy chỉnh theo nhu cầu)
-    this.flyHeight = 10; // Độ cao khi máy bay bay
+    this.flyHeight = 5; // Độ cao khi máy bay bay
     this.entity.setPosition(0, this.flyHeight, 0);
   };
 

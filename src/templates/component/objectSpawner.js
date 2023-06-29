@@ -14,12 +14,6 @@ export class ObjectSpawner extends Entity{
         
         this.setLocalScale(500, 50, 1);
  
-        this.addComponent('collision', {
-            type: 'box',
-            halfExtents: new pc.Vec3(250, 25, 0.5)
-        });
-
-        
         // add material to object
         this.material = new pc.StandardMaterial();
         this.material.diffuse = new pc.Color(0.6, 0.3, 0);

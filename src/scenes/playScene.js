@@ -8,6 +8,7 @@ import { assets } from "../assetLoader/assets";
 import { Game } from "../game";
 import { Ground1 } from "../templates/object/ground/groud1";
 import { ObjectSpawner } from "../templates/component/objectSpawner";
+import { Obstacle1 } from "../templates/object/obstacle/obstacle1";
 
 export class PlayScene extends Scene {
   constructor() {
@@ -83,7 +84,6 @@ export class PlayScene extends Scene {
     // ground
     this.ground = new Ground1(this.player);
     this.ground.spawnToPosition(new pc.Vec3(0, 0, 0));
-    this.addChild(this.ground);
 
     
     
@@ -95,6 +95,7 @@ export class PlayScene extends Scene {
   update(dt) {
     super.update(dt);
     this._debugListener();
+    console.log(this.obstacle)
   }
 
   _debugListener() {
@@ -102,7 +103,14 @@ export class PlayScene extends Scene {
     this.mainCamera.enabled = !this.camera.enabled;
 
     if (Game.app.keyboard.isPressed(pc.KEY_P)) {
-      this.onDebug = !this.onDebug;
+      // make listener only once per press
+      setTimeout(() => {
+        this.onDebug = !this.onDebug;
+        if (this.onDebug) {
+          this.camera.script.orbitCamera.focusEntity = this.player;
+        }
+      }
+      , 500);
     }
   
   }

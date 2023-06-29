@@ -11,13 +11,12 @@ export function ObjectScript(){
     });
 
     objectScript.prototype.initialize = function() {
-        console.log(this.entity)
-        console.log('objectScript initialize');
+
     }
 
     objectScript.prototype.update = function(dt) {
         // if object after player 20 unit, destroy object
-        if(this.entity.getPosition().z < this.player.getPosition().z - 20){
+        if(this.entity.getPosition().z < this.player.getPosition().z - 5){
             this.entity.destroyObject();
         }
 

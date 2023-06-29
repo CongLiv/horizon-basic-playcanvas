@@ -16,7 +16,7 @@ export class Plane1 extends Entity {
 
     this.addComponent("animation", {
       assets: [assets.flyAnim],
-      speed: 1,
+      speed: 2,
       loop: true,
       activate: true,
     });
@@ -35,8 +35,8 @@ export class Plane1 extends Entity {
     this.addComponent("script");
     this.script.create("planeControl");
 
-    this.turnSpeed = 10;
-    this.forwardSpeed = 5;
+    this.turnSpeed = 15;
+    this.forwardSpeed = 50;
   }
 
   update(dt) {}

@@ -1,6 +1,7 @@
 import { Vec3 } from "playcanvas";
 import { Ground1 } from "../../templates/object/ground/groud1";
-
+import { Utils } from "../../utils/utils";
+import { Obstacle1 } from "../../templates/object/obstacle/obstacle1";
 export function SpawnObject() {
   let spawnObject = new pc.createScript("spawnObject");
 
@@ -15,7 +16,8 @@ export function SpawnObject() {
       this.player.getPosition().z + this.entity.spawnDistance
     );
 
-    this.spawnGroundInterval = 3; // in seconds
+    this._spawnGroundCounter = 0;
+    this._spawnObstacleCounter = 0;
   };
 
   spawnObject.prototype.update = function (dt) {
@@ -24,17 +26,44 @@ export function SpawnObject() {
       0,
       this.player.getPosition().z + this.entity.spawnDistance
     );
-    this.spawnGroundInterval -= dt;
+    this._spawnGroundCounter -= dt;
+    this._spawnObstacleCounter -= dt;
 
-    if (this.spawnGroundInterval <= 0) {
+    if (this._spawnGroundCounter <= 0) {
       this._spawnGround();
-      this.spawnGroundInterval = 3;
+      this._spawnGroundCounter = Utils.getRandomFloat(0.5, 1);
+    }
+
+    if (this._spawnObstacleCounter <= 0) {
+      this._spawnObstacle();
+      this._spawnObstacleCounter = Utils.getRandomFloat(0.5, 1);;
     }
   };
 
   spawnObject.prototype._spawnGround = function () {
     let ground = new Ground1(this.player);
-    let position = new Vec3(this.player.getPosition().x, 0, this.player.getPosition().z)
+    let position = new Vec3(
+      this.player.getPosition().x,
+      0,
+      this.player.getPosition().z + this.entity.spawnDistance
+    );
     ground.spawnToPosition(position);
+  };
+
+  spawnObject.prototype._spawnObstacle = function () {
+    // spawn obstacles random along the x-axis of the object
+    let pivotLeft =
+      this.entity.getPosition().x - this.entity.getLocalScale().x / 2;
+    let pivotRight =
+      this.entity.getPosition().x + this.entity.getLocalScale().x / 2;
+
+    for (let i = pivotLeft; i < pivotRight; i += 10) {
+      if (Utils.getChance(0.3)) {
+        let obstacle = new Obstacle1(this.player);
+        let randHeight = Utils.getRandomInt(10, 60);
+        obstacle.setLocalScale(4, randHeight, 4);
+        obstacle.spawnToPosition(new Vec3(i, randHeight / 2, this.entity.getPosition().z));
+      }
+    }
   };
 }
