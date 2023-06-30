@@ -20,7 +20,9 @@ export function SpawnObject() {
     this._spawnObstacleCounter = 0;
 
     this.app.on("spawnObject:startGame", this._startGame, this);
+    this.app.on("spawnObject:endGame", this._endGame, this);
     this._isStart = false;
+    this._isEnd = false;
 
     // init spawn
     this._spawnGround();
@@ -29,11 +31,14 @@ export function SpawnObject() {
 
   spawnObject.prototype.update = function (dt) {
     if (this._isStart === false) return;
+
     this.entity.setPosition(
       this.player.getPosition().x,
       0,
       this.player.getPosition().z + this.entity.spawnDistance
     );
+
+    if (this._isEnd === true) return;
     this._spawnGroundCounter -= dt;
     this._spawnObstacleCounter -= dt;
 
@@ -79,4 +84,9 @@ export function SpawnObject() {
   spawnObject.prototype._startGame = function (isStart) {
     this._isStart = true;
   };
+
+  spawnObject.prototype._endGame = function (isEnd) {
+    this._isEnd = true;
+  }
+
 }
