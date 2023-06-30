@@ -31,12 +31,12 @@ export function SpawnObject() {
 
     if (this._spawnGroundCounter <= 0) {
       this._spawnGround();
-      this._spawnGroundCounter = 3;
+      this._spawnGroundCounter = 5;
     }
 
     if (this._spawnObstacleCounter <= 0) {
       this._spawnObstacle();
-      this._spawnObstacleCounter = Utils.getRandomFloat(2, 3);;
+      this._spawnObstacleCounter = Utils.getRandomFloat(0.5, 1);;
     }
   };
 

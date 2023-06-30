@@ -1,6 +1,7 @@
 import { Entity } from "playcanvas";
 import { assets } from "../../assetLoader/assets";
 import { PlaneControl } from "../../script/entity/planeControl";
+import { ExplosionEffect } from "../../script/entity/explosiveEffect";
 
 export class Plane1 extends Entity {
   constructor() {
@@ -27,7 +28,7 @@ export class Plane1 extends Entity {
       type: "mesh",
       asset: assets.planeModel,
     });
-    
+
     // this.addComponent("rigidbody", {
     //   type: "static",
     //   restitution: 0.5,
@@ -35,13 +36,14 @@ export class Plane1 extends Entity {
     // });
     // this.rigidbody.angularFactor = pc.Vec3.ZERO;
     // this.rigidbody.linearFactor = pc.Vec3.ZERO;
-
    
     this.addComponent("script");
     this.script.create("planeControl");
 
-    this.turnSpeed = 15;
-    this.forwardSpeed = 30;
+    this.turnSpeed = 20;
+    this.forwardSpeed = 40;
+
+   
   }
 
   update(dt) {}
@@ -51,4 +53,6 @@ export class Plane1 extends Entity {
     parent.removeChild(this);
     this.destroy();
   }
+
+
 }

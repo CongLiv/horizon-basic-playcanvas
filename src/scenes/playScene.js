@@ -9,6 +9,8 @@ import { Game } from "../game";
 import { Ground1 } from "../templates/object/ground/groud1";
 import { ObjectSpawner } from "../templates/component/objectSpawner";
 import { Obstacle1 } from "../templates/object/obstacle/obstacle1";
+import { StartUI } from "../ui/startUI";
+import { UIManager } from "../ui/UIManager";
 
 export class PlayScene extends Scene {
   constructor() {
@@ -30,7 +32,8 @@ export class PlayScene extends Scene {
     this._initObject();
     this._initCamera();
     this._initOrbitCamera();
-    // this._initSkybox();
+    this._initSkybox();   // not working
+    this._initUI();
   }
 
   _initLight() {
@@ -38,14 +41,14 @@ export class PlayScene extends Scene {
     this.addChild(this.directionalLight);
   }
 
-  // _initSkybox() {
-  //   this.skybox1 = new Entity();
-  //   this.skybox1.addComponent("skybox", {
-  //     type: "cubemap",
-  //     cubemap: assets.skybox1.resource,
-  //   });
-  //   Game.app.root.addChild(this.skybox1);
-  // }
+  _initSkybox() {
+    this.skybox1 = new Entity();
+    this.skybox1.addComponent("skybox", {
+      type: "cubemap",
+      cubemap: assets.skybox1,
+    });
+    Game.app.root.addChild(this.skybox1);
+  }
 
   _initOrbitCamera() {
     this.camera = new Entity();
@@ -77,6 +80,12 @@ export class PlayScene extends Scene {
     this.addChild(this.mainCamera);
   }
 
+  _initUI() {
+    this.UIManager = new UIManager();
+    this.addChild(this.UIManager);
+
+  }
+
   _initObject() {
     // plane
     this.player = new Plane1();
@@ -95,6 +104,21 @@ export class PlayScene extends Scene {
   update(dt) {
     super.update(dt);
     this._debugListener();
+
+     // make startUI always opposite to main camera
+      this.UIManager.setPosition(
+        this.mainCamera.getPosition().x,
+        this.mainCamera.getPosition().y,
+        this.mainCamera.getPosition().z + 5
+      );
+      this.UIManager.setEulerAngles(
+        this.mainCamera.getEulerAngles().x - 10,
+        this.mainCamera.getEulerAngles().y,
+        this.mainCamera.getEulerAngles().z
+      );
+      
+    
+
   }
 
   _debugListener() {

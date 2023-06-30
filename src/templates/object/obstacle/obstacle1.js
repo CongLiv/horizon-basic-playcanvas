@@ -1,5 +1,7 @@
 import { SuperObject } from "../superObject";
 import { Game } from "../../../game";
+import { assets } from "../../../assetLoader/assets";
+import { Utils } from "../../../utils/utils";
 export class Obstacle1 extends SuperObject {
   constructor(player) {
     super(player);
@@ -27,7 +29,8 @@ export class Obstacle1 extends SuperObject {
     this.rigidbody.linearFactor = pc.Vec3.ZERO;
 
     this.obstacleMaterial = new pc.StandardMaterial();
-    this.obstacleMaterial.diffuse = new pc.Color(0.6, 0.3, 0);
+    this.obstacleMaterial.diffuseMap = assets.rockTexture.resource;
+    this.obstacleMaterial.diffuseMapTiling = new pc.Vec2(Utils.getRandomInt(1, 2), Utils.getRandomInt(1, 3));
     this.obstacleMaterial.update();
     this.model.material = this.obstacleMaterial;
   }
