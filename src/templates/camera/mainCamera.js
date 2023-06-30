@@ -1,5 +1,4 @@
 import { Entity, Color } from "playcanvas";
-import { Follow } from "../../script/camera/cameraFollow";
 
 export class MainCamera extends Entity {
   constructor(targetEntity) {
@@ -16,7 +15,7 @@ export class MainCamera extends Entity {
 
     
     this.addComponent("script");
-    this.script.create("follow", {
+    this.script.create("cameraFollow", {
         attributes: {
             targetEntity: this.targetEntity,
             offset: new pc.Vec3(0, 3, this.targetEntity.forwardSpeed - 15 - this.targetEntity.forwardSpeed * 0.01),

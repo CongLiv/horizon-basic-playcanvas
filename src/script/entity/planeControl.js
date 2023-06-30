@@ -1,9 +1,9 @@
 export function PlaneControl() {
-  var control = pc.createScript("planeControl");
+  var planeControl = pc.createScript("planeControl");
 
  
   // initialize code called once per entity
-  control.prototype.initialize = function () {
+  planeControl.prototype.initialize = function () {
     this.waveCounter = 1;
     this.leanAngle = 0; // Góc nghiêng hiện tại của máy bay
     this.leanSpeed = 15; // Tốc độ nghiêng (tùy chỉnh theo nhu cầu)
@@ -11,29 +11,35 @@ export function PlaneControl() {
     this.flyHeight = 5; // Độ cao khi máy bay bay
     this.entity.setPosition(0, this.flyHeight, 0);
     this.entity.collision.on("triggerenter", this.onTriggerEnter, this);
+    this._isStart = false;
+    this._isEnd = false;
   };
 
   // update code called every frame
-  control.prototype.update = function (dt) {
-    var x = 0;
+  planeControl.prototype.update = function (dt) {
 
-    if (this.app.keyboard.isPressed(pc.KEY_A)) {
-      x += 1;
+    if (this._isStart && this._isEnd == false) {
+      var x = 0;
+
+      if (this.app.keyboard.isPressed(pc.KEY_A)) {
+        x += 1;
+      }
+      if (this.app.keyboard.isPressed(pc.KEY_D)) {
+        x -= 1;
+      }
+  
+      // use direction from input to apply a force to the character
+      if (x !== 0) {
+        // TODO un-optimized code!
+        const movement = new pc.Vec3(x, 0, 0).normalize().scale(dt * this.entity.turnSpeed);
+        this.entity.translate(movement);
+      }
+  
+      // make plane always fly forward
+      this.entity.translate(0, 0, dt * this.entity.forwardSpeed);
+  
     }
-    if (this.app.keyboard.isPressed(pc.KEY_D)) {
-      x -= 1;
-    }
-
-    // use direction from input to apply a force to the character
-    if (x !== 0) {
-      // TODO un-optimized code!
-      const movement = new pc.Vec3(x, 0, 0).normalize().scale(dt * this.entity.turnSpeed);
-      this.entity.translate(movement);
-    }
-
-    // make plane always fly forward
-    this.entity.translate(0, 0, dt * this.entity.forwardSpeed);
-
+   
     // make plane fly wave pattern
     let pos = this.entity.getPosition();
     this.waveCounter += dt * 2;
@@ -63,11 +69,25 @@ export function PlaneControl() {
 
     rot.z = this.leanAngle * 0.1;
     this.entity.setRotation(rot);
+
+
+    this.app.on("planeControl:startGame", this._startGame, this);
   };
 
-  control.prototype.onTriggerEnter = function (env) {
+  planeControl.prototype.onTriggerEnter = function (env) {
     if (env.tags.has("obstacle")) {
+      this._isEnd = true;
+      this.app.fire("managerUI:endGame", true);
+      this.app.fire("cameraFollow:endGame", true);
+      this.app.fire("spawnObject:endGame", true);
+
       this.entity.destroyPlayer();
+      
     }
   };
+
+
+  planeControl.prototype._startGame = function () {
+    this._isStart = true;
+  }
 }

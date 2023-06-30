@@ -18,9 +18,17 @@ export function SpawnObject() {
 
     this._spawnGroundCounter = 0;
     this._spawnObstacleCounter = 0;
+
+    this.app.on("spawnObject:startGame", this._startGame, this);
+    this._isStart = false;
+
+    // init spawn
+    this._spawnGround();
+    this._spawnObstacle();
   };
 
   spawnObject.prototype.update = function (dt) {
+    if (this._isStart === false) return;
     this.entity.setPosition(
       this.player.getPosition().x,
       0,
@@ -40,6 +48,7 @@ export function SpawnObject() {
     }
   };
 
+  
   spawnObject.prototype._spawnGround = function () {
     let ground = new Ground1(this.player);
     let position = new Vec3(
@@ -65,5 +74,9 @@ export function SpawnObject() {
         obstacle.spawnToPosition(new Vec3(i, randHeight / 2, this.entity.getPosition().z));
       }
     }
+  };
+
+  spawnObject.prototype._startGame = function (isStart) {
+    this._isStart = true;
   };
 }

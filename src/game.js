@@ -16,7 +16,7 @@ import { PlayScene } from "./scenes/playScene.js";
 import { ObjectScript } from "./script/object/objectScript.js";
 import { PlaneControl } from "./script/entity/planeControl.js";
 import { SpawnObject } from "./script/component/spawnObject.js";
-import { Follow } from "./script/camera/cameraFollow.js";
+import { CameraFollow } from "./script/camera/cameraFollow.js";
 
 export class Game {
   static init() {
@@ -46,7 +46,7 @@ export class Game {
     ObjectScript();
     PlaneControl();
     SpawnObject();
-    Follow();
+    CameraFollow();
 
     WasmModule.getInstance("Ammo", () => {
       AssetLoader.loadAssets(this.app, () => {

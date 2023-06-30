@@ -81,7 +81,7 @@ export class PlayScene extends Scene {
   }
 
   _initUI() {
-    this.UIManager = new UIManager();
+    this.UIManager = new UIManager(this.player);
     this.addChild(this.UIManager);
 
   }
@@ -90,12 +90,10 @@ export class PlayScene extends Scene {
     // plane
     this.player = new Plane1();
     this.addChild(this.player);
-    // ground
+    // init ground
     this.ground = new Ground1(this.player);
     this.ground.spawnToPosition(new pc.Vec3(0, 0, 0));
 
-    
-    
     this.objectSpawner = new ObjectSpawner(this.player);
     this.addChild(this.objectSpawner);
 

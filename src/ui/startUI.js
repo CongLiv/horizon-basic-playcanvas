@@ -1,5 +1,6 @@
 import { Entity } from "playcanvas";
 import { assets } from "../assetLoader/assets";
+import { StartButtonScript } from "../script/ui/startButtonScript";
 
 export class StartUI extends Entity {
   constructor() {
@@ -65,10 +66,13 @@ export class StartUI extends Entity {
       useInput: true,
     });
     this.startButton.setLocalPosition(0, -10, 0);
+    StartButtonScript();
     this.startButton.addComponent('script');
+    this.startButton.script.create("startButtonScript");
 
     this.screen.addChild(this.startButton);
 
+    
     this.addChild(this.screen);
   }
 }
