@@ -51,6 +51,20 @@ export class StartUI extends Entity {
       shadowOffset: new pc.Vec2(0.245, 0.15),
       useInput: true,
     });
+
+    // set fontsize text fit to screen width
+    // get screen width
+    let screenWidth = 128;
+    // get text width
+    let textWidth = 13.5 * this.titleText.element.text.length;
+    // calculate new fontsize
+    let newFontSize = (screenWidth / textWidth) * 10;
+
+    // set new fontsize
+    this.titleText.element.fontSize = newFontSize;
+
+    
+
     // set text to be centered on the screen
     this.titleText.setLocalPosition(0, 15, 0);
     this.screen.addChild(this.titleText);
