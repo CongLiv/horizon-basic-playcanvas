@@ -16,7 +16,6 @@ export class PlayScene extends Scene {
   constructor() {
     super(GameConstant.SCENE_PLAY);
     this._initialize();
-    this.onDebug = false;
   }
 
   create() {
@@ -120,19 +119,19 @@ export class PlayScene extends Scene {
   }
 
   _debugListener() {
-    this.camera.enabled = this.onDebug;
+    this.camera.enabled = Game.onDebug;
     this.mainCamera.enabled = !this.camera.enabled;
+    this.UIManager.enabled = !this.camera.enabled;
 
     if (Game.app.keyboard.isPressed(pc.KEY_P)) {
       // make listener only once per press
-      setTimeout(() => {
-        this.onDebug = !this.onDebug;
-        if (this.onDebug) {
-          this.camera.script.orbitCamera.focusEntity = this.player;
-        }
-      }
-      , 500);
+      if (this._isPressedDebug === true) return;
+      this._isPressedDebug = true;
+      Game.onDebug = !Game.onDebug;
+    } else {
+      this._isPressedDebug = false;
     }
-  
+    
+
   }
 }

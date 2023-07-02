@@ -1,3 +1,5 @@
+import { Game } from "../../game";
+
 export function PlaneControl() {
   var planeControl = pc.createScript("planeControl");
 

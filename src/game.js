@@ -22,6 +22,10 @@ import { ScoreTextScript } from "./script/ui/scoreTextScript.js";
 import { StartButtonScript } from "./script/ui/startButtonScript.js";
 import { ManagerUI } from "./script/ui/managerUI.js";
 export class Game {
+
+
+  static onDebug = false;
+    
   static init() {
     const canvas = document.createElement("canvas");
     document.body.appendChild(canvas);
@@ -45,6 +49,7 @@ export class Game {
     });
 
     // load all script
+    loadObitCameraPlugin();
     ObjectScript();
     PlaneControl();
     SpawnObject();
