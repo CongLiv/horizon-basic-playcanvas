@@ -40,7 +40,7 @@ export class Plane1 extends Entity {
     this.addComponent("script");
     this.script.create("planeControl");
 
-    this.turnSpeed = 20;
+    this.turnSpeed = 15;
     this.forwardSpeed = 40;
 
    
