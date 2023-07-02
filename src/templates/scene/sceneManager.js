@@ -15,17 +15,16 @@ export class SceneManager {
    */
 
   static loadScene(scene) {
-    let oldScene = this.currentScene;
-    this.currentScene = scene;
-
-    // this.addtiveScenes.forEach((s) => s.destroy());
-    Game.app.root.addChild(this.currentScene);
-    this.currentScene.create();
-
-    if (oldScene) {
-      Game.app.root.removeChild(oldScene);
-      oldScene.destroy();
+    if (this.currentScene) {
+      // remove all children of current scene
+      this.currentScene.children.forEach((child) => {
+        child.destroy();
+      });
     }
+    Game.app.root.removeChild(this.currentScene);
+    this.currentScene?.destroy();
+    this.currentScene = scene;
+    Game.app.root.addChild(this.currentScene);
   }
 
   // static loadSceneAddtive(scene) {

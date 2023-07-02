@@ -1,6 +1,6 @@
 import { Entity } from "playcanvas";
 import { assets } from "../assetLoader/assets";
-import { ScoreTextScript } from "../script/ui/scoreTextScript";
+
 
 export class PlayingUI extends Entity {
   constructor(player) {
@@ -33,7 +33,7 @@ export class PlayingUI extends Entity {
      
     });
     this.scoreText.setLocalPosition(0, 30, 0);
-    ScoreTextScript();
+    
     this.scoreText.addComponent("script");
     this.scoreText.script.create("scoreTextScript", {
         attributes: {

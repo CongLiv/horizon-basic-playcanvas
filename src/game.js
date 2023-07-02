@@ -17,7 +17,10 @@ import { ObjectScript } from "./script/object/objectScript.js";
 import { PlaneControl } from "./script/entity/planeControl.js";
 import { SpawnObject } from "./script/component/spawnObject.js";
 import { CameraFollow } from "./script/camera/cameraFollow.js";
-
+import { EndBackgroundScript } from "./script/ui/endBackgroundScript.js";
+import { ScoreTextScript } from "./script/ui/scoreTextScript.js";
+import { StartButtonScript } from "./script/ui/startButtonScript.js";
+import { ManagerUI } from "./script/ui/managerUI.js";
 export class Game {
   static init() {
     const canvas = document.createElement("canvas");
@@ -42,11 +45,14 @@ export class Game {
     });
 
     // load all script
-    loadObitCameraPlugin();
     ObjectScript();
     PlaneControl();
     SpawnObject();
     CameraFollow();
+    EndBackgroundScript();
+    ScoreTextScript();
+    StartButtonScript();
+    ManagerUI();
 
     WasmModule.getInstance("Ammo", () => {
       AssetLoader.loadAssets(this.app, () => {
@@ -55,6 +61,7 @@ export class Game {
       });
     });
   }
+ 
 
   static load() {
     InputManager.init(this.app);
