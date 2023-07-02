@@ -89,12 +89,19 @@ export class PlayScene extends Scene {
     // plane
     this.player = new Plane1();
     this.addChild(this.player);
-    // init ground
-    this.ground = new Ground1(this.player);
-    this.ground.spawnToPosition(new pc.Vec3(0, 0, 0));
+  
 
-    this.objectSpawner = new ObjectSpawner(this.player);
+
+    // init object spawner
+    this.spawnContainer = new Entity();
+    this.addChild(this.spawnContainer);
+    this.objectSpawner = new ObjectSpawner(this.player, this.spawnContainer);
     this.addChild(this.objectSpawner);
+
+
+      // init ground
+      this.ground = new Ground1(this.player);
+      this.ground.spawnToPosition(new pc.Vec3(0, 0, 0), this.spawnContainer);
 
   }
 

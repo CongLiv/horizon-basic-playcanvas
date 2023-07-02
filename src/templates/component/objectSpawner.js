@@ -4,9 +4,10 @@ import { SpawnObject } from "../../script/component/spawnObject";
 
 export class ObjectSpawner extends Entity{
 
-    constructor(player) {
+    constructor(player, spawnContainer) {
         super();
         this.player = player;
+        this.spawnContainer = spawnContainer;
         this.spawnDistance = 150;
         // this.addComponent('model', {   
         //     type: 'box'
@@ -24,7 +25,8 @@ export class ObjectSpawner extends Entity{
         this.addComponent('script');
         this.script.create('spawnObject', {
             attributes: {
-                player: this.player
+                player: this.player,
+                spawnContainer: this.spawnContainer,
             }
         });
     }

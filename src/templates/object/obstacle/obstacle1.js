@@ -35,9 +35,9 @@ export class Obstacle1 extends SuperObject {
     this.model.material = this.obstacleMaterial;
   }
 
-  spawnToPosition(position) {
+  spawnToPosition(position, spawnContainer) {
 
     this.setLocalPosition(position);
-    Game.app.root.addChild(this);
+    spawnContainer.addChild(this);
   }
 }

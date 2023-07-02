@@ -16,10 +16,9 @@ export class SceneManager {
 
   static loadScene(scene) {
     if (this.currentScene) {
-      // remove all children of current scene
-      this.currentScene.children.forEach((child) => {
-        child.destroy();
-      });
+      for (let i = this.currentScene.children.length - 1; i >= 0; i--) {
+        this.currentScene.children[i].destroy();
+      }
     }
     Game.app.root.removeChild(this.currentScene);
     this.currentScene?.destroy();

@@ -37,9 +37,9 @@ export class Ground1 extends SuperObject {
     // this.rigidbody.linearFactor = pc.Vec3.ZERO;
   }
 
-  spawnToPosition(position) {
+  spawnToPosition(position, spawnContainer) {
     this.setLocalPosition(position);
-    Game.app.root.addChild(this);
+    spawnContainer.addChild(this);
 
   }
 }

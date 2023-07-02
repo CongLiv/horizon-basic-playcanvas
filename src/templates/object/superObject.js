@@ -7,7 +7,7 @@ export class SuperObject extends Entity {
     this.player = player;
   }
 
-  spawnToPosition(position) {}
+  spawnToPosition(position, spawnContainer) {}
   destroyObject() {
     let parent = this.getParent();
     parent.removeChild(this);

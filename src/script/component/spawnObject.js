@@ -9,6 +9,12 @@ export function SpawnObject() {
     type: "entity",
     title: "Player",
   });
+
+  spawnObject.attributes.add("spawnContainer", {
+    type: "entity",
+    title: "Spawn Container",
+  });
+
   spawnObject.prototype.initialize = function () {
     this.entity.setLocalPosition(
       this.player.getPosition().x,
@@ -61,7 +67,7 @@ export function SpawnObject() {
       0,
       this.player.getPosition().z + this.entity.spawnDistance * 2
     );
-    ground.spawnToPosition(position);
+    ground.spawnToPosition(position, this.spawnContainer);
   };
 
   spawnObject.prototype._spawnObstacle = function () {
@@ -76,7 +82,7 @@ export function SpawnObject() {
         let obstacle = new Obstacle1(this.player);
         let randHeight = Utils.getRandomInt(10, 60);
         obstacle.setLocalScale(4, randHeight, 4);
-        obstacle.spawnToPosition(new Vec3(i, randHeight / 2, this.entity.getPosition().z));
+        obstacle.spawnToPosition(new Vec3(i, randHeight / 2, this.entity.getPosition().z), this.spawnContainer);
       }
     }
   };
