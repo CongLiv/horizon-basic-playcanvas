@@ -5,21 +5,25 @@ export function PlaneControl() {
 
   // initialize code called once per entity
   planeControl.prototype.initialize = function () {
-    this.waveCounter = 1;
-    this.leanAngle = 0; // Góc nghiêng hiện tại của máy bay
-    this.leanSpeed = 15; // Tốc độ nghiêng (tùy chỉnh theo nhu cầu)
-    this.maxLean = 2.5; // Góc nghiêng tối đa (tùy chỉnh theo nhu cầu)
-    this.flyHeight = 5; // Độ cao khi máy bay bay
-    this.entity.setPosition(0, this.flyHeight, 0);
+    this._waveCounter = 1;
+    this._leanAngle = 0; // Góc nghiêng hiện tại của máy bay
+    this._leanSpeed = 6; // Tốc độ nghiêng (tùy chỉnh theo nhu cầu)
+    this._maxLean = 2.5; // Góc nghiêng tối đa (tùy chỉnh theo nhu cầu)
+    this._flyHeight = 5; // Độ cao khi máy bay bay
+    this.entity.setPosition(0, this._flyHeight, 0);
     this.entity.collision.on("triggerenter", this.onTriggerEnter, this);
     this._isStart = false;
     this._isEnd = false;
 
-    this.touchStartPosition = null;
-    this.touchThreshold = 0.05; // Adjust this value to set the sensitivity of the touch movement
+    this._touchStartPosition = null;
+    this._delta = 0;
+    this._leftMost = 9999;
+    this._rightMost = -9999;
+
     this.app.touch.on("touchstart", this.onTouchStart, this);
     this.app.touch.on("touchmove", this.onTouchMove, this);
     this.app.touch.on("touchend", this.onTouchEnd, this);
+    this.app.on("planeControl:startGame", this._startGame, this);
   };
 
   // update code called every frame
@@ -27,16 +31,35 @@ export function PlaneControl() {
     if (this._isStart && this._isEnd == false) {
       var x = 0;
 
-      if (this.app.keyboard.isPressed(pc.KEY_A)) {
+      if (this.app.keyboard.isPressed(pc.KEY_A) || this._delta > 0) {
         x += 1;
+        this.entity.isTurnLeft = true;
+        this.entity.isTurnRight = false;
+        this.entity.isMovingStraight = false;
       }
-      if (this.app.keyboard.isPressed(pc.KEY_D)) {
+      if (this.app.keyboard.isPressed(pc.KEY_D) || this._delta < 0) {
         x -= 1;
+        this.entity.isTurnRight = true;
+        this.entity.isTurnLeft = false;
+        this.entity.isMovingStraight = false;
+      }
+
+      if (x === 0) {
+        this.entity.isMovingStraight = true;
+        this.entity.isTurnLeft = false;
+        this.entity.isTurnRight = false;
       }
 
       // use direction from input to apply a force to the character
       if (x !== 0) {
         // TODO un-optimized code!
+
+        if (this._delta === 0) {
+          this.entity.turnSpeed = this.entity.initTurnSpeed;
+        } else {
+          this.entity.turnSpeed = Math.abs(this._delta) / 10;
+        }
+
         const movement = new pc.Vec3(x, 0, 0)
           .normalize()
           .scale(dt * this.entity.turnSpeed);
@@ -49,8 +72,8 @@ export function PlaneControl() {
 
     // make plane fly wave pattern
     let pos = this.entity.getPosition();
-    this.waveCounter += dt * 2;
-    pos.y = this.flyHeight + Math.sin(this.waveCounter);
+    this._waveCounter += dt * 2;
+    pos.y = this._flyHeight + Math.sin(this._waveCounter);
     this.entity.setPosition(pos);
 
     // make plane lean left and right slightly
@@ -59,25 +82,27 @@ export function PlaneControl() {
     // Tính toán góc nghiêng mới dựa trên hướng di chuyển
     if (x !== 0) {
       if (x > 0) {
-        this.leanAngle += this.leanSpeed * dt;
+        this._leanAngle += this._leanSpeed * dt;
       }
       if (x < 0) {
-        this.leanAngle -= this.leanSpeed * dt;
+        this._leanAngle -= this._leanSpeed * dt;
       }
     } else {
-      if (this.leanAngle > 0) {
-        this.leanAngle -= this.leanSpeed * dt;
+      if (this._leanAngle > 0) {
+        this._leanAngle -= this._leanSpeed * dt;
       }
-      if (this.leanAngle < 0) {
-        this.leanAngle += this.leanSpeed * dt;
+      if (this._leanAngle < 0) {
+        this._leanAngle += this._leanSpeed * dt;
       }
     }
-    this.leanAngle = pc.math.clamp(this.leanAngle, -this.maxLean, this.maxLean);
+    this._leanAngle = pc.math.clamp(
+      this._leanAngle,
+      -this._maxLean,
+      this._maxLean
+    );
 
-    rot.z = this.leanAngle * 0.1;
+    rot.z = this._leanAngle * 0.1;
     this.entity.setRotation(rot);
-
-    this.app.on("planeControl:startGame", this._startGame, this);
   };
 
   planeControl.prototype.onTriggerEnter = function (env) {
@@ -96,40 +121,40 @@ export function PlaneControl() {
   };
 
   planeControl.prototype.onTouchStart = function (event) {
-    this.touchStartPosition = event.touches[0].x;
+    this._touchStartPosition = event.touches[0].x;
   };
 
   planeControl.prototype.onTouchMove = function (event) {
-    if (this.touchStartPosition !== null) {
-      const delta = event.touches[0].x - this.touchStartPosition;
-      if (Math.abs(delta) > this.touchThreshold) {
-        this.touchStartPosition = event.touches[0].x;
-        // translate the entity based on the delta value slowly
-        const movement = new pc.Vec3(-delta, 0, 0)
-          .normalize()
-          .scale(this.entity.turnSpeed * 0.015);
-        this.entity.translate(movement);
-      }
-      // make plane lean left and right slightly
-      let rot = this.entity.getRotation();
-      // Tính toán góc nghiêng mới dựa trên hướng di chuyển
-      if (delta !== 0) {
-        if (delta > 0) {
-          this.leanAngle -= this.leanSpeed * 0.025;
-        }
-        if (delta < 0) {
-          this.leanAngle += this.leanSpeed * 0.025;
-        }
-      }
-      this.leanAngle = pc.math.clamp(this.leanAngle, -this.maxLean, this.maxLean);
-      rot.z = this.leanAngle * 0.1;
-      this.entity.setRotation(rot);
+    let currentTouchPosition = event.touches[0].x;
 
+    // save leftmost touch when turn left and rightmost touch when turn right
+    if (this.entity.isTurnLeft) {
+      if (currentTouchPosition < this._leftMost) {
+        this._leftMost = currentTouchPosition;
+        this._rightMost = -9999;
+      }
 
+      else{
+        this._touchStartPosition = this._leftMost;
+      }
+    }
+    if (this.entity.isTurnRight) {
+      if (currentTouchPosition > this._rightMost) {
+        this._rightMost = currentTouchPosition;
+        this._leftMost = 9999;
+      }
+      else {
+        this._touchStartPosition = this._rightMost;
+      }
+    }
+
+    if (this._touchStartPosition !== null) {
+      this._delta = this._touchStartPosition - currentTouchPosition;
     }
   };
 
   planeControl.prototype.onTouchEnd = function (event) {
-    this.touchStartPosition = null;
+    this._touchStartPosition = null;
+    this._delta = 0;
   };
 }
