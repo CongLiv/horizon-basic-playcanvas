@@ -14,6 +14,6 @@ export const assets = {
     skybox1: new Asset("skybox1", "cubemap", {url: "assets/cubemaps/skybox1.png"}),
 
 
-    font1: new Asset("font1", "font", {url: "assets/fonts/140859953/Trend HM Sans W00 One.json"}),
+    font1: new Asset("font1", "font", {url: "assets/fonts/141117452/IsometrikSCReg W00 Regular.json"}),
 
 };
