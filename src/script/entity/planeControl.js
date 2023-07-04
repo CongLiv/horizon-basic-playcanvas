@@ -20,6 +20,9 @@ export function PlaneControl() {
     this._leftMost = 9999;
     this._rightMost = -9999;
 
+    this._updateTouchCounter = 0;
+    this._tmpTouchPosition = 0;
+
     this.app.touch.on("touchstart", this.onTouchStart, this);
     this.app.touch.on("touchmove", this.onTouchMove, this);
     this.app.touch.on("touchend", this.onTouchEnd, this);
@@ -63,8 +66,6 @@ export function PlaneControl() {
         const movement = new pc.Vec3(x, 0, 0)
           .normalize()
           .scale(dt * this.entity.turnSpeed);
-
-        console.log("player " + this.entity.turnSpeed);
         this.entity.translate(movement);
       }
 
@@ -134,9 +135,7 @@ export function PlaneControl() {
       if (currentTouchPosition < this._leftMost) {
         this._leftMost = currentTouchPosition;
         this._rightMost = -9999;
-      }
-
-      else{
+      } else {
         this._touchStartPosition = this._leftMost;
       }
     }
@@ -144,11 +143,23 @@ export function PlaneControl() {
       if (currentTouchPosition > this._rightMost) {
         this._rightMost = currentTouchPosition;
         this._leftMost = 9999;
-      }
-      else {
+      } else {
         this._touchStartPosition = this._rightMost;
       }
     }
+
+    // if touch position is no change in 0.2s, make plane move straight
+    // this._updateTouchCounter += 0.1;
+    // if (this._updateTouchCounter > 5) {
+    //   console.log(this._tmpTouchPosition, currentTouchPosition);
+    //   this._tmpTouchPosition = currentTouchPosition;
+    // }
+
+    // if (this._tmpTouchPosition === currentTouchPosition) {
+    //   this._touchStartPosition = currentTouchPosition;
+    //   this._delta = 0;
+    //   this._updateTouchCounter = 0;
+    // }
 
     if (this._touchStartPosition !== null) {
       this._delta = this._touchStartPosition - currentTouchPosition;
@@ -158,5 +169,6 @@ export function PlaneControl() {
   planeControl.prototype.onTouchEnd = function (event) {
     this._touchStartPosition = null;
     this._delta = 0;
+    this._updateTouchCounter = 0;
   };
 }

@@ -39,7 +39,9 @@ export class StartUI extends Entity {
 
     this.titleText.addComponent("element", {
       type: "text",
-      text: "Infinite Flight",
+      text: "INFINITE FLIGHT",
+      // BOLD
+      
       fontSize: 10,
       fontAsset: assets.font1,
       color: new pc.Color(1, 1, 0.8, 1),

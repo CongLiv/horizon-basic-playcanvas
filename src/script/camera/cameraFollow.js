@@ -31,11 +31,15 @@ export function CameraFollow() {
     this.entity.setLocalEulerAngles(-8, 180, 0);
     this.app.on("cameraFollow:startGame", this._startGame, this);
     this.app.on("cameraFollow:endGame", this._endGame, this);
+
     this._isStart = false;
     this._isEnd = false;
 
     this._turnDetectLastCount = 0;
     this._turnDetectCount = 0;
+
+    this._shakeCounter = 0;
+    this._shakeDuration = 0.5;
   };
 
   // update code called every frame
@@ -57,9 +61,8 @@ export function CameraFollow() {
       }
     }
 
-  
     // Kiểm tra xem target có di chuyển thẳng hay không
-  
+
     if (this.targetEntity.isMovingStraight) {
       this._lastX = this.entity.getPosition().x;
     }
@@ -76,7 +79,7 @@ export function CameraFollow() {
     }
 
     // Nếu đang theo dõi, cập nhật vị trí camera
-    if (this._following) {
+    if (this._following && !this._isEnd) {
       var targetPosition = this.targetEntity.getPosition().clone();
       var offset = new pc.Vec3().copy(this.offset);
       // Sử dụng phương pháp lerp để mượn camera
@@ -88,7 +91,7 @@ export function CameraFollow() {
       );
       this.entity.setPosition(position);
       this._lastX = this.entity.getPosition().x;
-    } else {
+    } else if (!this._isEnd) {
       let movement = new Vec3(0, 0, this.targetEntity.forwardSpeed * dt);
       // Nếu target di chuyển ra ngoài camera, camera sẽ di chuyển để đuổi kịp
 
@@ -109,10 +112,9 @@ export function CameraFollow() {
         plusCameraSpeed = 1;
         // this._lastX = this.entity.getPosition().x;
       }
-
-      if (distanceToTarget > 2) {
+      if (distanceToTarget > 3) {
         // camera move slightly to make sure the plane is in the view
-        console.log("camera follow " + this.targetEntity.turnSpeed);
+
         let moveSpeed =
           this._lastX - this.targetEntity.getPosition().x > 0 ? -1 : 1;
         movement = new Vec3(
@@ -131,5 +133,38 @@ export function CameraFollow() {
 
   cameraFollow.prototype._endGame = function () {
     this._isEnd = true;
+
+    // Make camera shake when the game ends
+    this.app.on("update", this._shakeUpdate, this);
+    
+  };
+
+  cameraFollow.prototype._shakeUpdate = function (dt) {
+
+    this._shakeCounter += dt
+    if (this._shakeCounter > this._shakeDuration) {
+      this.app.off("update", this._shakeUpdate, this);
+      this._shakeCounter = 0;
+    }
+
+
+    var shakeIntensity = 0.5; // Adjust the intensity of the shake
+
+    // Store the initial camera position
+    var initialPosition = this.entity.getPosition().clone();
+
+    // Shake the camera for a specified duration
+    var shakeTimer = 0;
+    shakeTimer += dt;
+
+    // Calculate the shake offset
+    var randomOffset = new pc.Vec3(
+      Math.random() * shakeIntensity - shakeIntensity / 2,
+      Math.random() * shakeIntensity - shakeIntensity / 2,
+      Math.random() * shakeIntensity - shakeIntensity / 2
+    );
+
+    // Apply the shake offset to the camera position
+    this.entity.setPosition(initialPosition.add(randomOffset));
   };
 }

@@ -42,7 +42,7 @@ export class Plane1 extends Entity {
 
     this.initTurnSpeed = 15;
     this.turnSpeed = this.initTurnSpeed;
-    this.initForwardSpeed = 40;
+    this.initForwardSpeed = 50;
     this.forwardSpeed = this.initForwardSpeed;
     
     this.isTurnLeft = false;

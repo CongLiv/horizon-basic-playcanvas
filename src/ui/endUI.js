@@ -31,7 +31,7 @@ export class EndUI extends Entity{
             width: 1280,
             height: 720,
             color: new pc.Color(0, 0, 0, 0),
-            opacity: 0.2,
+            opacity: 0,
         });
     
         this.background.addComponent("script");

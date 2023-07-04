@@ -17,9 +17,9 @@ import { ObjectScript } from "./script/object/objectScript.js";
 import { PlaneControl } from "./script/entity/planeControl.js";
 import { SpawnObject } from "./script/component/spawnObject.js";
 import { CameraFollow } from "./script/camera/cameraFollow.js";
-import { EndBackgroundScript } from "./script/ui/endBackgroundScript.js";
-import { ScoreTextScript } from "./script/ui/scoreTextScript.js";
-import { StartButtonScript } from "./script/ui/startButtonScript.js";
+import { EndBackgroundScript } from "./script/ui/endUI/endBackgroundScript.js";
+import { ScoreTextScript } from "./script/ui/playingUI/scoreTextScript.js";
+import { StartButtonScript } from "./script/ui/startUI/startButtonScript.js";
 import { ManagerUI } from "./script/ui/managerUI.js";
 export class Game {
 
