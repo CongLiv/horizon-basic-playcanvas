@@ -16,8 +16,9 @@ export class Ground1 extends SuperObject {
     this.setLocalScale(500, 1, 500);
 
     this.groundMaterial = new pc.StandardMaterial();
-    this.groundMaterial.diffuseMap = assets.sandTexture.resource;
-    this.groundMaterial.diffuseMapTiling = new pc.Vec2(10, 10);
+    // this.groundMaterial.diffuseMap = assets.sandTexture.resource;
+    // this.groundMaterial.diffuseMapTiling = new pc.Vec2(10, 10);
+    this.groundMaterial.diffuse = new pc.Color(0.5, 0.5, 0.5);
     this.groundMaterial.update();
     this.model.material = this.groundMaterial;
     // make sand texture repeat

@@ -7,7 +7,7 @@ export function PlaneControl() {
   planeControl.prototype.initialize = function () {
     this._waveCounter = 1;
     this._leanAngle = 0; // Góc nghiêng hiện tại của máy bay
-    this._leanSpeed = 6; // Tốc độ nghiêng (tùy chỉnh theo nhu cầu)
+    this._leanSpeed = 8; // Tốc độ nghiêng (tùy chỉnh theo nhu cầu)
     this._maxLean = 2.5; // Góc nghiêng tối đa (tùy chỉnh theo nhu cầu)
     this._flyHeight = 5; // Độ cao khi máy bay bay
     this.entity.setPosition(0, this._flyHeight, 0);
@@ -63,6 +63,8 @@ export function PlaneControl() {
         const movement = new pc.Vec3(x, 0, 0)
           .normalize()
           .scale(dt * this.entity.turnSpeed);
+
+        console.log("player " + this.entity.turnSpeed);
         this.entity.translate(movement);
       }
 

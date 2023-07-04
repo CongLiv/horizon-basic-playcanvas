@@ -23,16 +23,19 @@ export function CameraFollow() {
     this._lastX = 0; // Vị trí x cuối cùng của camera
     this.offset = new pc.Vec3(
       0,
-      3,
+      6,
       this.targetEntity.forwardSpeed -
         15 -
         this.targetEntity.forwardSpeed * 0.01
     );
-
+    this.entity.setLocalEulerAngles(-8, 180, 0);
     this.app.on("cameraFollow:startGame", this._startGame, this);
     this.app.on("cameraFollow:endGame", this._endGame, this);
     this._isStart = false;
     this._isEnd = false;
+
+    this._turnDetectLastCount = 0;
+    this._turnDetectCount = 0;
   };
 
   // update code called every frame
@@ -44,32 +47,31 @@ export function CameraFollow() {
     }
     var x = 0;
     if (!this._isEnd) {
-  
-      if (this.app.keyboard.isPressed(pc.KEY_A)) {
+      if (this.targetEntity.isTurnLeft) {
         x += 1;
+        this._turnDetectCount++;
       }
-      if (this.app.keyboard.isPressed(pc.KEY_D)) {
+      if (this.targetEntity.isTurnRight) {
         x -= 1;
+        this._turnDetectCount++;
       }
     }
 
+  
     // Kiểm tra xem target có di chuyển thẳng hay không
-    var isMovingStraight = x == 0;
-    var isMovingLeft = x > 0;
-    var isMovingRight = x < 0;
-
-    if (isMovingStraight) {
+  
+    if (this.targetEntity.isMovingStraight) {
       this._lastX = this.entity.getPosition().x;
     }
 
     // Nếu target đang di chuyển thẳng và chưa đang theo dõi, bắt đầu follow
-    if (isMovingStraight && !this._following) {
+    if (this.targetEntity.isMovingStraight && !this._following) {
       this._following = true;
       this._lastX = this.entity.getPosition().x;
     }
 
     // Nếu target đang di chuyển trái hoặc phải và đang theo dõi, dừng follow
-    if (!isMovingStraight && this._following) {
+    if (!this.targetEntity.isMovingStraight && this._following) {
       this._following = false;
     }
 
@@ -89,6 +91,12 @@ export function CameraFollow() {
     } else {
       let movement = new Vec3(0, 0, this.targetEntity.forwardSpeed * dt);
       // Nếu target di chuyển ra ngoài camera, camera sẽ di chuyển để đuổi kịp
+
+      if (this._turnDetectLastCount != this._turnDetectCount) {
+        this._turnDetectLastCount = this._turnDetectCount;
+        this._lastX = this.entity.getPosition().x;
+      }
+
       let distanceToTarget = Math.abs(
         this._lastX - this.targetEntity.getPosition().x
       );
@@ -102,8 +110,9 @@ export function CameraFollow() {
         // this._lastX = this.entity.getPosition().x;
       }
 
-      if (distanceToTarget > 5) {
+      if (distanceToTarget > 2) {
         // camera move slightly to make sure the plane is in the view
+        console.log("camera follow " + this.targetEntity.turnSpeed);
         let moveSpeed =
           this._lastX - this.targetEntity.getPosition().x > 0 ? -1 : 1;
         movement = new Vec3(

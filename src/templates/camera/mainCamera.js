@@ -10,8 +10,6 @@ export class MainCamera extends Entity {
       fov: 60,
       nearClip: 0.1,
     });
-    this.setLocalPosition(0, 0, this.targetEntity.getLocalPosition().z - 50);
-    this.setLocalEulerAngles(-30, 180, 0);
 
     
     this.addComponent("script");
