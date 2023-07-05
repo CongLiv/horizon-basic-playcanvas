@@ -36,7 +36,7 @@ export class Plane1 extends Entity {
     // });
     // this.rigidbody.angularFactor = pc.Vec3.ZERO;
     // this.rigidbody.linearFactor = pc.Vec3.ZERO;
-   
+
     this.addComponent("script");
     this.script.create("planeControl");
 
@@ -44,21 +44,31 @@ export class Plane1 extends Entity {
     this.turnSpeed = this.initTurnSpeed;
     this.initForwardSpeed = 50;
     this.forwardSpeed = this.initForwardSpeed;
-    
+
     this.isTurnLeft = false;
     this.isTurnRight = false;
     this.isMovingStraight = true;
 
-   
+
+    //TODO: add particle system behind plane
+    this.addComponent("particlesystem", {
+      enabled: true,
+      autoPlay: true,
+      localSpace: true,
+      
+      rate: 0.1,
+      lifetime: 5,
+      particleSize: 0.1,
+      colorMap: assets.sandTexture.resource,
+      loop: true,
+      preWarm: true,
+      lightAffected: false,
+    });
   }
 
   update(dt) {}
 
   destroyPlayer() {
-    let parent = this.getParent();
-    parent.removeChild(this);
     this.destroy();
   }
-
-
 }
