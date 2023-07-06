@@ -35,41 +35,33 @@ export class StartUI extends Entity {
 
     
 
-    this.titleText = new Entity();
+    this.header = new Entity();
+    // this.header.addComponent("element", {
+    //   type: "image",
+    //   anchor: new pc.Vec4(0.5, 0.5, 0.5, 0.5),
+    //   pivot: new pc.Vec2(0.5, 0.5),
+    //   width: 150,
+    //   height: 50,
+    //   color: new pc.Color(0, 0, 0, 0),
+    //   opacity: 0.2,
+    // });
+  
 
-    this.titleText.addComponent("element", {
-      type: "text",
-      text: "INFINITE FLIGHT",
-      // BOLD
-      
-      fontSize: 10,
-      fontAsset: assets.font1,
-      color: new pc.Color(1, 1, 0.8, 1),
+    this.header.addComponent("element", {
+      type: "image",
+      textureAsset: assets.logoTexture,
       anchor: new pc.Vec4(0.5, 0.5, 0.5, 0.5),
       pivot: new pc.Vec2(0.5, 0.5),
-      outlineColor: new pc.Color(0, 0, 0, 1),
-      outlineThickness: 0.5,
-      shadowColor: new pc.Color(0, 0, 0, 0.5),
-      shadowOffset: new pc.Vec2(0.245, 0.15),
-      useInput: true,
+      width: 80,
+      height: 20,
+      opacity: 1,
     });
-
-    // set fontsize text fit to screen width
-    // get screen width
-    let screenWidth = 128;
-    // get text width
-    let textWidth = 13.5 * this.titleText.element.text.length;
-    // calculate new fontsize
-    let newFontSize = (screenWidth / textWidth) * 10;
-
-    // set new fontsize
-    this.titleText.element.fontSize = newFontSize;
 
     
 
-    // set text to be centered on the screen
-    this.titleText.setLocalPosition(0, 15, 0);
-    this.screen.addChild(this.titleText);
+    this.screen.addChild(this.header);
+    this.header.setLocalPosition(0, 15, 0);
+    this.screen.addChild(this.header);
 
     this.startButton = new Entity();
     this.startButton.addComponent("element", {

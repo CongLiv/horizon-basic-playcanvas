@@ -10,10 +10,11 @@ export const assets = {
     sandTexture: new Asset("sandTexture", "texture", {url: "assets/textures/sand.jpg"}),
     rockTexture: new Asset("rockTexture", "texture", {url: "assets/textures/rock.jpg"}),
     buttonTexture: new Asset("buttonTexture", "texture", {url: "assets/textures/playbutton.png"}),
+    logoTexture: new Asset("logoTexture", "texture", {url: "assets/textures/logostart.png"}),
 
     skybox1: new Asset("skybox1", "cubemap", {url: "assets/cubemaps/skybox1.png"}),
 
 
-    font1: new Asset("font1", "font", {url: "assets/fonts/141117452/IsometrikSCReg W00 Regular.json"}),
+    font1: new Asset("font1", "font", {url: "assets/fonts/141347177/neuropol x rg.json"}),
 
 };
