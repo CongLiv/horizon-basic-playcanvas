@@ -1,7 +1,5 @@
 import { Entity } from "playcanvas";
 import { assets } from "../../assetLoader/assets";
-import { PlaneControl } from "../../script/entity/planeControl";
-import { ExplosionEffect } from "../../script/entity/explosiveEffect";
 
 export class Plane1 extends Entity {
   constructor() {
@@ -49,21 +47,6 @@ export class Plane1 extends Entity {
     this.isTurnRight = false;
     this.isMovingStraight = true;
 
-
-    //TODO: add particle system behind plane
-    this.addComponent("particlesystem", {
-      enabled: true,
-      autoPlay: true,
-      localSpace: true,
-      
-      rate: 0.1,
-      lifetime: 5,
-      particleSize: 0.1,
-      colorMap: assets.sandTexture.resource,
-      loop: true,
-      preWarm: true,
-      lightAffected: false,
-    });
   }
 
   update(dt) {}

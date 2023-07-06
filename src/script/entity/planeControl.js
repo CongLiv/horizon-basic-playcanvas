@@ -27,6 +27,32 @@ export function PlaneControl() {
     this.app.touch.on("touchmove", this.onTouchMove, this);
     this.app.touch.on("touchend", this.onTouchEnd, this);
     this.app.on("planeControl:startGame", this._startGame, this);
+
+    // let particle = new pc.Entity();
+    // particle.addComponent("particlesystem", {
+    //   blendType: pc.BLEND_NORMAL,
+    //   enabled: true,
+    //   autoPlay: true,
+    //   loop: true,
+    //   preWarm: true,
+    //   numParticles: 100,
+    //   lifetime: 5,
+    //   rate: 0.1,
+    //   intensity: 1,
+    //   emitterShape: pc.EMITTERSHAPE_SPHERE,
+    //   localSpace: false,
+    //   noFog: false,
+    //   orientation: pc.PARTICLEORIENTATION_SCREEN
+
+    // });
+    // particle.particlesystem.scaleGraph = new pc.CurveSet([0, 0.1], [1, 0.1]);
+    // particle.particlesystem.rateGraph = new pc.CurveSet([0, 0.1], [1, 0.1]);
+    // particle.particlesystem.rate2Graph = new pc.CurveSet([0, 0.1], [1, 0.1]);
+
+    // particle.particlesystem.reset();
+    // particle.particlesystem.play();
+
+    // this.entity.addChild(particle);
   };
 
   // update code called every frame
@@ -69,15 +95,15 @@ export function PlaneControl() {
         this.entity.translate(movement);
       }
 
+      // make plane fly wave pattern
+      let pos = this.entity.getPosition();
+      this._waveCounter += dt * 2;
+      pos.y = this._flyHeight + Math.sin(this._waveCounter);
+      this.entity.setPosition(pos);
+
       // make plane always fly forward
       this.entity.translate(0, 0, dt * this.entity.forwardSpeed);
     }
-
-    // make plane fly wave pattern
-    let pos = this.entity.getPosition();
-    this._waveCounter += dt * 2;
-    pos.y = this._flyHeight + Math.sin(this._waveCounter);
-    this.entity.setPosition(pos);
 
     // make plane lean left and right slightly
     let rot = this.entity.getRotation();

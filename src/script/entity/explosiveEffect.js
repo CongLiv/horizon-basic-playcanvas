@@ -16,7 +16,6 @@ export function ExplosionEffect() {
     
       // Thêm Component Particle System vào thực thể con
       var particleSystem = explosion.addComponent("particlesystem", {
-        colorMapAsset: this.particleColorMapAsset,
         loop: false,
       });
     
