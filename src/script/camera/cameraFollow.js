@@ -40,12 +40,20 @@ export function CameraFollow() {
 
     this._shakeCounter = 0;
     this._shakeDuration = 0.5;
+
+    this._moveCameraStart = 7;
   };
 
   // update code called every frame
   cameraFollow.prototype.update = function (dt) {
     if (!this._isStart) {
-      this.entity.setPosition(7, 7, -12);
+
+      // make camera move around the plane when the game starts
+      this._moveCameraStart += dt / 10;
+
+      this.entity.setPosition(Math.sin(this._moveCameraStart) * 5, 7, -12);
+      this.entity.lookAt(this.targetEntity.getPosition() + new Vec3(0, 2, 0));
+    
 
       return;
     }
