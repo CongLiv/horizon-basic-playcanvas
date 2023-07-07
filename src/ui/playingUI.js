@@ -35,10 +35,10 @@ export class PlayingUI extends Entity {
       pivot: new pc.Vec2(0.5, 0.5),
     });
 
-    // reference to the app screen height
-    this.screenHeight = Game.app.graphicsDevice.height;
+    // responsive 
+    let isPortrait = Game.app.graphicsDevice.height > Game.app.graphicsDevice.width;
     // set the score text position based on the screen height
-    if (this.screenHeight < 720) {
+    if (!isPortrait) {
       this.scoreText.setLocalPosition(0, 30, 0);
     } else {
       this.scoreText.setLocalPosition(0, 50, 0);

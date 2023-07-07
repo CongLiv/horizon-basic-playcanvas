@@ -2,7 +2,7 @@ import { PlayingUI } from "./playingUI";
 import { StartUI } from "./startUI";
 import { Entity } from "playcanvas";
 import { EndUI } from "./endUI";
-
+import { SkinUI } from "./skinUI";
 export class UIManager extends Entity{
 
     constructor(player){
@@ -18,6 +18,9 @@ export class UIManager extends Entity{
         this.endUI = new EndUI(this.player);
         this.addChild(this.endUI);
 
+        this.skinUI = new SkinUI();
+        this.addChild(this.skinUI);
+
         
         this.addComponent('script');
         this.script.create('managerUI', {
@@ -25,7 +28,8 @@ export class UIManager extends Entity{
                 player: this.player,
                 startUI: this.startUI,
                 playingUI: this.playingUI,
-                endUI: this.endUI
+                endUI: this.endUI,
+                skinUI: this.skinUI,
             }
         });
     }

@@ -19,15 +19,23 @@ export function ManagerUI() {
         title: 'End UI'
     });
 
+    managerUI.attributes.add('skinUI', {
+        type: 'entity',
+        title: 'Skin UI'
+    });
+
     managerUI.prototype.initialize = function() {
 
         this.playingUI.enabled = false;
         this.startUI.enabled = true;
         this.endUI.enabled = false;
+        this.skinUI.enabled = false;
         this._isStart = false;
         this._isEnd = false;
         this.app.on('managerUI:startGame', this._startGame, this);
         this.app.on('managerUI:endGame', this._endGame, this);
+        this.app.on('managerUI:skinSelect', this._skinSelect, this);
+        this.app.on('managerUI:backHome', this._backHome, this);
     };
 
 
@@ -41,6 +49,7 @@ export function ManagerUI() {
         this.playingUI.enabled = true;
         this.startUI.enabled = false;
         this.endUI.enabled = false;
+        this.skinUI.enabled = false;
     }
 
     managerUI.prototype._endGame = function() {
@@ -48,5 +57,21 @@ export function ManagerUI() {
         this.playingUI.enabled = false;
         this.startUI.enabled = false;
         this.endUI.enabled = true;
+        this.skinUI.enabled = false;
     }
+
+    managerUI.prototype._skinSelect = function() {
+        this.skinUI.enabled = true;
+        this.endUI.enabled = false;
+        this.playingUI.enabled = false;
+        this.startUI.enabled = false;
+    }   
+
+    managerUI.prototype._backHome = function() {
+        this.skinUI.enabled = false;
+        this.endUI.enabled = false;
+        this.playingUI.enabled = false;
+        this.startUI.enabled = true;
+    }
+
 }

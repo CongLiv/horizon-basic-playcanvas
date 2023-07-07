@@ -21,7 +21,9 @@ import { EndBackgroundScript } from "./script/ui/endUI/endBackgroundScript.js";
 import { ScoreTextScript } from "./script/ui/playingUI/scoreTextScript.js";
 import { StartButtonScript } from "./script/ui/startUI/startButtonScript.js";
 import { ManagerUI } from "./script/ui/managerUI.js";
-import { ExplosionEffect } from "./script/entity/explosiveEffect.js";
+import { SkinButtonScript } from "./script/ui/startUI/skinButtonScript.js";
+import { BackButtonScript } from "./script/ui/skinUI/backButtonScript.js";
+// import { ExplosionEffect } from "./script/entity/explosiveEffect.js";
 export class Game {
 
 
@@ -59,7 +61,10 @@ export class Game {
     ScoreTextScript();
     StartButtonScript();
     ManagerUI();
-    ExplosionEffect();
+    // ExplosionEffect();
+    SkinButtonScript();
+    BackButtonScript();
+
 
     WasmModule.getInstance("Ammo", () => {
       AssetLoader.loadAssets(this.app, () => {
