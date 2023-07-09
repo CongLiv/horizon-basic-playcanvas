@@ -108,12 +108,10 @@ export class Game {
   }
 
   static isPortrait() {
-    return this.width < this.height;
+    
+    return this.height > this.width;
   }
 
-  static isLandscape() {
-    return this.width > this.height;
-  }
 }
 
 window.onload = function () {

@@ -109,17 +109,19 @@ export class PlayScene extends Scene {
     super.update(dt);
     this._debugListener();
 
-     // make startUI always opposite to main camera
-      this.UIManager.setPosition(
-        this.mainCamera.getPosition().x,
-        this.mainCamera.getPosition().y,
-        this.mainCamera.getPosition().z + 5
-      );
-      this.UIManager.setEulerAngles(
-        this.mainCamera.getEulerAngles().x - 10,
-        this.mainCamera.getEulerAngles().y,
-        this.mainCamera.getEulerAngles().z
-      );
+    // DONT NEED THIS BECAUSE SCREEN 2D IS ALWAYS ON TOP
+
+    //  // make startUI always opposite to main camera
+    //   this.UIManager.setPosition(
+    //     this.mainCamera.getPosition().x,
+    //     this.mainCamera.getPosition().y,
+    //     this.mainCamera.getPosition().z + 5
+    //   );
+    //   this.UIManager.setEulerAngles(
+    //     this.mainCamera.getEulerAngles().x - 10,
+    //     this.mainCamera.getEulerAngles().y,
+    //     this.mainCamera.getEulerAngles().z
+    //   );
       
     
 
