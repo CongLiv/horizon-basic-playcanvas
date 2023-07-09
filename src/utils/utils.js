@@ -10,5 +10,9 @@ export class Utils {
   static getRandomFloat(min, max) {
     return Math.random() * (max - min) + min;
   }
+
+  static getColor(r = 255, g = 255, b = 255, a = 255) {
+    return new pc.Color(r / 255, g / 255, b / 255, a / 255);
+  }
   
 }
