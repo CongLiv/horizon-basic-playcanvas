@@ -29,7 +29,12 @@ export class Game {
 
 
   static onDebug = false;
-    
+
+
+  static player = null;
+  static lastPoint = 0;
+  static highestPoint = 0;
+
   static init() {
     const canvas = document.createElement("canvas");
     document.body.appendChild(canvas);

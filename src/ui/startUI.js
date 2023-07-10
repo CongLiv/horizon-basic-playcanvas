@@ -3,6 +3,7 @@ import { assets } from "../assetLoader/assets";
 import { Game } from "../game.js";
 import { Screen2D } from "../templates/ui/screen2D";
 import { BackGround } from "../templates/ui/background";
+import { PointBar } from "../templates/ui/pointBar";
 
 export class StartUI extends Entity {
   constructor() {
@@ -25,14 +26,38 @@ export class StartUI extends Entity {
       opacity: 1,
     });
     if (Game.isPortrait()) {
-      this.title.element.width = 64;
-      this.title.element.height = 9.6;
+      this.title.element.width = 70;
+      this.title.element.height = 54;
       this.title.setLocalPosition(0, 35, 0);
     } else {
       this.title.element.width = 80;
-      this.title.element.height = 12;
+      this.title.element.height = 60
       this.title.setLocalPosition(0, 15, 0);
     }
+
+
+    // point bar
+    this.lastPointBar = new PointBar();
+    this.screen.addChild(this.lastPointBar);
+    this.lastPointBar.header.element.text = "Score";
+    this.lastPointBar.point.element.text = Math.floor(Game.lastPoint).toString();
+    
+
+    this.highestPointBar = new PointBar();
+    this.screen.addChild(this.highestPointBar);
+    this.highestPointBar.header.element.text = "Best";
+    this.highestPointBar.point.element.text = Math.floor(Game.highestPoint).toString();
+    
+    if (Game.isPortrait()) {
+      this.lastPointBar.setLocalPosition(-18, 20, 0);
+      this.highestPointBar.setLocalPosition(18, 20, 0);
+    }
+    else {
+      this.lastPointBar.setLocalPosition(-20, 0, 0);
+      this.highestPointBar.setLocalPosition(20, 0, 0);
+    }
+  
+    
 
     // start button
     this.startButton = new Entity();

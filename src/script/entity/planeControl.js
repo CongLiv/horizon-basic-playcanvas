@@ -141,6 +141,10 @@ export function PlaneControl() {
       this.app.fire("cameraFollow:endGame", true);
       this.app.fire("spawnObject:endGame", true);
 
+      // save point
+      Game.lastPoint = this.entity.getPosition().z / 10;
+      Game.highestPoint = Math.max(Game.highestPoint, Game.lastPoint);
+
       this.entity.destroyPlayer();
     }
   };
