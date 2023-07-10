@@ -49,8 +49,9 @@ export class StartUI extends Entity {
     this.highestPointBar.point.element.text = Math.floor(Game.highestPoint).toString();
     
     if (Game.isPortrait()) {
-      this.lastPointBar.setLocalPosition(-18, 20, 0);
-      this.highestPointBar.setLocalPosition(18, 20, 0);
+      this.lastPointBar.setLocalPosition(-18, 18, 0);
+      this.highestPointBar.setLocalPosition(18, 18, 0);
+    
     }
     else {
       this.lastPointBar.setLocalPosition(-20, 0, 0);

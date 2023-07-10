@@ -1,6 +1,6 @@
 import { Entity } from "playcanvas";
 import { assets } from "../../assetLoader/assets";
-
+import { Game } from "../../game.js";
 export class PointBar extends Entity{
 
     constructor(){
@@ -46,7 +46,10 @@ export class PointBar extends Entity{
         });
         this.point.setLocalPosition(0, 5, 0);
 
-
+        if (Game.isPortrait()) {
+            this.header.element.fontSize = 4;
+            this.point.element.fontSize = 6;
+        }
 
     }
 
