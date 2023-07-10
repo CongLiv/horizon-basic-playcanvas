@@ -1,16 +1,19 @@
 
+import { Game } from "../../game.js";
 import { Utils } from "../../utils/utils.js";
 export function SkyboxScript() {
   var skyboxScript = pc.createScript("skyboxScript");
 
   skyboxScript.prototype.initialize = function () {
-    this._changeSkyboxCounter = 0;
     this._alpha = 0;
+
   };
 
   skyboxScript.prototype.update = function (dt) {
-    this._changeSkyboxCounter += dt;
-    if (this._changeSkyboxCounter > 5 && this._alpha == 0) {
+   
+    let currentPoint = Math.floor(Game.player.getPosition().z / 10);
+    // if player fly 100m, change skybox color
+    if (currentPoint != 0 && currentPoint % 100 === 0 && this._alpha == 0){
       this._alpha += dt;
       this.targetColor = Utils.getColor(
         Utils.getRandomInt(0, 255),
@@ -25,7 +28,6 @@ export function SkyboxScript() {
       this._changeSkybox(this.currentColor, this.targetColor, this._alpha);
       if (this._alpha > 1) {
         this._alpha = 0;
-        this._changeSkyboxCounter = 0;
       }
     }
   };
