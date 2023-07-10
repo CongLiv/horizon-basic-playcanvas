@@ -23,6 +23,7 @@ import { StartButtonScript } from "./script/ui/startUI/startButtonScript.js";
 import { ManagerUI } from "./script/ui/managerUI.js";
 import { SkinButtonScript } from "./script/ui/startUI/skinButtonScript.js";
 import { BackButtonScript } from "./script/ui/skinUI/backButtonScript.js";
+import { SkyboxScript } from "./script/skybox/skyboxScript.js";
 // import { ExplosionEffect } from "./script/entity/explosiveEffect.js";
 export class Game {
 
@@ -64,6 +65,7 @@ export class Game {
     // ExplosionEffect();
     SkinButtonScript();
     BackButtonScript();
+    SkyboxScript();
 
 
     WasmModule.getInstance("Ammo", () => {

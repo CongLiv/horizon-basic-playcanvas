@@ -11,11 +11,14 @@ import { ObjectSpawner } from "../templates/component/objectSpawner";
 import { Obstacle1 } from "../templates/object/obstacle/obstacle1";
 import { StartUI } from "../ui/startUI";
 import { UIManager } from "../ui/UIManager";
+import { Utils } from "../utils/utils";
+import { Skybox } from "../templates/skybox/skybox";
 
 export class PlayScene extends Scene {
   constructor() {
     super(GameConstant.SCENE_PLAY);
     this._initialize();
+   
   }
 
   create() {
@@ -31,7 +34,7 @@ export class PlayScene extends Scene {
     this._initObject();
     this._initCamera();
     this._initOrbitCamera();
-    this._initSkybox();   // not working
+    this._initSkybox();
     this._initUI();
   }
 
@@ -41,12 +44,8 @@ export class PlayScene extends Scene {
   }
 
   _initSkybox() {
-    this.skybox1 = new Entity();
-    this.skybox1.addComponent("skybox", {
-      type: "cubemap",
-      cubemap: assets.skybox1,
-    });
-    Game.app.root.addChild(this.skybox1);
+    this.skybox = new Skybox();
+    this.addChild(this.skybox);
   }
 
   _initOrbitCamera() {
@@ -82,15 +81,12 @@ export class PlayScene extends Scene {
   _initUI() {
     this.UIManager = new UIManager(this.player);
     this.addChild(this.UIManager);
-
   }
 
   _initObject() {
     // plane
     this.player = new Plane1();
     this.addChild(this.player);
-  
-
 
     // init object spawner
     this.spawnContainer = new Entity();
@@ -98,11 +94,9 @@ export class PlayScene extends Scene {
     this.objectSpawner = new ObjectSpawner(this.player, this.spawnContainer);
     this.addChild(this.objectSpawner);
 
-
-      // init ground
-      this.ground = new Ground1(this.player);
-      this.ground.spawnToPosition(new pc.Vec3(0, 0, 0), this.spawnContainer);
-
+    // init ground
+    this.ground = new Ground1(this.player);
+    this.ground.spawnToPosition(new pc.Vec3(0, 0, 0), this.spawnContainer);
   }
 
   update(dt) {
@@ -122,9 +116,8 @@ export class PlayScene extends Scene {
     //     this.mainCamera.getEulerAngles().y,
     //     this.mainCamera.getEulerAngles().z
     //   );
-      
-    
 
+   
   }
 
   _debugListener() {
@@ -140,7 +133,7 @@ export class PlayScene extends Scene {
     } else {
       this._isPressedDebug = false;
     }
-    
-
   }
+
+
 }
