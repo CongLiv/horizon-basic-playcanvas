@@ -52,7 +52,7 @@ export class Skybox extends Entity {
     this._scene.skyboxMip = 0;
     this._scene.fogColor = color;
     this._scene.fog = pc.FOG_EXP2;
-    this._scene.fogStart = 20;
+    this._scene.fogStart = 50;
     this._scene.fogEnd = 1000;
     this._scene.fogDensity = 0.01;
     this._scene.ambientLight = color;
