@@ -24,21 +24,20 @@ export class ScrollView extends Entity{
 
         this.scrollBar = new ScrollBar();
         this.addChild(this.scrollBar);
-        this.scrollBar.setLocalPosition(0, 70, 0);
-
     
+
 
         this.addComponent('scrollview', {
             scrollMode: pc.SCROLL_MODE_BOUNCE,
             bounceAmount: 0.1,
-            friction: 0.05,
+            friction: 0.1,
             useMouseWheel: true,
             mouseWheelSensitivity: new pc.Vec2(1, 1),
             viewportEntity: this.viewPort,
-            contenEntity: this.viewPort.content,
+            contentEntity: this.viewPort.content,
             horizontal: false,
             vertical: true,
-            scrollbarEntity: this.scrollBar,
+            verticalScrollbarEntity: this.scrollBar,
             verticalScrollbarVisibility: pc.SCROLLBAR_VISIBILITY_SHOW_ALWAYS,
             
         });

@@ -11,7 +11,7 @@
                 type: "image",
                 anchor: new pc.Vec4(0.5, 0.5, 0.5, 0.5),
                 pivot: new pc.Vec2(0.5, 0.5),
-                width: 120,
+                width: 130,
                 height: 90,
                 margin: new pc.Vec4(-60, -45, -60, -45),
                 color: new pc.Color(0, 0, 0, 1),
@@ -27,7 +27,7 @@
                 anchor: new pc.Vec4(0.5, 0.5, 0.5, 0.5),
                 pivot: new pc.Vec2(0.5, 0.5),
                 margin: new pc.Vec4(-60, -65, -60, -65),
-                width: 120,
+                width: 130,
                 height: 130,
                 useInput: true,
             });

@@ -15,6 +15,12 @@ export class SkinUI extends Entity {
     this.background = new BackGround();
     this.screen.addChild(this.background);
 
+    //scrollview
+
+    this.scrollview = new ScrollView();
+    this.screen.addChild(this.scrollview);
+    this.scrollview.setLocalPosition(0, 0, 0);
+
     // back button
     this.backButton = new Entity();
     this.screen.addChild(this.backButton);
@@ -37,17 +43,5 @@ export class SkinUI extends Entity {
       this.backButton.element.height = 8;
       this.backButton.setLocalPosition(0, -25, 0);
     }
-
-    // scrollview
-
-    this.scrollview = new ScrollView();
-    this.screen.addChild(this.scrollview);
-    this.scrollview.setLocalPosition(0, 0, 0);
-
-
-  
-  
-
-
   }
 }
