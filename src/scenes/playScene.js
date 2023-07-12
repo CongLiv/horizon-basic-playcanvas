@@ -96,7 +96,7 @@ export class PlayScene extends Scene {
 
     // init ground
     this.ground = new Ground1(this.player);
-    this.ground.spawnToPosition(new pc.Vec3(0, 0, 0), this.spawnContainer);
+    this.ground.spawnToPosition(new pc.Vec3(0, 0, 10), this.spawnContainer);
   }
 
   update(dt) {

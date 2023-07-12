@@ -82,6 +82,7 @@ export function SpawnObject() {
         let obstacle = new Obstacle1(this.player);
         let randHeight = Utils.getRandomInt(10, 60);
         obstacle.setLocalScale(4, randHeight, 4);
+        obstacle.collision.halfExtents = new Vec3(2, randHeight / 2, 2);
         obstacle.spawnToPosition(new Vec3(i, randHeight / 2, this.entity.getPosition().z), this.spawnContainer);
       }
     }
