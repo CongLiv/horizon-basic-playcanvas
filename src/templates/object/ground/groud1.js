@@ -4,10 +4,8 @@ import { SuperObject } from "../superObject";
 import { Game } from "../../../game";
 
 export class Ground1 extends SuperObject {
-  constructor(player) {
+  constructor() {
     super();
-    this.player = player;
-    this.addObjectScript();
     this.tags.add("ground");
     this.addComponent("model", {
       type: "plane",

@@ -31,6 +31,7 @@ export class PlayScene extends Scene {
 
   _initialize() {
     this._initLight();
+    this._initPlayer();
     this._initObject();
     this._initCamera();
     this._initOrbitCamera();
@@ -83,10 +84,14 @@ export class PlayScene extends Scene {
     this.addChild(this.UIManager);
   }
 
-  _initObject() {
-    // plane
+  _initPlayer() {
     Game.player = this.player = new Plane1();
     this.addChild(this.player);
+  }
+
+  _initObject() {
+    // plane
+    
 
     // init object spawner
     this.spawnContainer = new Entity();
@@ -95,7 +100,7 @@ export class PlayScene extends Scene {
     this.addChild(this.objectSpawner);
 
     // init ground
-    this.ground = new Ground1(this.player);
+    this.ground = new Ground1();
     this.ground.spawnToPosition(new pc.Vec3(0, 0, 10), this.spawnContainer);
   }
 

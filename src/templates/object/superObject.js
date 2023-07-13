@@ -1,10 +1,11 @@
 import { Entity } from "playcanvas";
 import { ObjectScript } from "../../script/object/objectScript";
+import { Game } from "../../game";
 
 export class SuperObject extends Entity {
-  constructor(player) {
+  constructor() {
     super();
-    this.player = player;
+    this._addObjectScript();
   }
 
   spawnToPosition(position, spawnContainer) {}
@@ -14,12 +15,12 @@ export class SuperObject extends Entity {
     this.destroy();
   }
 
-  addObjectScript() {
+  _addObjectScript() {
     
     this.addComponent("script");
     this.script.create("objectScript", {
       attributes: {
-        player: this.player,
+        player: Game.player,
       },
     });
   }

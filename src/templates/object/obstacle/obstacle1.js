@@ -3,10 +3,8 @@ import { Game } from "../../../game";
 import { assets } from "../../../assetLoader/assets";
 import { Utils } from "../../../utils/utils";
 export class Obstacle1 extends SuperObject {
-  constructor(player) {
-    super(player);
-    this.player = player;
-    this.addObjectScript();
+  constructor() {
+    super();
     this.tags.add("obstacle");
 
     this.addComponent("model", {
