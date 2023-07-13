@@ -7,6 +7,15 @@ export function SkyboxScript() {
   skyboxScript.prototype.initialize = function () {
     this._alpha = 0;
 
+    this._listColor = [
+      Utils.getColor(194, 222, 220),    // gray
+      Utils.getColor(244, 177, 131),  // orange
+      Utils.getColor(160, 191, 224),  // blue
+      Utils.getColor(179, 200, 144),  // green
+      Utils.getColor(236, 229, 199),  // yellow
+    ]
+
+
   };
 
   skyboxScript.prototype.update = function (dt) {
@@ -15,11 +24,10 @@ export function SkyboxScript() {
     // if player fly 100m, change skybox color
     if (currentPoint != 0 && currentPoint % 100 === 0 && this._alpha == 0){
       this._alpha += dt;
-      this.targetColor = Utils.getColor(
-        Utils.getRandomInt(0, 255),
-        Utils.getRandomInt(0, 255),
-        Utils.getRandomInt(0, 255)
-      );
+      
+      // make target color is squential color
+      let targetColorIndex = Math.floor(currentPoint / 100) % this._listColor.length;
+      this.targetColor = this._listColor[targetColorIndex];
       this.currentColor = this.entity._scene.ambientLight;
     }
 

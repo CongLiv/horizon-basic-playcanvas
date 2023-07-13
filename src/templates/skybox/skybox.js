@@ -21,7 +21,7 @@ export class Skybox extends Entity {
     this.script.create("skyboxScript");
 
     // init skybox
-    this._changeSkyboxColor(Utils.getColor(176, 224, 230));
+    this._changeSkyboxColor(Utils.getColor(194, 222, 220));
   }
 
 
