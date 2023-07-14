@@ -90,9 +90,7 @@ export class PlayScene extends Scene {
   }
 
   _initObject() {
-    // plane
     
-
     // init object spawner
     this.spawnContainer = new Entity();
     this.addChild(this.spawnContainer);

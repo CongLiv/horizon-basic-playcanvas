@@ -35,7 +35,7 @@ export class Obstacle1 extends SuperObject {
   }
 
   spawnToPosition(position, spawnContainer) {
-
+      
     this.setLocalPosition(position);
     spawnContainer.addChild(this);
   }

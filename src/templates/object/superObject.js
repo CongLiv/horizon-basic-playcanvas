@@ -9,12 +9,14 @@ export class SuperObject extends Entity {
   }
 
   spawnToPosition(position, spawnContainer) {}
+  createObject() {}
+
   destroyObject() {
     let parent = this.getParent();
     parent.removeChild(this);
     this.destroy();
   }
-
+  
   _addObjectScript() {
     
     this.addComponent("script");
