@@ -24,7 +24,7 @@ export class Ground1 extends SuperObject {
 
     this.addComponent("collision", {
       type: "box",
-      halfExtents: new pc.Vec3(250, 0.5, 250),
+      halfExtents: new pc.Vec3(250, 0.001, 250),
     });
 
     this.addComponent("rigidbody", {
