@@ -3,6 +3,7 @@ import { Entity } from "playcanvas";
 export class Cone extends Entity {
   constructor(x, y, z) {
     super();
+    this.tags.add("obstacle");
 
     this.addComponent("model", {
       type: "cone",
