@@ -2,6 +2,7 @@ import { Vec3 } from "playcanvas";
 import { Ground1 } from "../../templates/object/ground/groud1";
 import { Utils } from "../../utils/utils";
 import { Obstacle1 } from "../../templates/object/obstacle/obstacle1";
+import { SetBox } from "../../templates/object/obstacle/setBox";
 export function SpawnObject() {
   var spawnObject = new pc.createScript("spawnObject");
 
@@ -79,11 +80,8 @@ export function SpawnObject() {
 
     for (let i = pivotLeft; i < pivotRight; i += 10) {
       if (Utils.getChance(0.3)) {
-        let obstacle = new Obstacle1(this.player);
-        let randHeight = Utils.getRandomInt(10, 60);
-        obstacle.setLocalScale(4, randHeight, 4);
-        obstacle.collision.halfExtents = new Vec3(2, randHeight / 2, 2);
-        obstacle.spawnToPosition(new Vec3(i, randHeight / 2, this.entity.getPosition().z), this.spawnContainer);
+        let obstacle = new SetBox();
+        obstacle.spawnToPosition(new Vec3(i, 0, this.entity.getPosition().z), this.spawnContainer);
       }
     }
   };
