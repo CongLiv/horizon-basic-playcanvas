@@ -11,7 +11,7 @@ export class Ground1 extends SuperObject {
       type: "plane",
     });
 
-    this.setLocalScale(500, 1, 500);
+    this.setLocalScale(1000, 1, 1000);
 
     this.groundMaterial = new pc.StandardMaterial();
     // this.groundMaterial.diffuseMap = assets.sandTexture.resource;
@@ -24,11 +24,12 @@ export class Ground1 extends SuperObject {
 
     this.addComponent("collision", {
       type: "box",
-      halfExtents: new pc.Vec3(250, 0.001, 250),
+      halfExtents: new pc.Vec3(500, 0.001, 500),
     });
 
     this.addComponent("rigidbody", {
       type: "static",
+      frition: 1,
     });
 
     // //make rigidbody dont fall down
