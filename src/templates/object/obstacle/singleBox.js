@@ -19,11 +19,11 @@ export class SingleBox extends SuperObject{
         this.addChild(this.box);
         
 
-        this.obstacleMaterial = new pc.StandardMaterial();
-        this.obstacleMaterial.diffuse = new pc.Color(0.5, 0.5, 0.5);
-        this.obstacleMaterial.update();
+        this.OBSTACLE_MATERIAL = new pc.StandardMaterial();
+        this.OBSTACLE_MATERIAL.diffuse = new pc.Color(0.5, 0.5, 0.5);
+        this.OBSTACLE_MATERIAL.update();
 
-        this.box.model.material = this.obstacleMaterial;
+        this.box.model.material = this.OBSTACLE_MATERIAL;
         
 
     }
