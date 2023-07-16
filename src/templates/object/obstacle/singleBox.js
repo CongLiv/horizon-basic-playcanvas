@@ -17,11 +17,6 @@ export class SingleBox extends SuperObject{
         this.box = new Box(randWidth, randHeight, randWidth);
         this.box.setLocalPosition(0, randHeight / 2, 0);
         this.addChild(this.box);
-        
-
-        this.OBSTACLE_MATERIAL = new pc.StandardMaterial();
-        this.OBSTACLE_MATERIAL.diffuse = new pc.Color(0.5, 0.5, 0.5);
-        this.OBSTACLE_MATERIAL.update();
 
         this.box.model.material = this.OBSTACLE_MATERIAL;
         
