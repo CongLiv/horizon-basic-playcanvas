@@ -25,6 +25,7 @@ import { SkinButtonScript } from "./script/ui/startUI/skinButtonScript.js";
 import { BackButtonScript } from "./script/ui/skinUI/backButtonScript.js";
 import { SkyboxScript } from "./script/skybox/skyboxScript.js";
 import { ScrollBarScript } from "./script/ui/skinUI/scrollBarScript.js";
+import { FallBoxScript } from "./script/object/fallBoxScript.js";
 // import { ExplosionEffect } from "./script/entity/explosiveEffect.js";
 export class Game {
 
@@ -73,6 +74,7 @@ export class Game {
     BackButtonScript();
     SkyboxScript();
     ScrollBarScript();
+    FallBoxScript();
 
 
     WasmModule.getInstance("Ammo", () => {
