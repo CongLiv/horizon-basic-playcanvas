@@ -11,7 +11,7 @@ export class Ground1 extends SuperObject {
       type: "plane",
     });
 
-    this.setLocalScale(1000, 1, 1000);
+    this.setLocalScale(600, 1, 600);
 
     this.groundMaterial = new pc.StandardMaterial();
     // this.groundMaterial.diffuseMap = assets.sandTexture.resource;
@@ -24,7 +24,7 @@ export class Ground1 extends SuperObject {
 
     this.addComponent("collision", {
       type: "box",
-      halfExtents: new pc.Vec3(500, 0.001, 500),
+      halfExtents: new pc.Vec3(300, 0.001, 300),
     });
 
     this.addComponent("rigidbody", {
