@@ -6,7 +6,6 @@ export class SingleCylinder extends SuperObject {
   constructor() {
     super();
     this.tags.add("obstacle");
-    this._createObject();
     this.objectWidth = 6;
   }
 

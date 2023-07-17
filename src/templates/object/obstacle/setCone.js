@@ -7,8 +7,7 @@ export class SetCone extends SuperObject{
     constructor(){
         super();
         this.tags.add("obstacle");
-        this._createObject();
-        this.objectWidth;
+        this.objectWidth = 10;
     }
 
     _createObject(){

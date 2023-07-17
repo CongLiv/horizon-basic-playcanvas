@@ -7,9 +7,7 @@ export class FallBox extends SuperObject{
     constructor(){
         super();
         this.tags.add("obstacle");
-        this._createObject();
         this.objectWidth = 40;
-
     }
 
     _createObject(){
@@ -22,9 +20,6 @@ export class FallBox extends SuperObject{
             this.addChild(box);
             box.setLocalPosition(i, 0, 0);
         }
-
-        
-
     }
 
     spawnToPosition(position, spawnContainer){
