@@ -51,9 +51,9 @@ export class Skybox extends Entity {
     this._scene.skyboxRotation = new pc.Quat().setFromEulerAngles(150, -20, 90);
     this._scene.skyboxMip = 0;
     this._scene.fogColor = color;
-    this._scene.fog = pc.FOG_EXP2;
-    this._scene.fogStart = 50;
-    this._scene.fogEnd = 1000;
+    this._scene.fog = pc.FOG_LINEAR;
+    this._scene.fogStart = 1;
+    this._scene.fogEnd = 250;
     this._scene.fogDensity = 0.01;
     this._scene.ambientLight = color;
     this._scene.ambientLightIntensity = 0.5;
