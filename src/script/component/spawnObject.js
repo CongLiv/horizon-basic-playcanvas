@@ -1,8 +1,14 @@
 import { Vec3 } from "playcanvas";
 import { Ground1 } from "../../templates/object/ground/groud1";
 import { Utils } from "../../utils/utils";
-import { Obstacle1 } from "../../templates/object/obstacle/obstacle1";
 import { SetBox } from "../../templates/object/obstacle/setBox";
+import { SingleBox } from "../../templates/object/obstacle/singleBox";
+import { Cone } from "../../templates/object/model/cone";
+import { SingleCone } from "../../templates/object/obstacle/singleCone";
+import { SetCone } from "../../templates/object/obstacle/setCone";
+import { FallBox } from "../../templates/object/obstacle/fallBox";
+import { SingleCylinder } from "../../templates/object/obstacle/singleCylinder";
+import { SingleTree } from "../../templates/object/obstacle/singleTree";
 export function SpawnObject() {
   var spawnObject = new pc.createScript("spawnObject");
 
@@ -31,9 +37,11 @@ export function SpawnObject() {
     this._isStart = false;
     this._isEnd = false;
 
+    this._spawnChance = 0.2;
+
     // init spawn
     this._spawnGround();
-    this._spawnObstacle();
+
   };
 
   spawnObject.prototype.update = function (dt) {
@@ -78,10 +86,11 @@ export function SpawnObject() {
     let pivotRight =
       this.entity.getPosition().x + this.entity.getLocalScale().x / 2;
 
-    for (let i = pivotLeft; i < pivotRight; i += 10) {
-      if (Utils.getChance(0.3)) {
-        let obstacle = new SetBox();
+    for (let i = pivotLeft; i < pivotRight; i += 5) {
+      if (Utils.getChance(this._spawnChance)) {
+        let obstacle = new FallBox();
         obstacle.spawnToPosition(new Vec3(i, 0, this.entity.getPosition().z), this.spawnContainer);
+        i += obstacle.objectWidth;
       }
     }
   };

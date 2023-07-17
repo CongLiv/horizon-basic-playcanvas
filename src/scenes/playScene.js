@@ -8,7 +8,6 @@ import { assets } from "../assetLoader/assets";
 import { Game } from "../game";
 import { Ground1 } from "../templates/object/ground/groud1";
 import { ObjectSpawner } from "../templates/component/objectSpawner";
-import { Obstacle1 } from "../templates/object/obstacle/obstacle1";
 import { StartUI } from "../ui/startUI";
 import { UIManager } from "../ui/UIManager";
 import { Utils } from "../utils/utils";
