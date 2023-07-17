@@ -7,7 +7,6 @@ export class SingleBox extends SuperObject{
     constructor(){
         super();
         this.tags.add("obstacle");
-
         this.objectWidth = 15;
     }
 

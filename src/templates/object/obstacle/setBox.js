@@ -8,7 +8,6 @@ export class SetBox extends SuperObject{
     constructor(){
         super();
         this.tags.add("obstacle");
-
         this.objectWidth = 10;
     }
 
