@@ -8,7 +8,7 @@ export class FallBox extends SuperObject{
         super();
         this.tags.add("obstacle");
         this._createObject();
-        
+        this.objectWidth = 40;
 
     }
 
@@ -23,6 +23,7 @@ export class FallBox extends SuperObject{
             box.setLocalPosition(i, 0, 0);
         }
 
+        
 
     }
 
