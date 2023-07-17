@@ -8,7 +8,7 @@ export class ObjectSpawner extends Entity{
         super();
         this.player = player;
         this.spawnContainer = spawnContainer;
-        this.spawnDistance = 200;
+        this.spawnDistance = 300;
         // this.addComponent('model', {   
         //     type: 'box'
         // });

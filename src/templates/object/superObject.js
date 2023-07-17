@@ -7,7 +7,8 @@ export class SuperObject extends Entity {
     super();
     this._addObjectScript();
     this._createMaterial();
-    this.objectWidth;
+    this._createObject();
+    this.objectWidth = 5; 
   }
 
   spawnToPosition(position, spawnContainer) {}

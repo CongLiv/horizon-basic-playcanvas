@@ -136,6 +136,7 @@ export function PlaneControl() {
 
   planeControl.prototype.onTriggerEnter = function (env) {
     if (env.tags.has("obstacle")) {
+      console.log("hit obstacle");
       this._isEnd = true;
       this.app.fire("managerUI:endGame", true);
       this.app.fire("cameraFollow:endGame", true);
