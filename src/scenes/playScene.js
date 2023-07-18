@@ -34,8 +34,10 @@ export class PlayScene extends Scene {
     this._initObject();
     this._initCamera();
     this._initOrbitCamera();
+    this._initDebugCollision();
     this._initSkybox();
     this._initUI();
+  
   }
 
   _initLight() {
@@ -72,6 +74,15 @@ export class PlayScene extends Scene {
     this.camera.setLocalPosition(-350, 80, -20);
 
     this.addChild(this.camera);
+  }
+
+  _initDebugCollision() {
+    this.addComponent("script");
+    this.script.create("renderPhysics", {
+      attributes: {
+        drawShapes: false,
+      },
+    });
   }
   _initCamera() {
     this.mainCamera = new MainCamera(this.player);
@@ -123,7 +134,10 @@ export class PlayScene extends Scene {
     } else {
       this._isPressedDebug = false;
     }
+
   }
+
+
 
 
 }
