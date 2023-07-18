@@ -11,7 +11,7 @@ export function ObjectScript(){
     });
 
     objectScript.prototype.initialize = function() {
-        this._destroyDistance = 10;
+        this._destroyDistance = 30;
     }
 
     objectScript.prototype.update = function(dt) {

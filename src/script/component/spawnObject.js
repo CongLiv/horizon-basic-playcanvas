@@ -11,6 +11,7 @@ import { SingleCylinder } from "../../templates/object/obstacle/singleCylinder";
 import { SingleTree } from "../../templates/object/obstacle/singleTree";
 import { AdjoinBox } from "../../templates/object/obstacle/adjoinBox";
 import { AdjoinBox2 } from "../../templates/object/obstacle/adjoinBox2";
+import { Game } from "../../game";
 export function SpawnObject() {
   var spawnObject = new pc.createScript("spawnObject");
 
@@ -47,7 +48,7 @@ export function SpawnObject() {
   };
 
   spawnObject.prototype.update = function (dt) {
-    if (this._isStart === false) return;
+    if (this._isStart === false || Game.onDebug == true) return;
 
     this.entity.setPosition(
       this.player.getPosition().x,
@@ -90,7 +91,7 @@ export function SpawnObject() {
 
     for (let i = pivotLeft; i < pivotRight; i += 10) {
       if (Utils.getChance(this._spawnChance)) {
-        let obstacle = new SingleTree();
+        let obstacle = new AdjoinBox();
         obstacle.spawnToPosition(new Vec3(i, 0, this.entity.getPosition().z), this.spawnContainer);
         i += obstacle.objectWidth;
       }

@@ -135,6 +135,15 @@ export class PlayScene extends Scene {
       this._isPressedDebug = false;
     }
 
+    if (this.camera.enabled) {
+      // make camera follow player once per press
+      if (this._isFollow === true) return;
+      this._isFollow = true;
+      this.camera.script.orbitCamera.focusEntity = this.player;
+    } else {
+      this._isFollow = false;
+      
+    }
   }
 
 

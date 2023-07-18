@@ -1,4 +1,5 @@
 import { Game } from "../../game";
+import { FlyParticle } from "../../templates/entity/flyParticle";
 
 export function PlaneControl() {
   var planeControl = pc.createScript("planeControl");
@@ -28,36 +29,16 @@ export function PlaneControl() {
     this.app.touch.on("touchend", this.onTouchEnd, this);
     this.app.on("planeControl:startGame", this._startGame, this);
 
-    // let particle = new pc.Entity();
-    // particle.addComponent("particlesystem", {
-    //   blendType: pc.BLEND_NORMAL,
-    //   enabled: true,
-    //   autoPlay: true,
-    //   loop: true,
-    //   preWarm: true,
-    //   numParticles: 100,
-    //   lifetime: 5,
-    //   rate: 0.1,
-    //   intensity: 1,
-    //   emitterShape: pc.EMITTERSHAPE_SPHERE,
-    //   localSpace: false,
-    //   noFog: false,
-    //   orientation: pc.PARTICLEORIENTATION_SCREEN
 
-    // });
-    // particle.particlesystem.scaleGraph = new pc.CurveSet([0, 0.1], [1, 0.1]);
-    // particle.particlesystem.rateGraph = new pc.CurveSet([0, 0.1], [1, 0.1]);
-    // particle.particlesystem.rate2Graph = new pc.CurveSet([0, 0.1], [1, 0.1]);
+    this.flyParticle = new FlyParticle();
+    this.entity.addChild(this.flyParticle);
+    this.flyParticle.play();
 
-    // particle.particlesystem.reset();
-    // particle.particlesystem.play();
-
-    // this.entity.addChild(particle);
   };
 
   // update code called every frame
   planeControl.prototype.update = function (dt) {
-    if (this._isStart && this._isEnd == false) {
+    if (this._isStart && this._isEnd == false && Game.onDebug == false) {
       var x = 0;
 
       if (this.app.keyboard.isPressed(pc.KEY_A) || this._delta > 0) {
