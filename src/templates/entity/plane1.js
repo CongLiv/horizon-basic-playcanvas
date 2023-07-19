@@ -1,6 +1,7 @@
 import { Entity } from "playcanvas";
 import { assets } from "../../assetLoader/assets";
-
+import { FlyParticle } from "../entity/flyParticle.js";
+import { FlyMesh } from "./flyMesh";
 export class Plane1 extends Entity {
   constructor() {
     super();
@@ -47,6 +48,12 @@ export class Plane1 extends Entity {
     this.isTurnRight = false;
     this.isMovingStraight = true;
 
+    
+    this.flyMesh = new FlyMesh();
+    
+    this.addChild(this.flyMesh);
+    this.flyMesh.setLocalPosition(0, -0.1, -0.9);
+    this.flyMesh.setEulerAngles(0, 0, 90);
   }
 
   update(dt) {}

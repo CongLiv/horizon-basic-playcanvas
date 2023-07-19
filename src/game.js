@@ -27,6 +27,7 @@ import { SkyboxScript } from "./script/skybox/skyboxScript.js";
 import { ScrollBarScript } from "./script/ui/skinUI/scrollBarScript.js";
 import { FallBoxScript } from "./script/object/fallBoxScript.js";
 import { RenderPhysicLoader } from "./system/renderPhysicLoader.js";
+import { Ribbon } from "./script/entity/ribbon.js";
 // import { ExplosionEffect } from "./script/entity/explosiveEffect.js";
 export class Game {
 
@@ -77,7 +78,7 @@ export class Game {
     ScrollBarScript();
     FallBoxScript();
     RenderPhysicLoader();
-
+    Ribbon();
 
     WasmModule.getInstance("Ammo", () => {
       AssetLoader.loadAssets(this.app, () => {

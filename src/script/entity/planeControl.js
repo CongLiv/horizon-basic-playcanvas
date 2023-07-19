@@ -29,10 +29,10 @@ export function PlaneControl() {
     this.app.touch.on("touchend", this.onTouchEnd, this);
     this.app.on("planeControl:startGame", this._startGame, this);
 
-
-    this.flyParticle = new FlyParticle();
-    this.entity.addChild(this.flyParticle);
-    this.flyParticle.play();
+    // DONT USE IT ANYMORE
+    // this.flyParticle = new FlyParticle();
+    // this.entity.addChild(this.flyParticle);
+    // this.flyParticle.play();
 
   };
 
