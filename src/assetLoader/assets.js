@@ -16,6 +16,7 @@ export const assets = {
     backButtonTexture: new Asset("backButtonTexture", "texture", {url: "assets/textures/backbutton.png"}),
     playButtonTexture: new Asset("buttonTexture", "texture", {url: "assets/textures/playbutton.png"}),
     skinButtonTexture: new Asset("skinbuttonTexture", "texture", {url: "assets/textures/skinbutton.png"}),
+    explosiveTexture: new Asset("explosiveTexture", "texture", {url: "assets/textures/explosive.png"}),
 
     
 

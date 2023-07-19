@@ -1,6 +1,5 @@
 import { Entity } from "playcanvas";
 import { assets } from "../../assetLoader/assets";
-import { FlyParticle } from "../entity/flyParticle.js";
 import { FlyMesh } from "./flyMesh";
 export class Plane1 extends Entity {
   constructor() {

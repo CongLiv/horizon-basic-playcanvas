@@ -1,5 +1,5 @@
 import { Game } from "../../game";
-import { FlyParticle } from "../../templates/entity/flyParticle";
+import { ExplosiveParticle } from "../../templates/entity/explosiveParticle";
 
 export function PlaneControl() {
   var planeControl = pc.createScript("planeControl");
@@ -29,11 +29,10 @@ export function PlaneControl() {
     this.app.touch.on("touchend", this.onTouchEnd, this);
     this.app.on("planeControl:startGame", this._startGame, this);
 
-    // DONT USE IT ANYMORE
-    // this.flyParticle = new FlyParticle();
-    // this.entity.addChild(this.flyParticle);
-    // this.flyParticle.play();
 
+    this.explosiveParticle = new ExplosiveParticle();
+    this.entity.addChild(this.explosiveParticle);
+    
   };
 
   // update code called every frame
@@ -117,7 +116,6 @@ export function PlaneControl() {
 
   planeControl.prototype.onTriggerEnter = function (env) {
     if (env.tags.has("obstacle")) {
-      console.log("hit obstacle");
       this._isEnd = true;
       this.app.fire("managerUI:endGame", true);
       this.app.fire("cameraFollow:endGame", true);
@@ -126,8 +124,15 @@ export function PlaneControl() {
       // save point
       Game.lastPoint = this.entity.getPosition().z / 10;
       Game.highestPoint = Math.max(Game.highestPoint, Game.lastPoint);
+      
+      // play particle before destroy
+      this.entity.model.enabled = false;
+      this.explosiveParticle.play();
+      this.explosiveParticle.particleEntity.particlesystem.on("end", () => {
+        this.destroyPlayer();
+      });
 
-      this.entity.destroyPlayer();
+     
     }
   };
 
