@@ -23,9 +23,12 @@ export class Plane1 extends Entity {
     this.animation.play(assets.flyAnim.name, 0.3);
 
     this.addComponent("collision", {
-      type: "mesh",
-      asset: assets.planeModel,
+      type: "box",
+      halfExtents: new pc.Vec3(2, 0.514, 0.672),
+      linearOffset: new pc.Vec3(0, -0.06, 0.48),
     });
+
+
 
     // this.addComponent("rigidbody", {
     //   type: "static",
