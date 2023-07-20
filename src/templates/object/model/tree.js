@@ -11,7 +11,7 @@ export class Tree extends Entity {
       asset: assets.treeModel,
     });
 
-    this.setLocalScale(0.2, 0.2, 0.2);
+    this.setLocalScale(1, 1, 1);
 
     this.addComponent("collision", {
       type: "mesh",
@@ -34,6 +34,6 @@ export class Tree extends Entity {
     material.update();
 
     this.model.model.meshInstances[0].material = material;
-    this.model.model.meshInstances[1].material = material;
+  
   }
 }
