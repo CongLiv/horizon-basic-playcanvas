@@ -24,10 +24,11 @@ export class Plane1 extends Entity {
 
     this.addComponent("collision", {
       type: "box",
-      halfExtents: new pc.Vec3(2, 0.514, 0.672),
+      halfExtents: new pc.Vec3(2, 0.2, 0.672),
       linearOffset: new pc.Vec3(0, -0.06, 0.48),
     });
 
+  
 
 
     // this.addComponent("rigidbody", {

@@ -12,6 +12,10 @@ import { SingleTree } from "../../templates/object/obstacle/singleTree";
 import { AdjoinBox } from "../../templates/object/obstacle/adjoinBox";
 import { AdjoinBox2 } from "../../templates/object/obstacle/adjoinBox2";
 import { Game } from "../../game";
+import { MatrixCone } from "../../templates/object/obstacle/matrixCone";
+import { MatrixCylinder } from "../../templates/object/obstacle/matrixCylinder";
+import { RotateBox } from "../../templates/object/obstacle/rotateBox";
+import { MoveSphere } from "../../templates/object/obstacle/moveSphere";
 export function SpawnObject() {
   var spawnObject = new pc.createScript("spawnObject");
 
@@ -91,7 +95,7 @@ export function SpawnObject() {
 
     for (let i = pivotLeft; i < pivotRight; i += 10) {
       if (Utils.getChance(this._spawnChance)) {
-        let obstacle = new AdjoinBox();
+        let obstacle = new MoveSphere();
         obstacle.spawnToPosition(new Vec3(i, 0, this.entity.getPosition().z), this.spawnContainer);
         i += obstacle.objectWidth;
       }

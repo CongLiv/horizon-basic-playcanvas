@@ -30,6 +30,8 @@ import { RenderPhysicLoader } from "./system/renderPhysicLoader.js";
 import { Ribbon } from "./script/entity/ribbon.js";
 import { RotateBox } from "./templates/object/obstacle/rotateBox.js";
 import { RotateBoxScript } from "./script/object/rotateBoxScript.js";
+import { MoveSphere } from "./templates/object/obstacle/moveSphere.js";
+import { MoveSphereScript } from "./script/object/moveSphereScript.js";
 // import { ExplosionEffect } from "./script/entity/explosiveEffect.js";
 export class Game {
 
@@ -82,6 +84,7 @@ export class Game {
     RenderPhysicLoader();
     Ribbon();
     RotateBoxScript();
+    MoveSphereScript();
 
     WasmModule.getInstance("Ammo", () => {
       AssetLoader.loadAssets(this.app, () => {
