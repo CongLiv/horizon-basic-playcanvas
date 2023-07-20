@@ -3,7 +3,6 @@ import { Ground1 } from "../../templates/object/ground/groud1";
 import { Utils } from "../../utils/utils";
 import { SetBox } from "../../templates/object/obstacle/setBox";
 import { SingleBox } from "../../templates/object/obstacle/singleBox";
-import { Cone } from "../../templates/object/model/cone";
 import { SingleCone } from "../../templates/object/obstacle/singleCone";
 import { SetCone } from "../../templates/object/obstacle/setCone";
 import { FallBox } from "../../templates/object/obstacle/fallBox";
@@ -16,6 +15,7 @@ import { MatrixCone } from "../../templates/object/obstacle/matrixCone";
 import { MatrixCylinder } from "../../templates/object/obstacle/matrixCylinder";
 import { RotateBox } from "../../templates/object/obstacle/rotateBox";
 import { MoveSphere } from "../../templates/object/obstacle/moveSphere";
+import { SpawnLevel } from "../component/spawnLevel";
 export function SpawnObject() {
   var spawnObject = new pc.createScript("spawnObject");
 
@@ -44,11 +44,12 @@ export function SpawnObject() {
     this._isStart = false;
     this._isEnd = false;
 
-    this._spawnChance = 0.15;
+    this._spawnChance = 0.3;
+    this._lastObstacleType = null;
+    this._changeObstacleCounter = 0;
 
     // init spawn
     this._spawnGround();
-
   };
 
   spawnObject.prototype.update = function (dt) {
@@ -63,7 +64,15 @@ export function SpawnObject() {
     if (this._isEnd === true) return;
     this._spawnGroundCounter -= dt;
     this._spawnObstacleCounter -= dt;
+    this._changeObstacleCounter -= dt;
+    // calculate level
+    this._level =
+      Math.floor(Math.floor(this.player.getPosition().z / 100) / 10) + 1;
 
+    if (this._level > 5) this._level = 5;
+    this._levelName = "level" + this._level.toString();
+
+    // counters
     if (this._spawnGroundCounter <= 0) {
       this._spawnGround();
       this._spawnGroundCounter = 5;
@@ -71,11 +80,25 @@ export function SpawnObject() {
 
     if (this._spawnObstacleCounter <= 0) {
       this._spawnObstacle();
-      this._spawnObstacleCounter = Utils.getRandomFloat(0.5, 1);;
+      this._spawnObstacleCounter = Utils.getRandomFloat(0.5, 1);
+    }
+
+    if (this._changeObstacleCounter <= 0) {
+      this._lastObstacleType =
+        SpawnLevel[this._levelName].general[
+          Utils.getRandomInt(0, SpawnLevel[this._levelName].general.length - 1)
+        ];
+      console.log(this._lastObstacleType);
+      if (this._lastObstacleType == "moveSphere") {
+        this._changeObstacleCounter = 2.5;
+        this._spawnChance = 0.5;
+      } else {
+        this._changeObstacleCounter = 5;
+        this._spawnChance = 0.3;
+      }
     }
   };
 
-  
   spawnObject.prototype._spawnGround = function () {
     let ground = new Ground1(this.player);
     let position = new Vec3(
@@ -95,8 +118,25 @@ export function SpawnObject() {
 
     for (let i = pivotLeft; i < pivotRight; i += 10) {
       if (Utils.getChance(this._spawnChance)) {
-        let obstacle = new MoveSphere();
-        obstacle.spawnToPosition(new Vec3(i, 0, this.entity.getPosition().z), this.spawnContainer);
+        let obstacle = null;
+        let spawnGeneralChance = Utils.getChance(0.4);
+        if (spawnGeneralChance || this._lastObstacleType == "moveSphere") {
+          obstacle = this._getObstacle(this._lastObstacleType);
+        } else {
+          obstacle = this._getObstacle(
+            SpawnLevel[this._levelName].single[
+              Utils.getRandomInt(
+                0,
+                SpawnLevel[this._levelName].single.length - 1
+              )
+            ]
+          );
+        }
+
+        obstacle.spawnToPosition(
+          new Vec3(i, 0, this.entity.getPosition().z),
+          this.spawnContainer
+        );
         i += obstacle.objectWidth;
       }
     }
@@ -108,6 +148,38 @@ export function SpawnObject() {
 
   spawnObject.prototype._endGame = function (isEnd) {
     this._isEnd = true;
-  }
+  };
 
+  spawnObject.prototype._getObstacle = function (type) {
+    switch (type) {
+      case "setBox":
+        return new SetBox();
+      case "singleBox":
+        return new SingleBox();
+      case "singleCone":
+        return new SingleCone();
+      case "setCone":
+        return new SetCone();
+      case "fallBox":
+        return new FallBox();
+      case "singleCylinder":
+        return new SingleCylinder();
+      case "singleTree":
+        return new SingleTree();
+      case "adjoinBox":
+        return new AdjoinBox();
+      case "adjoinBox2":
+        return new AdjoinBox2();
+      case "matrixCone":
+        return new MatrixCone();
+      case "matrixCylinder":
+        return new MatrixCylinder();
+      case "rotateBox":
+        return new RotateBox();
+      case "moveSphere":
+        return new MoveSphere();
+      default:
+        return new SetBox();
+    }
+  };
 }
