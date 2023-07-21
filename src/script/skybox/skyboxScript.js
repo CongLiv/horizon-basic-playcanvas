@@ -22,8 +22,8 @@ export function SkyboxScript() {
       this._alpha += dt;
 
       // make target color is squential color
-      let targetColorIndex =
-        Math.floor(currentPoint / 100) % this._listColor.length;
+      let targetColorIndex = Math.floor(currentPoint / 100);
+      if (targetColorIndex > 4) targetColorIndex = 4;
       this.targetColor = this._listColor[targetColorIndex];
       this.currentColor = this.entity._scene.ambientLight;
     }
@@ -35,7 +35,6 @@ export function SkyboxScript() {
         this._alpha = 0;
       }
     }
-
 
     // Debug on
     if (Game.onDebug) {
