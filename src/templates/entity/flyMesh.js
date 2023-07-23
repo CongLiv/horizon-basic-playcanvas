@@ -7,9 +7,9 @@ export class FlyMesh extends Entity {
 
     this.script.create("ribbon", {
         attributes: {
-            yoffset: 0.6,
-            xoffset: -0.6,
-            lifetime: 0.14
+            yoffset: 0.4,
+            xoffset: -0.4,
+            lifetime: 0.17
         }
     })
   }

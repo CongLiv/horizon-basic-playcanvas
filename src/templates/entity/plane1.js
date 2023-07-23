@@ -55,8 +55,14 @@ export class Plane1 extends Entity {
     this.flyMesh = new FlyMesh();
     
     this.addChild(this.flyMesh);
-    this.flyMesh.setLocalPosition(0, -0.1, -0.9);
+    this.flyMesh.setLocalPosition(-0.6, -0.17, 0.2);
     this.flyMesh.setEulerAngles(0, 0, 90);
+
+    this.flyMesh2 = new FlyMesh();
+    
+    this.addChild(this.flyMesh2);
+    this.flyMesh2.setLocalPosition(0.6, -0.17, 0.2);
+    this.flyMesh2.setEulerAngles(0, 0, 90);
   }
 
   update(dt) {}
