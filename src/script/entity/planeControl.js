@@ -1,3 +1,4 @@
+import { log } from "playcanvas";
 import { Game } from "../../game";
 import { ExplosiveParticle } from "../../templates/entity/explosiveParticle";
 
@@ -29,10 +30,8 @@ export function PlaneControl() {
     this.app.touch.on("touchend", this.onTouchEnd, this);
     this.app.on("planeControl:startGame", this._startGame, this);
 
-
     this.explosiveParticle = new ExplosiveParticle();
     this.entity.addChild(this.explosiveParticle);
-    
   };
 
   // update code called every frame
@@ -112,6 +111,8 @@ export function PlaneControl() {
 
     rot.z = this._leanAngle * 0.1;
     this.entity.setRotation(rot);
+
+    // console.log("delta on loop: " + this._delta);
   };
 
   planeControl.prototype.onTriggerEnter = function (env) {
@@ -124,15 +125,13 @@ export function PlaneControl() {
       // save point
       Game.lastPoint = this.entity.getPosition().z / 10;
       Game.highestPoint = Math.max(Game.highestPoint, Game.lastPoint);
-      
+
       // play particle before destroy
       this.entity.model.enabled = false;
       this.explosiveParticle.play();
       this.explosiveParticle.particleEntity.particlesystem.on("end", () => {
         this.destroyPlayer();
       });
-
-     
     }
   };
 
@@ -142,44 +141,48 @@ export function PlaneControl() {
 
   planeControl.prototype.onTouchStart = function (event) {
     this._touchStartPosition = event.touches[0].x;
+    // console.log("touch start: " + this._touchStartPosition);
   };
 
   planeControl.prototype.onTouchMove = function (event) {
     let currentTouchPosition = event.touches[0].x;
 
-    // save leftmost touch when turn left and rightmost touch when turn right
-    if (this.entity.isTurnLeft) {
-      if (currentTouchPosition < this._leftMost) {
-        this._leftMost = currentTouchPosition;
-        this._rightMost = -9999;
-      } else {
-        this._touchStartPosition = this._leftMost;
+    if (
+      (currentTouchPosition < 80 || currentTouchPosition > 310) &&
+      Math.abs(this._delta) > 80 &&
+      Game.isPortrait()
+    ) {
+      if (Math.abs(this._delta) < 150) {
+        if (currentTouchPosition < 80) {
+          this._delta = 150;
+        }
+        if (currentTouchPosition > 310) {
+          this._delta = -150;
+        }
+      } else this._delta *= 1.015;
+      // console.log("delta: " + this._delta);
+    } else {
+      // save leftmost touch when turn left and rightmost touch when turn right
+      if (this.entity.isTurnLeft) {
+        if (currentTouchPosition < this._leftMost) {
+          this._leftMost = currentTouchPosition;
+          this._rightMost = -9999;
+        } else {
+          this._touchStartPosition = this._leftMost;
+        }
       }
-    }
-    if (this.entity.isTurnRight) {
-      if (currentTouchPosition > this._rightMost) {
-        this._rightMost = currentTouchPosition;
-        this._leftMost = 9999;
-      } else {
-        this._touchStartPosition = this._rightMost;
+      if (this.entity.isTurnRight) {
+        if (currentTouchPosition > this._rightMost) {
+          this._rightMost = currentTouchPosition;
+          this._leftMost = 9999;
+        } else {
+          this._touchStartPosition = this._rightMost;
+        }
       }
-    }
 
-    // if touch position is no change in 0.2s, make plane move straight
-    // this._updateTouchCounter += 0.1;
-    // if (this._updateTouchCounter > 5) {
-    //   console.log(this._tmpTouchPosition, currentTouchPosition);
-    //   this._tmpTouchPosition = currentTouchPosition;
-    // }
-
-    // if (this._tmpTouchPosition === currentTouchPosition) {
-    //   this._touchStartPosition = currentTouchPosition;
-    //   this._delta = 0;
-    //   this._updateTouchCounter = 0;
-    // }
-
-    if (this._touchStartPosition !== null) {
-      this._delta = this._touchStartPosition - currentTouchPosition;
+      if (this._touchStartPosition !== null) {
+        this._delta = this._touchStartPosition - currentTouchPosition;
+      }
     }
   };
 
@@ -187,5 +190,8 @@ export function PlaneControl() {
     this._touchStartPosition = null;
     this._delta = 0;
     this._updateTouchCounter = 0;
+    this._leftMost = 9999;
+    this._rightMost = -9999;
+    // console.log("last touch start: " + this._touchStartPosition);
   };
 }
