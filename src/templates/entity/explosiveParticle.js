@@ -63,6 +63,8 @@ export class ExplosiveParticle extends Entity {
       alphaGraph: alphaGraph,
       colorMap: texture,
       radialSpeedGraph: radialSpeedGraph,
+      localSpace: false,
+  
 
     });
   

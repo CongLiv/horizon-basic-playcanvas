@@ -12,6 +12,10 @@ import { StartUI } from "../ui/startUI";
 import { UIManager } from "../ui/UIManager";
 import { Utils } from "../utils/utils";
 import { Skybox } from "../templates/skybox/skybox";
+import { Plane2 } from "../templates/entity/plane2";
+import { Plane3 } from "../templates/entity/plane3";
+import { Plane4 } from "../templates/entity/plane4";
+import { Plane5 } from "../templates/entity/plane5";
 
 export class PlayScene extends Scene {
   constructor() {
@@ -95,7 +99,7 @@ export class PlayScene extends Scene {
   }
 
   _initPlayer() {
-    Game.player = this.player = new Plane1();
+    Game.player = this.player = new Plane5();
     this.addChild(this.player);
   }
 

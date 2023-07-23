@@ -1,11 +1,17 @@
 import { Asset } from "playcanvas";
 
 export const assets = {
-    planeModel: new Asset("planeModel", "model", {url: "assets/models/plane.glb"}),
+    plane1Model: new Asset("planeModel", "model", {url: "assets/models/plane.glb"}),
+    plane2Model: new Asset("planeModel", "model", {url: "assets/models/plane2.glb"}),
+    plane3Model: new Asset("planeModel", "model", {url: "assets/models/plane3.glb"}),
+    plane4Model: new Asset("planeModel", "model", {url: "assets/models/plane4.glb"}),
+    plane5Model: new Asset("planeModel", "model", {url: "assets/models/plane5.glb"}),
     treeModel: new Asset("treeModel", "model", {url: "assets/models/tree.glb"}),
+
 
     flyAnim: new Asset("flyAnim", "animation", {url: "assets/anims/flying.glb"}),
     waverAnim: new Asset("waverAnim", "animation", {url: "assets/anims/waver.glb"}),
+
 
     groundTexture: new Asset("groundTexture", "texture", {url: "assets/textures/ground.png"}),
     sandTexture: new Asset("sandTexture", "texture", {url: "assets/textures/sand.jpg"}),
