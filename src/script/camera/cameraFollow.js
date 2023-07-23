@@ -120,7 +120,7 @@ export function CameraFollow() {
         plusCameraSpeed = 1;
         // this._lastX = this.entity.getPosition().x;
       }
-      if (distanceToTarget > 3) {
+      if (distanceToTarget > 4) {
         // camera move slightly to make sure the plane is in the view
 
         let moveSpeed =
