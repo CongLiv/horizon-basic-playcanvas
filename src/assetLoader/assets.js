@@ -23,7 +23,9 @@ export const assets = {
     playButtonTexture: new Asset("buttonTexture", "texture", {url: "assets/textures/playbutton.png"}),
     skinButtonTexture: new Asset("skinbuttonTexture", "texture", {url: "assets/textures/skinbutton.png"}),
     explosiveTexture: new Asset("explosiveTexture", "texture", {url: "assets/textures/explosive.png"}),
+    skinpatternTexture: new Asset("skinpatternTexture", "texture", {url: "assets/textures/skinparttern.png"}),
 
+    skin1Texture: new Asset("skin1Texture", "texture", {url: "assets/textures/skin1.png"}),
     
 
     skybox1: new Asset("skybox1", "texture", {url: "assets/cubemaps/skybox1.png"}),

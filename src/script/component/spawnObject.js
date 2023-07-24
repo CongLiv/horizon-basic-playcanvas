@@ -88,7 +88,7 @@ export function SpawnObject() {
         SpawnLevel[this._levelName].general[
           Utils.getRandomInt(0, SpawnLevel[this._levelName].general.length - 1)
         ];
-      console.log(this._lastObstacleType);
+      // console.log(this._lastObstacleType);
       if (this._lastObstacleType == "moveSphere") {
         this._changeObstacleCounter = 2.5;
         this._spawnChance = 0.5;
