@@ -23,10 +23,15 @@ export class SkinUI extends Entity {
     this.screen.addChild(this.scrollview);
     this.scrollview.setLocalPosition(0, 0, 0);
 
+
     this.footer = new SkinPattern();
     this.scrollview.viewPort.addChild(this.footer);
     this.footer.setLocalPosition(0, -65, 0);
     this.footer.setLocalScale(0.2, -0.2, 0.2);
+
+    if (!Game.isPortrait()) {
+      this.footer.enabled = false;
+    }
 
     this.header = new Entity();
     this.scrollview.viewPort.addChild(this.header);
@@ -43,7 +48,12 @@ export class SkinUI extends Entity {
     this.headerText.setLocalScale(0.2, 0.2, 0.2);
     this.headerText.element.margin = new pc.Vec4(-53.808, 39.096, -53.808, -70.904);  
     
-  
+    if (!Game.isPortrait()) {
+      this.headerpattern.setLocalScale(1, 0.1, 0.1);
+      this.headerpattern.setLocalPosition(0, 35, 0);
+      this.headerText.setLocalPosition(0, 30, 0);
+      this.headerText.element.fontSize = 20;
+    }
   
     // back button
     this.backButton = new Entity();

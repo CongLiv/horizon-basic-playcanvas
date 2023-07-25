@@ -2,7 +2,7 @@ import { Entity } from "playcanvas";
 import { ScrollBar } from "./scrollbar";
 import { Viewport } from "./viewport";
 import { SkinPattern } from "./skinpattern";
-
+import { Game } from "../../game";
 export class ScrollView extends Entity {
   constructor() {
     super();
@@ -19,6 +19,9 @@ export class ScrollView extends Entity {
     this.viewPort = new Viewport();
     this.addChild(this.viewPort);
     this.viewPort.setLocalPosition(0, 15, 0);
+    if (Game.isPortrait() == false) {
+      this.viewPort.setLocalPosition(0, 5, 0);
+    }
 
     this.scrollBar = new ScrollBar();
     this.addChild(this.scrollBar);

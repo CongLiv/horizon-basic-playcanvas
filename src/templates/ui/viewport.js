@@ -1,7 +1,7 @@
 import { Entity } from "playcanvas";
 import { assets } from "../../assetLoader/assets";
 import { SkinBar } from "./skinBar";
-
+import { Game } from "../../game";
 export class Viewport extends Entity {
   constructor() {
     super();
@@ -18,6 +18,13 @@ export class Viewport extends Entity {
       mask: true,
     });
 
+    if (Game.isPortrait() == false) {
+      this.element.height = 50;
+      this.element.margin = new pc.Vec4(-65, -25, -65, -25);
+
+
+    }
+
     this.content = new Entity();
 
     this.content.addComponent("element", {
@@ -30,6 +37,13 @@ export class Viewport extends Entity {
       useInput: true,
     });
 
+    if (Game.isPortrait() == false) {
+      this.content.setLocalScale(0.6, 0.6, 0.6);
+      this.content.element.height = 70;
+      this.content.element.margin = new pc.Vec4(-65, -20, -65, -5);
+      this.content.setLocalPosition(0, 20, 0);
+
+    }
     this.listSkinBar = [];
 
     this._addListSkinBar();
