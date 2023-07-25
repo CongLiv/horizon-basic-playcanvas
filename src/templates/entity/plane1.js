@@ -1,7 +1,8 @@
-import { Entity } from "playcanvas";
+
 import { assets } from "../../assetLoader/assets";
 import { FlyMesh } from "./flyMesh";
-export class Plane1 extends Entity {
+import { SuperPlayer } from "./superPlayer";
+export class Plane1 extends SuperPlayer {
   constructor() {
     super();
     this.tags.add("player");
@@ -40,17 +41,7 @@ export class Plane1 extends Entity {
     // this.rigidbody.angularFactor = pc.Vec3.ZERO;
     // this.rigidbody.linearFactor = pc.Vec3.ZERO;
 
-    this.addComponent("script");
-    this.script.create("planeControl");
-
-    this.initTurnSpeed = 15;
-    this.turnSpeed = this.initTurnSpeed;
-    this.initForwardSpeed = 50;
-    this.forwardSpeed = this.initForwardSpeed;
-
-    this.isTurnLeft = false;
-    this.isTurnRight = false;
-    this.isMovingStraight = true;
+   
 
     
     this.flyMesh = new FlyMesh();
@@ -68,7 +59,5 @@ export class Plane1 extends Entity {
 
   update(dt) {}
 
-  destroyPlayer() {
-    this.destroy();
-  }
+ 
 }
