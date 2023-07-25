@@ -26,6 +26,10 @@ export const assets = {
     skinpatternTexture: new Asset("skinpatternTexture", "texture", {url: "assets/textures/skinparttern.png"}),
 
     skin1Texture: new Asset("skin1Texture", "texture", {url: "assets/textures/skin1.png"}),
+    skin2Texture: new Asset("skin2Texture", "texture", {url: "assets/textures/skin2.png"}),
+    skin3Texture: new Asset("skin3Texture", "texture", {url: "assets/textures/skin3.png"}),
+    skin4Texture: new Asset("skin4Texture", "texture", {url: "assets/textures/skin4.png"}),
+    skin5Texture: new Asset("skin5Texture", "texture", {url: "assets/textures/skin5.png"}),
     
 
     skybox1: new Asset("skybox1", "texture", {url: "assets/cubemaps/skybox1.png"}),

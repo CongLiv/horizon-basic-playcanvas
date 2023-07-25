@@ -5,7 +5,7 @@ export class Plane5 extends SuperPlayer {
   constructor() {
     super();
     this.tags.add("player");
-    this.tags.add("plane5");
+    this.name = "skin5";
 
     this.addComponent("model", {
       type: "asset",

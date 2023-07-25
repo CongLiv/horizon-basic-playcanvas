@@ -121,7 +121,7 @@ export function PlaneControl() {
       this.app.fire("managerUI:endGame", true);
       this.app.fire("cameraFollow:endGame", true);
       this.app.fire("spawnObject:endGame", true);
-
+      Game.lastSkin = Game.player.name;
       // save point
       Game.lastPoint = this.entity.getPosition().z / 10;
       Game.highestPoint = Math.max(Game.highestPoint, Game.lastPoint);

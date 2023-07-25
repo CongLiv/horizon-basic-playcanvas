@@ -32,14 +32,21 @@ import { RotateBox } from "./templates/object/obstacle/rotateBox.js";
 import { RotateBoxScript } from "./script/object/rotateBoxScript.js";
 import { MoveSphere } from "./templates/object/obstacle/moveSphere.js";
 import { MoveSphereScript } from "./script/object/moveSphereScript.js";
+import { ListSkinScript } from "./script/ui/skinUI/listSkinScript.js";
 // import { ExplosionEffect } from "./script/entity/explosiveEffect.js";
+
+import { Plane1 } from "./templates/entity/plane1.js";
+import { Plane2 } from "./templates/entity/plane2.js";
+import { Plane3 } from "./templates/entity/plane3.js";
+import { Plane4 } from "./templates/entity/plane4.js";
+import { Plane5 } from "./templates/entity/plane5.js";
+import { SkinBarScript } from "./script/ui/skinUI/skinBarScript.js";
+
 export class Game {
-
-
   static onDebug = false;
 
-
   static player = null;
+  static lastSkin = null;
   static lastPoint = 0;
   static highestPoint = 0;
 
@@ -75,7 +82,6 @@ export class Game {
     ScoreTextScript();
     StartButtonScript();
     ManagerUI();
-    // ExplosionEffect();
     SkinButtonScript();
     BackButtonScript();
     SkyboxScript();
@@ -85,6 +91,8 @@ export class Game {
     Ribbon();
     RotateBoxScript();
     MoveSphereScript();
+    ListSkinScript();
+    SkinBarScript();
 
     WasmModule.getInstance("Ammo", () => {
       AssetLoader.loadAssets(this.app, () => {
@@ -93,7 +101,6 @@ export class Game {
       });
     });
   }
- 
 
   static load() {
     InputManager.init(this.app);
@@ -128,10 +135,8 @@ export class Game {
   }
 
   static isPortrait() {
-    
     return this.height > this.width;
   }
-
 }
 
 window.onload = function () {

@@ -21,7 +21,6 @@ export class PlayScene extends Scene {
   constructor() {
     super(GameConstant.SCENE_PLAY);
     this._initialize();
-   
   }
 
   create() {
@@ -41,7 +40,6 @@ export class PlayScene extends Scene {
     this._initDebugCollision();
     this._initSkybox();
     this._initUI();
-  
   }
 
   _initLight() {
@@ -99,13 +97,31 @@ export class PlayScene extends Scene {
   }
 
   _initPlayer() {
-    Game.player = new Plane4();
+    switch (Game.lastSkin) {
+      case "skin1":
+        Game.player = new Plane1();
+        break;
+      case "skin2":
+        Game.player = new Plane2();
+        break;
+      case "skin3":
+        Game.player = new Plane3();
+        break;
+      case "skin4":
+        Game.player = new Plane4();
+        break;
+      case "skin5":
+        Game.player = new Plane5();
+        break;
+      default:
+        Game.player = new Plane1();
+        break;
+    }
 
     this.addChild(Game.player);
   }
 
   _initObject() {
-    
     // init object spawner
     this.spawnContainer = new Entity();
     this.addChild(this.spawnContainer);
@@ -120,9 +136,8 @@ export class PlayScene extends Scene {
   update(dt) {
     super.update(dt);
     this._debugListener();
-  
+
     // DONT NEED UPDATE MAINCAMERA POSITION THIS BECAUSE SCREEN 2D IS ALWAYS ON TOP
-    
   }
 
   _debugListener() {
@@ -146,11 +161,21 @@ export class PlayScene extends Scene {
       this.camera.script.orbitCamera.focusEntity = Game.player;
     } else {
       this._isFollow = false;
-      
     }
   }
 
+  restart() {
+    // reset player
+    Game.player.destroy();
+    this._initPlayer();
 
+    // reset camera
+    this.mainCamera.destroy();
+    this._initCamera();
 
-
+    // restart object
+    this.spawnContainer.destroy();
+    this.objectSpawner.destroy();
+    this._initObject();
+  }
 }

@@ -26,26 +26,34 @@ export class Viewport extends Entity {
       pivot: new pc.Vec2(0.5, 0.5),
       margin: new pc.Vec4(-65, -80, -65, -80),
       width: 130,
-      height: 160,
+      height: 180,
       useInput: true,
     });
 
-    this.skinBar1 = new SkinBar("skin1", 0);
-    this.content.addChild(this.skinBar1);
+    this.listSkinBar = [];
+
+    this._addListSkinBar();
+
+    this.addComponent("script");
+    this.script.create("listSkinScript", {
+      attributes: {
+        listSkinBar: this.listSkinBar,
+      },
+    });
     
-
-    this.skinBar2 = new SkinBar("skin2", 1);
-    this.content.addChild(this.skinBar2);
-
-    this.skinBar3 = new SkinBar("skin3", 2);
-    this.content.addChild(this.skinBar3);
-
-    this.skinBar4 = new SkinBar("skin4", 3);
-    this.content.addChild(this.skinBar4);
-
-    this.skinBar5 = new SkinBar("skin5", 4);
-    this.content.addChild(this.skinBar5);
-
     this.addChild(this.content);
   }
+
+  _addListSkinBar() {
+    this.listSkinBar.push(new SkinBar("skin1", 0));
+    this.listSkinBar.push(new SkinBar("skin2", 1));
+    this.listSkinBar.push(new SkinBar("skin3", 2));
+    this.listSkinBar.push(new SkinBar("skin4", 3));
+    this.listSkinBar.push(new SkinBar("skin5", 4));
+
+    this.listSkinBar.forEach((skinBar) => {
+      this.content.addChild(skinBar);
+    });
+  }
+
 }

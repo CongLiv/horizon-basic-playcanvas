@@ -20,7 +20,12 @@ export function EndBackgroundScript() {
       this.entity.element.opacity = opacity;
   
       if (opacity >= 1){
-          SceneManager.loadScene(new PlayScene());
+          let playScene = SceneManager.currentScene;
+          playScene.restart();
+          this.app.fire("managerUI:backHome", true);
+          this.entity.element.opacity = 0;
+          this._explodeCounter = 0;
+
       }
     }
 

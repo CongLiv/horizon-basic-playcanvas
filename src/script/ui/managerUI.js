@@ -60,6 +60,8 @@ export function ManagerUI() {
         this.skinUI.enabled = false;
     }
 
+    
+
     managerUI.prototype._skinSelect = function() {
         this.skinUI.enabled = true;
         this.endUI.enabled = false;
