@@ -1,12 +1,13 @@
 import { Entity} from "playcanvas";
 import { SpawnObject } from "../../script/component/spawnObject";
+import { Game } from "../../game";
 
 
 export class ObjectSpawner extends Entity{
 
-    constructor(player, spawnContainer) {
+    constructor(spawnContainer) {
         super();
-        this.player = player;
+
         this.spawnContainer = spawnContainer;
         this.spawnDistance = 300;
         // this.addComponent('model', {   
@@ -25,7 +26,6 @@ export class ObjectSpawner extends Entity{
         this.addComponent('script');
         this.script.create('spawnObject', {
             attributes: {
-                player: this.player,
                 spawnContainer: this.spawnContainer,
             }
         });

@@ -1,13 +1,10 @@
+import { Game } from "../../../game";
+
 
 export function ScoreTextScript() {
 
 
     var scoreTextScript = pc.createScript('scoreTextScript');
-
-    scoreTextScript.attributes.add('player', {
-        type: 'entity',
-        title: 'Player'
-    });
 
 
     scoreTextScript.prototype.initialize = function() {
@@ -16,7 +13,7 @@ export function ScoreTextScript() {
 
 
     scoreTextScript.prototype.update = function(dt) {
-        this.entity.element.text = Math.floor(this.player.getPosition().z / 10);
+        this.entity.element.text = Math.floor(Game.player.getPosition().z / 10);
     };
 
 }

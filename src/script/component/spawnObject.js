@@ -16,13 +16,9 @@ import { MatrixCylinder } from "../../templates/object/obstacle/matrixCylinder";
 import { RotateBox } from "../../templates/object/obstacle/rotateBox";
 import { MoveSphere } from "../../templates/object/obstacle/moveSphere";
 import { SpawnLevel } from "../component/spawnLevel";
+
 export function SpawnObject() {
   var spawnObject = new pc.createScript("spawnObject");
-
-  spawnObject.attributes.add("player", {
-    type: "entity",
-    title: "Player",
-  });
 
   spawnObject.attributes.add("spawnContainer", {
     type: "entity",
@@ -31,9 +27,9 @@ export function SpawnObject() {
 
   spawnObject.prototype.initialize = function () {
     this.entity.setLocalPosition(
-      this.player.getPosition().x,
+      Game.player.getPosition().x,
       0,
-      this.player.getPosition().z + this.entity.spawnDistance
+      Game.player.getPosition().z + this.entity.spawnDistance
     );
 
     this._spawnGroundCounter = 0;
@@ -56,9 +52,9 @@ export function SpawnObject() {
     if (this._isStart === false || Game.onDebug == true) return;
 
     this.entity.setPosition(
-      this.player.getPosition().x,
+      Game.player.getPosition().x,
       0,
-      this.player.getPosition().z + this.entity.spawnDistance
+      Game.player.getPosition().z + this.entity.spawnDistance
     );
 
     if (this._isEnd === true) return;
@@ -67,7 +63,7 @@ export function SpawnObject() {
     this._changeObstacleCounter -= dt;
     // calculate level
     this._level =
-      Math.floor(Math.floor(this.player.getPosition().z / 100) / 10) + 1;
+      Math.floor(Math.floor(Game.player.getPosition().z / 100) / 10) + 1;
 
     if (this._level > 5) this._level = 5;
     this._levelName = "level" + this._level.toString();
@@ -100,11 +96,11 @@ export function SpawnObject() {
   };
 
   spawnObject.prototype._spawnGround = function () {
-    let ground = new Ground1(this.player);
+    let ground = new Ground1(Game.player);
     let position = new Vec3(
-      this.player.getPosition().x,
+      Game.player.getPosition().x,
       0,
-      this.player.getPosition().z + this.entity.spawnDistance * 2
+      Game.player.getPosition().z + this.entity.spawnDistance * 2
     );
     ground.spawnToPosition(position, this.spawnContainer);
   };

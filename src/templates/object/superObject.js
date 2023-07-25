@@ -22,11 +22,7 @@ export class SuperObject extends Entity {
   _createObject() {}
   _addObjectScript() {
     this.addComponent("script");
-    this.script.create("objectScript", {
-      attributes: {
-        player: Game.player,
-      },
-    });
+    this.script.create("objectScript");
   }
 
   _createMaterial() {

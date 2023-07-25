@@ -65,7 +65,7 @@ export class PlayScene extends Scene {
     this.camera.script.create("orbitCamera", {
       attributes: {
         inertiaFactor: 0.2,
-        focusEntity: this.player,
+        focusEntity: Game.player,
         distanceMin: 0.5,
         distanceMax: Infinity,
         pitchAngleMin: -90,
@@ -89,18 +89,19 @@ export class PlayScene extends Scene {
     });
   }
   _initCamera() {
-    this.mainCamera = new MainCamera(this.player);
+    this.mainCamera = new MainCamera();
     this.addChild(this.mainCamera);
   }
 
   _initUI() {
-    this.UIManager = new UIManager(this.player);
+    this.UIManager = new UIManager();
     this.addChild(this.UIManager);
   }
 
   _initPlayer() {
-    Game.player = this.player = new Plane5();
-    this.addChild(this.player);
+    Game.player = new Plane4();
+
+    this.addChild(Game.player);
   }
 
   _initObject() {
@@ -108,7 +109,7 @@ export class PlayScene extends Scene {
     // init object spawner
     this.spawnContainer = new Entity();
     this.addChild(this.spawnContainer);
-    this.objectSpawner = new ObjectSpawner(this.player, this.spawnContainer);
+    this.objectSpawner = new ObjectSpawner(this.spawnContainer);
     this.addChild(this.objectSpawner);
 
     // init ground
@@ -119,10 +120,9 @@ export class PlayScene extends Scene {
   update(dt) {
     super.update(dt);
     this._debugListener();
-
+  
     // DONT NEED UPDATE MAINCAMERA POSITION THIS BECAUSE SCREEN 2D IS ALWAYS ON TOP
     
-   
   }
 
   _debugListener() {
@@ -143,7 +143,7 @@ export class PlayScene extends Scene {
       // make camera follow player once per press
       if (this._isFollow === true) return;
       this._isFollow = true;
-      this.camera.script.orbitCamera.focusEntity = this.player;
+      this.camera.script.orbitCamera.focusEntity = Game.player;
     } else {
       this._isFollow = false;
       

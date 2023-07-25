@@ -4,9 +4,8 @@ import { Game } from "../game.js";
 import { Screen2D } from "../templates/ui/screen2D";
 
 export class PlayingUI extends Entity {
-  constructor(player) {
+  constructor() {
     super();
-    this.player = player;
 
     this.screen = new Screen2D();
     this.addChild(this.screen);
@@ -32,11 +31,7 @@ export class PlayingUI extends Entity {
       this.scoreText.element.fontSize = 5;
     }
     this.scoreText.addComponent("script");
-    this.scoreText.script.create("scoreTextScript", {
-      attributes: {
-        player: this.player,
-      },
-    });
+    this.scoreText.script.create("scoreTextScript");
 
   
 

@@ -4,10 +4,6 @@ import { SceneManager } from "../../../templates/scene/sceneManager";
 export function EndBackgroundScript() {
   var endBackgroundScript = new pc.createScript("endBackgroundScript");
 
-  endBackgroundScript.attributes.add("player", {
-    type: "entity",
-    title: "Player",
-  });
 
   endBackgroundScript.prototype.initialize = function () {
     this._explodeCounter = 0;

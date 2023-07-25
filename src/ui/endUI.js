@@ -4,11 +4,9 @@ import { BackGround } from "../templates/ui/background";
 
 export class EndUI extends Entity{
 
-    constructor(player) {
+    constructor() {
 
         super();
-
-        this.player = player;
 
         this.screen = new Screen2D();
         this.addChild(this.screen);
@@ -17,11 +15,7 @@ export class EndUI extends Entity{
         this.background.element.opacity = 0;
         
         this.background.addComponent("script");
-        this.background.script.create("endBackgroundScript", {
-            attributes: {
-                player: this.player,
-            },
-        });
+        this.background.script.create("endBackgroundScript");
         this.screen.addChild(this.background);
        
 
