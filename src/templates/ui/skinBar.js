@@ -84,6 +84,7 @@ export class SkinBar extends Entity {
 
   useSkin() {
     this.skinText.element.opacity = 1;
+    this.skinText.element.outlineThickness = 0.2;
     this.skinImage.element.opacity = 1;
     Game.player.destroy();
     switch (this.skinName) {
@@ -109,7 +110,8 @@ export class SkinBar extends Entity {
   }
 
   unUseSkin() {
-    this.skinText.element.opacity = 0.5;
-    this.skinImage.element.opacity = 0.5;
+    this.skinText.element.opacity = 0.2;
+    this.skinText.element.outlineThickness = 0;
+    this.skinImage.element.opacity = 0.2;
   }
 }
