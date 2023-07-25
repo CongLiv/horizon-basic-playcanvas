@@ -25,6 +25,9 @@ export class ScrollView extends Entity {
 
     this.scrollBar = new ScrollBar();
     this.addChild(this.scrollBar);
+    if (Game.isPortrait() == false) {
+      this.scrollBar.element.margin = new pc.Vec4(-1, -10, -3, 0);
+    } 
 
     this.addComponent("scrollview", {
       scrollMode: pc.SCROLL_MODE_BOUNCE,
