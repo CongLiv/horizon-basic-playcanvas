@@ -23,10 +23,17 @@ export class SkinUI extends Entity {
     this.screen.addChild(this.scrollview);
     this.scrollview.setLocalPosition(0, 0, 0);
 
+    if (Game.isPortrait()) {
+      this.scrollview.setLocalPosition(0, -11, 0);
+      this.scrollview.viewPort.setLocalPosition(0, 25, 0);
+      this.scrollview.viewPort.element.height = 200;
+      this.scrollview.viewPort.content.element.height = 218;
+    }
+    
 
     this.footer = new SkinPattern();
     this.scrollview.viewPort.addChild(this.footer);
-    this.footer.setLocalPosition(0, -65, 0);
+    this.footer.setLocalPosition(0, -75, 0);
     this.footer.setLocalScale(0.2, -0.2, 0.2);
 
     if (!Game.isPortrait()) {
@@ -71,7 +78,7 @@ export class SkinUI extends Entity {
     if (Game.isPortrait()) {
       this.backButton.element.width = 30;
       this.backButton.element.height = 12;
-      this.backButton.setLocalPosition(0, -50, 0);
+      this.backButton.setLocalPosition(0, -55, 0);
     } else {
       this.backButton.element.width = 20;
       this.backButton.element.height = 8;
