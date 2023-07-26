@@ -1,3 +1,4 @@
+import { Game } from "../../../game";
 
 
 export function BackButtonScript() {
@@ -13,6 +14,7 @@ export function BackButtonScript() {
     }
 
     backButtonScript.prototype._onClick = function(event) {
+        Game.Sound.play('click');
         this.app.fire('managerUI:backHome', true);
     }
 }

@@ -1,3 +1,4 @@
+import { Game } from "../../game";
 
 export function ManagerUI() {
 
@@ -45,6 +46,8 @@ export function ManagerUI() {
 
 
     managerUI.prototype._startGame = function() {
+        Game.Sound.stopThemeSound();
+        Game.Sound.playThemeSound();
         this._isStart = true;
         this.playingUI.enabled = true;
         this.startUI.enabled = false;
@@ -53,6 +56,13 @@ export function ManagerUI() {
     }
 
     managerUI.prototype._endGame = function() {
+
+        // stop theme sound after 1 second
+        setTimeout(() => {
+            Game.Sound.stopThemeSound();
+        }, 2000);
+
+
         this._isEnd = true;
         this.playingUI.enabled = false;
         this.startUI.enabled = false;

@@ -118,6 +118,7 @@ export function PlaneControl() {
   planeControl.prototype.onTriggerEnter = function (env) {
     if (env.tags.has("obstacle")) {
       this._isEnd = true;
+      Game.Sound.play("explosion");
       this.app.fire("managerUI:endGame", true);
       this.app.fire("cameraFollow:endGame", true);
       this.app.fire("spawnObject:endGame", true);

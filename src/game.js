@@ -41,6 +41,7 @@ import { Plane3 } from "./templates/entity/plane3.js";
 import { Plane4 } from "./templates/entity/plane4.js";
 import { Plane5 } from "./templates/entity/plane5.js";
 import { SkinBarScript } from "./script/ui/skinUI/skinBarScript.js";
+import { Sound } from "./templates/sound/sound.js";
 
 export class Game {
   static onDebug = false;
@@ -49,6 +50,7 @@ export class Game {
   static lastSkin = null;
   static lastPoint = 0;
   static highestPoint = 0;
+  static Sound = null;
 
   static init() {
     const canvas = document.createElement("canvas");
@@ -58,6 +60,7 @@ export class Game {
       keyboard: new Keyboard(window),
       mouse: new Mouse(canvas),
       touch: new TouchDevice(canvas),
+      
     });
 
     this.app.setCanvasResolution(RESOLUTION_AUTO);

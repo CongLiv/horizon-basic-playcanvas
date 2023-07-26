@@ -16,6 +16,7 @@ import { Plane2 } from "../templates/entity/plane2";
 import { Plane3 } from "../templates/entity/plane3";
 import { Plane4 } from "../templates/entity/plane4";
 import { Plane5 } from "../templates/entity/plane5";
+import { Sound } from "../templates/sound/sound";
 
 export class PlayScene extends Scene {
   constructor() {
@@ -32,6 +33,7 @@ export class PlayScene extends Scene {
   }
 
   _initialize() {
+    this._initSound();
     this._initLight();
     this._initPlayer();
     this._initObject();
@@ -42,6 +44,10 @@ export class PlayScene extends Scene {
     this._initUI();
   }
 
+  _initSound() {
+    Game.Sound = new Sound();
+    this.addChild(Game.Sound);
+  }
   _initLight() {
     this.directionalLight = new Light();
     this.addChild(this.directionalLight);
@@ -181,5 +187,13 @@ export class PlayScene extends Scene {
     // reset skybox
     this.skybox.destroy();
     this._initSkybox();
+
+    // update last point
+    this.UIManager.startUI.lastPointBar.point.element.text = Math.floor(
+      Game.lastPoint
+    ).toString();
+    this.UIManager.startUI.highestPointBar.point.element.text = Math.floor(
+      Game.highestPoint
+    ).toString();
   }
 }

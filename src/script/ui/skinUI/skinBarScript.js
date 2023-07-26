@@ -1,3 +1,5 @@
+import { Game } from "../../../game";
+
 export function SkinBarScript() {
   var skinBarScript = new pc.createScript("skinBarScript");
 
@@ -6,6 +8,7 @@ export function SkinBarScript() {
   };
 
   skinBarScript.prototype._onClick = function (event) {
+    Game.Sound.play("click");
     this.app.fire("listSkinScript:skinSelect", this.entity.skinName);
   };
   skinBarScript.prototype.update = function (dt) {};

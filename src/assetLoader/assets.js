@@ -39,4 +39,16 @@ export const assets = {
 
     font1: new Asset("font1", "font", {url: "assets/fonts/141347177/neuropol x rg.json"}),
 
+
+    themeSound: new Asset("themesound", "audio", {url: "assets/sounds/themesound.mp3"}),
+    clickSound: new Asset("clicksound", "audio", {url: "assets/sounds/click.mp3"}),
+    explosiveSound: new Asset("explodesound", "audio", {url: "assets/sounds/explosivesound.wav"}),
+    themeSound1: new Asset("themesound1", "audio", {url: "assets/sounds/theme1.mp3"}),
+    themeSound2: new Asset("themesound2", "audio", {url: "assets/sounds/theme2.mp3"}),
+    themeSound3: new Asset("themesound3", "audio", {url: "assets/sounds/theme3.mp3"}),
+    themeSound4: new Asset("themesound4", "audio", {url: "assets/sounds/theme4.mp3"}),
+    themeSound5: new Asset("themesound5", "audio", {url: "assets/sounds/theme5.mp3"}),
+    themeSound6: new Asset("themesound6", "audio", {url: "assets/sounds/theme6.mp3"}),
+    
+
 };
