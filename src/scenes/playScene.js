@@ -177,5 +177,9 @@ export class PlayScene extends Scene {
     this.spawnContainer.destroy();
     this.objectSpawner.destroy();
     this._initObject();
+
+    // reset skybox
+    this.skybox.destroy();
+    this._initSkybox();
   }
 }
