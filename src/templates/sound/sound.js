@@ -34,6 +34,15 @@ export class Sound extends Entity {
       overlap: true,
     });
 
+    this.sound.addSlot("jetstart", {
+      asset: assets.jetstartSound,
+      pitch: 1,
+      loop: false,
+      autoPlay: false,
+      volume: 0.5,
+      overlap: true,
+    });
+
     this.sound.addSlot("theme1", {
       asset: assets.themeSound1,
       pitch: 1,
