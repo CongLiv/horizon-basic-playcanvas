@@ -16,6 +16,7 @@ import { MatrixCylinder } from "../../templates/object/obstacle/matrixCylinder";
 import { RotateBox } from "../../templates/object/obstacle/rotateBox";
 import { MoveSphere } from "../../templates/object/obstacle/moveSphere";
 import { SpawnLevel } from "../component/spawnLevel";
+import { SetGem } from "../../templates/object/collectable/setGem";
 
 export function SpawnObject() {
   var spawnObject = new pc.createScript("spawnObject");
@@ -41,6 +42,7 @@ export function SpawnObject() {
     this._isEnd = false;
 
     this._spawnChance = 0.3;
+    this._spawnCollectableChance = 0.6;
     this._lastObstacleType = null;
     this._changeObstacleCounter = 0;
 
@@ -134,6 +136,14 @@ export function SpawnObject() {
           this.spawnContainer
         );
         i += obstacle.objectWidth;
+      }
+
+      else if (Utils.getChance(this._spawnCollectableChance)) {
+        let collectable = new SetGem();
+        collectable.spawnToPosition(
+          new Vec3(i, 0, this.entity.getPosition().z),
+          this.spawnContainer
+        );
       }
     }
   };

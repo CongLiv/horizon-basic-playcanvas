@@ -42,6 +42,8 @@ import { Plane4 } from "./templates/entity/plane4.js";
 import { Plane5 } from "./templates/entity/plane5.js";
 import { SkinBarScript } from "./script/ui/skinUI/skinBarScript.js";
 import { Sound } from "./templates/sound/sound.js";
+import { GemScript } from "./script/object/gemScript.js";
+import { SoundScript } from "./script/sound/soundScript.js";
 
 export class Game {
   static onDebug = false;
@@ -96,6 +98,8 @@ export class Game {
     MoveSphereScript();
     ListSkinScript();
     SkinBarScript();
+    GemScript();
+    SoundScript();
 
     WasmModule.getInstance("Ammo", () => {
       AssetLoader.loadAssets(this.app, () => {

@@ -77,7 +77,7 @@ export function PlaneControl() {
       // make plane fly wave pattern
       let pos = this.entity.getPosition();
       this._waveCounter += dt * 2;
-      pos.y = this._flyHeight + Math.sin(this._waveCounter);
+      pos.y = this._flyHeight + Math.sin(this._waveCounter) / 2;
       this.entity.setPosition(pos);
 
       // make plane always fly forward
@@ -133,6 +133,12 @@ export function PlaneControl() {
       this.explosiveParticle.particleEntity.particlesystem.on("end", () => {
         this.destroyPlayer();
       });
+    }
+
+    else if (env.tags.has("collectable")) {
+      if (env.tags.has("gem")) {
+        Game.Sound.playGemSound();
+      }
     }
   };
 

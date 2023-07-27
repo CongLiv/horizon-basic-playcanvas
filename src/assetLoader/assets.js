@@ -7,7 +7,7 @@ export const assets = {
     plane4Model: new Asset("planeModel", "model", {url: "assets/models/plane4.glb"}),
     plane5Model: new Asset("planeModel", "model", {url: "assets/models/plane5.glb"}),
     treeModel: new Asset("treeModel", "model", {url: "assets/models/tree.glb"}),
-
+    gemModel: new Asset("gemModel", "model", {url: "assets/models/gem.glb"}),
 
     flyAnim: new Asset("flyAnim", "animation", {url: "assets/anims/flying.glb"}),
     waverAnim: new Asset("waverAnim", "animation", {url: "assets/anims/waver.glb"}),
@@ -49,6 +49,12 @@ export const assets = {
     themeSound5: new Asset("themesound5", "audio", {url: "assets/sounds/theme5.mp3"}),
     themeSound6: new Asset("themesound6", "audio", {url: "assets/sounds/theme6.mp3"}),
     jetstartSound: new Asset("jetstartsound", "audio", {url: "assets/sounds/jetstart.mp3"}),
+    gemSound1: new Asset("gemsound1", "audio", {url: "assets/sounds/scale-c6.mp3"}),
+    gemSound2: new Asset("gemsound2", "audio", {url: "assets/sounds/scale-d6.mp3"}),
+    gemSound3: new Asset("gemsound3", "audio", {url: "assets/sounds/scale-e6.mp3"}),
+    gemSound4: new Asset("gemsound4", "audio", {url: "assets/sounds/scale-f6.mp3"}),
+    gemSound5: new Asset("gemsound5", "audio", {url: "assets/sounds/scale-g6.mp3"}),
+    gemSound6: new Asset("gemsound6", "audio", {url: "assets/sounds/scale-a6.mp3"}),
     
 
 };

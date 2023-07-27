@@ -7,8 +7,11 @@ export class Sound extends Entity {
     super();
     this.addComponent("sound");
     this._initSound();
-
+    this.addComponent("script");
+    this.script.create("soundScript");
     this.currentThemeSound = 1;
+    this.currentGemSound = 1;
+    
   }
 
   _initSound() {
@@ -84,6 +87,55 @@ export class Sound extends Entity {
       loop: true,
       autoPlay: false,
     });
+
+    this.sound.addSlot("gem1", {
+      asset: assets.gemSound1,
+      pitch: 1,
+      loop: false,
+      autoPlay: false,
+      overlap: true,
+    });
+
+    this.sound.addSlot("gem2", {
+      asset: assets.gemSound2,
+      pitch: 1,
+      loop: false,
+      autoPlay: false,
+      overlap: true,
+    });
+
+    this.sound.addSlot("gem3", {
+      asset: assets.gemSound3,
+      pitch: 1,
+      loop: false,
+      autoPlay: false,
+      overlap: true,
+    });
+
+    this.sound.addSlot("gem4", {
+      asset: assets.gemSound4,
+      pitch: 1,
+      loop: false,
+      autoPlay: false,
+      overlap: true,
+    });
+
+    this.sound.addSlot("gem5", {
+      asset: assets.gemSound5,
+      pitch: 1,
+      loop: false,
+      autoPlay: false,
+      overlap: true,
+    });
+
+    this.sound.addSlot("gem6", {
+      asset: assets.gemSound6,
+      pitch: 1,
+      loop: false,
+      autoPlay: false,
+      overlap: true,
+    });
+
   }
 
   play(soundName) {
@@ -143,6 +195,38 @@ export class Sound extends Entity {
         break;
       default:
         break;
+    }
+  }
+
+  playGemSound() {
+    switch (this.currentGemSound) {
+      case 1:
+        this.sound.play("gem1");
+        break;
+      case 2:
+        this.sound.play("gem2");
+        break;
+      case 3:
+        this.sound.play("gem3");
+        break;
+      case 4:
+        this.sound.play("gem4");
+        break;
+      case 5:
+        this.sound.play("gem5");
+        break;
+      case 6:
+        this.sound.play("gem6");
+        break;
+      default:
+        break;
+    }
+
+    if (this.currentGemSound == 6) {
+      this.currentGemSound = 6;
+    }
+    else {
+      this.currentGemSound++;
     }
   }
 }
