@@ -1,4 +1,5 @@
 import { Entity } from "playcanvas";
+import { Game } from "../../../game";
 
 
 export class Box extends Entity{
@@ -25,6 +26,7 @@ export class Box extends Entity{
             restitution: 0.5,
         });
 
+        this.model.material = Game.currentObjectMaterial;
     }
     
 }

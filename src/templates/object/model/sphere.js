@@ -1,5 +1,5 @@
 import { Entity } from "playcanvas";
-
+import { Game } from "../../../game";
 export class Sphere extends Entity {
   constructor(x, y, z) {
     super();
@@ -20,5 +20,7 @@ export class Sphere extends Entity {
       type: "dynamic",
       restitution: 0.5,
     });
+
+    this.model.material = Game.currentObjectMaterial;
   }
 }

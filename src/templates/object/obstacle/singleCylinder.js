@@ -17,8 +17,6 @@ export class SingleCylinder extends SuperObject {
 
     this.cylinder.setLocalPosition(0, randHeight / 2, 0);
     this.addChild(this.cylinder);
-
-    this.cylinder.model.material = this.OBSTACLE_MATERIAL;
   }
 
   spawnToPosition(position, spawnContainer) {

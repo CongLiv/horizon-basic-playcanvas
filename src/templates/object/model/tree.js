@@ -1,6 +1,6 @@
 import { Entity } from "playcanvas";
 import { assets } from "../../../assetLoader/assets";
-
+import { Game } from "../../../game";
 export class Tree extends Entity {
   constructor() {
     super();
@@ -20,7 +20,6 @@ export class Tree extends Entity {
       angularOffset: new pc.Vec3(0, 0, 0),
     });
 
-
     this.addComponent("rigidbody", {
       type: "dynamic",
       restitution: 0.5,
@@ -28,12 +27,6 @@ export class Tree extends Entity {
     this.rigidbody.angularFactor = pc.Vec3.ZERO;
     this.rigidbody.linearFactor = pc.Vec3.ZERO;
 
-    
-    let material = new pc.StandardMaterial();
-    material.diffuse = new pc.Color(0.5, 0.5, 0.5);
-    material.update();
-
-    this.model.model.meshInstances[0].material = material;
-  
+    this.model.model.meshInstances[0].material = Game.currentObjectMaterial;
   }
 }

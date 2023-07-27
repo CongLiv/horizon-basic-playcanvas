@@ -10,10 +10,10 @@ export class FallBox extends SuperObject {
   }
 
   _createObject() {
-    let direction = Utils.getChance(0.5) ? 1 : -1;  // 1 for right, -1 for left
+    let direction = Utils.getChance(0.5) ? 1 : -1; // 1 for right, -1 for left
     for (let i = -20; i <= 20; i += 10) {
       let box = new Box(1.5, 20, 3);
-      box.model.material = this.OBSTACLE_MATERIAL;
+
       box.addComponent("script");
       box.script.create("fallBoxScript", {
         attributes: {

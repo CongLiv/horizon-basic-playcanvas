@@ -47,6 +47,8 @@ export function SpawnObject() {
     this._changeObstacleCounter = 0;
 
     // init spawn
+    let ground = new Ground1();
+    ground.spawnToPosition(new Vec3(0, 0, 300), this.spawnContainer);
     this._spawnGround();
   };
 
@@ -136,9 +138,7 @@ export function SpawnObject() {
           this.spawnContainer
         );
         i += obstacle.objectWidth;
-      }
-
-      else if (Utils.getChance(this._spawnCollectableChance)) {
+      } else if (Utils.getChance(this._spawnCollectableChance)) {
         let collectable = new SetGem();
         collectable.spawnToPosition(
           new Vec3(i, 0, this.entity.getPosition().z),

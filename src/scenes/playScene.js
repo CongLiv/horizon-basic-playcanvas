@@ -33,6 +33,7 @@ export class PlayScene extends Scene {
   }
 
   _initialize() {
+    this._initColor();
     this._initSound();
     this._initLight();
     this._initPlayer();
@@ -48,6 +49,12 @@ export class PlayScene extends Scene {
     Game.Sound = new Sound();
     this.addChild(Game.Sound);
   }
+
+  _initColor() {
+    this.addComponent("script");
+    this.script.create("colorManager");
+  }
+
   _initLight() {
     this.directionalLight = new Light();
     this.addChild(this.directionalLight);
@@ -133,10 +140,6 @@ export class PlayScene extends Scene {
     this.addChild(this.spawnContainer);
     this.objectSpawner = new ObjectSpawner(this.spawnContainer);
     this.addChild(this.objectSpawner);
-
-    // init ground
-    this.ground = new Ground1();
-    this.ground.spawnToPosition(new pc.Vec3(0, 0, 300), this.spawnContainer);
   }
 
   update(dt) {

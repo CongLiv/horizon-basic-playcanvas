@@ -5,14 +5,6 @@ export function SkyboxScript() {
 
   skyboxScript.prototype.initialize = function () {
     this._alpha = 0;
-
-    this._listColor = [
-      Utils.getColor(194, 222, 220), // gray
-      Utils.getColor(244, 177, 131), // orange
-      Utils.getColor(160, 191, 224), // blue
-      Utils.getColor(179, 200, 144), // green
-      Utils.getColor(236, 229, 199), // yellow
-    ];
   };
 
   skyboxScript.prototype.update = function (dt) {
@@ -24,7 +16,7 @@ export function SkyboxScript() {
       // make target color is squential color
       let targetColorIndex = Math.floor(currentPoint / 100);
       if (targetColorIndex > 4) targetColorIndex = 4;
-      this.targetColor = this._listColor[targetColorIndex];
+      this.targetColor = Game.skyboxColorList[targetColorIndex];
       this.currentColor = this.entity._scene.ambientLight;
     }
 

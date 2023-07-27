@@ -44,6 +44,7 @@ import { SkinBarScript } from "./script/ui/skinUI/skinBarScript.js";
 import { Sound } from "./templates/sound/sound.js";
 import { GemScript } from "./script/object/gemScript.js";
 import { SoundScript } from "./script/sound/soundScript.js";
+import { ColorManager } from "./system/colorManager.js";
 
 export class Game {
   static onDebug = false;
@@ -54,6 +55,13 @@ export class Game {
   static highestPoint = 0;
   static Sound = null;
   static gemPoint = 0;
+  static objectColorList = [];
+  static groundColorList = [];
+  static skyboxColorList = [];
+  static currentObjectColor = null;
+  static currentGroundColor = null;
+  static currentObjectMaterial = null;
+  static currentGroundMaterial = null;
 
   static init() {
     const canvas = document.createElement("canvas");
@@ -101,6 +109,7 @@ export class Game {
     SkinBarScript();
     GemScript();
     SoundScript();
+    ColorManager();
 
     WasmModule.getInstance("Ammo", () => {
       AssetLoader.loadAssets(this.app, () => {
