@@ -1,6 +1,7 @@
 import { log } from "playcanvas";
 import { Game } from "../../game";
-import { ExplosiveParticle } from "../../templates/entity/explosiveParticle";
+import { ExplosiveParticle } from "../../templates/particle/explosiveParticle";
+import { GemParticle } from "../../templates/particle/gemParticle";
 
 export function PlaneControl() {
   var planeControl = pc.createScript("planeControl");
@@ -32,6 +33,9 @@ export function PlaneControl() {
 
     this.explosiveParticle = new ExplosiveParticle();
     this.entity.addChild(this.explosiveParticle);
+    this.explosiveParticle.particleEntity.particlesystem.on("end", () => {
+      this.destroyPlayer();
+    });
   };
 
   // update code called every frame
@@ -124,20 +128,17 @@ export function PlaneControl() {
       this.app.fire("spawnObject:endGame", true);
       Game.lastSkin = Game.player.name;
       // save point
-      Game.lastPoint = this.entity.getPosition().z / 10;
+      Game.lastPoint = this.entity.getPosition().z / 10 + Game.gemPoint;
       Game.highestPoint = Math.max(Game.highestPoint, Game.lastPoint);
-
+      Game.gemPoint = 0;
       // play particle before destroy
       this.entity.model.enabled = false;
       this.explosiveParticle.play();
-      this.explosiveParticle.particleEntity.particlesystem.on("end", () => {
-        this.destroyPlayer();
-      });
-    }
-
-    else if (env.tags.has("collectable")) {
+    } else if (env.tags.has("collectable")) {
       if (env.tags.has("gem")) {
         Game.Sound.playGemSound();
+        // rest logic for gem in gemScript
+        env.gemCollected();
       }
     }
   };

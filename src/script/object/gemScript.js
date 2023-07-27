@@ -1,3 +1,5 @@
+import { GemParticle } from "../../templates/particle/gemParticle";
+
 export function GemScript() {
   var gemScript = new pc.createScript("gemScript");
 

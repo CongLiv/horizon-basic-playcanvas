@@ -1,6 +1,7 @@
 import { Entity } from "playcanvas";
 import { assets } from "../../../assetLoader/assets";
 import { Game } from "../../../game";
+import { GemParticle } from "../../particle/gemParticle";
 
 export class Gem extends Entity {
   constructor() {
@@ -14,14 +15,8 @@ export class Gem extends Entity {
 
     this.setLocalScale(2, 2, 2);
     this.addComponent("collision", {
-      // type: "box",
-      // halfExtents: new pc.Vec3(1.5, 1.5, 1.5),
-      // linearOffset: new pc.Vec3(0, 1, 0),
-      // angularOffset: new pc.Vec3(0, 0, 0),
-
       type: "mesh",
       asset: assets.gemModel,
-      
     });
 
     this.addComponent("rigidbody", {
@@ -36,5 +31,17 @@ export class Gem extends Entity {
     material.update();
 
     this.model.model.meshInstances[0].material = material;
+
+    this.gemParticle = new GemParticle();
+    this.addChild(this.gemParticle);
+    this.gemParticle.particleEntity.particlesystem.on("end", () => {
+      this.destroy();
+    });
+  }
+
+  gemCollected() {
+    this.model.enabled = false;
+    this.gemParticle.play();
+    Game.gemPoint += 5; 
   }
 }

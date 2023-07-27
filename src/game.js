@@ -53,6 +53,7 @@ export class Game {
   static lastPoint = 0;
   static highestPoint = 0;
   static Sound = null;
+  static gemPoint = 0;
 
   static init() {
     const canvas = document.createElement("canvas");

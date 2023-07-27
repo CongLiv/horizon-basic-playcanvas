@@ -15,13 +15,7 @@ export class Sound extends Entity {
   }
 
   _initSound() {
-    this.sound.addSlot("themesound", {
-      asset: assets.themeSound,
-      pitch: 1,
-      loop: true,
-      autoPlay: false,
-    });
-
+  
     this.sound.addSlot("click", {
       asset: assets.clickSound,
       pitch: 1,

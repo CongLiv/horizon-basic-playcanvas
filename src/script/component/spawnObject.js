@@ -42,7 +42,7 @@ export function SpawnObject() {
     this._isEnd = false;
 
     this._spawnChance = 0.3;
-    this._spawnCollectableChance = 0.6;
+    this._spawnCollectableChance = 0.1;
     this._lastObstacleType = null;
     this._changeObstacleCounter = 0;
 
