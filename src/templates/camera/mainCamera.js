@@ -15,7 +15,7 @@ export class MainCamera extends Entity {
     this.addComponent("script");
     this.script.create("cameraFollow", {
         attributes: {
-            offset: new pc.Vec3(0, 3, Game.player.forwardSpeed - 15 - Game.player.forwardSpeed * 0.01),
+            Offset: new pc.Vec3(0, 4.8, Game.player.forwardSpeed - 18 - Game.player.forwardSpeed * 0.01),
         },
 
     });

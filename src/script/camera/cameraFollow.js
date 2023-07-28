@@ -3,7 +3,7 @@ import { Game } from "../../game";
 export function CameraFollow() {
   var cameraFollow = pc.createScript("cameraFollow");
 
-  cameraFollow.attributes.add("offset", {
+  cameraFollow.attributes.add("Offset", {
     type: "vec3",
     default: [0, 0, 0],
     title: "Offset",
@@ -18,9 +18,9 @@ export function CameraFollow() {
     this._velocity = new pc.Vec3(); // Vận tốc của camera
     this._lastX = 0; // Vị trí x cuối cùng của camera
     this.offset = new pc.Vec3(
-      0,
-      6,
-      Game.player.forwardSpeed - 15 - Game.player.forwardSpeed * 0.01
+      this.Offset.x,
+      this.Offset.y,
+      this.Offset.z
     );
     this.entity.setLocalEulerAngles(-8, 180, 0);
     this.app.on("cameraFollow:startGame", this._startGame, this);
