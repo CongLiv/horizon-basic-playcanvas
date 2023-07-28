@@ -8,6 +8,7 @@ export const assets = {
     plane5Model: new Asset("planeModel", "model", {url: "assets/models/plane5.glb"}),
     treeModel: new Asset("treeModel", "model", {url: "assets/models/tree.glb"}),
     gemModel: new Asset("gemModel", "model", {url: "assets/models/gem.glb"}),
+    cactusModel: new Asset("cactusModel", "model", {url: "assets/models/cactus.glb"}),
 
     flyAnim: new Asset("flyAnim", "animation", {url: "assets/anims/flying.glb"}),
     waverAnim: new Asset("waverAnim", "animation", {url: "assets/anims/waver.glb"}),

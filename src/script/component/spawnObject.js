@@ -17,6 +17,7 @@ import { RotateBox } from "../../templates/object/obstacle/rotateBox";
 import { MoveSphere } from "../../templates/object/obstacle/moveSphere";
 import { SpawnLevel } from "../component/spawnLevel";
 import { SetGem } from "../../templates/object/collectable/setGem";
+import { SingleCactus } from "../../templates/object/obstacle/singleCactus";
 
 export function SpawnObject() {
   var spawnObject = new pc.createScript("spawnObject");
@@ -120,7 +121,10 @@ export function SpawnObject() {
       if (Utils.getChance(this._spawnChance)) {
         let obstacle = null;
         let spawnGeneralChance = Utils.getChance(0.4);
-        if (spawnGeneralChance || this._lastObstacleType == "moveSphere") {
+        if (Game.player.position.z > 900 && Game.player.position.z < 1600 && Utils.getChance(0.5)) {
+          obstacle = new SingleCactus();
+        }
+        else if (spawnGeneralChance || this._lastObstacleType == "moveSphere") {
           obstacle = this._getObstacle(this._lastObstacleType);
         } else {
           obstacle = this._getObstacle(
@@ -186,6 +190,9 @@ export function SpawnObject() {
         return new RotateBox();
       case "moveSphere":
         return new MoveSphere();
+      case "singleCactus":
+        return new SingleCactus();
+
       default:
         return new SetBox();
     }

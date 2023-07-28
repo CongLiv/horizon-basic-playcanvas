@@ -5,13 +5,13 @@ export const SpawnLevel = {
   },
 
   level2: {
-    general: ["singleBox", "singleCylinder", "singleCone", "setBox", "setCone"],
+    general: ["singleCone", "setBox", "setCone"],
     single: ["singleBox", "singleCylinder", "singleCone", "setBox", "setCone"],
   },
 
   level3: {
     general: ["setBox", "adjoinBox", "matrixCyliner", "moveSphere"],
-    single: [, "singleBox", "singleCylinder", "singleCone"],
+    single: ["singleBox", "singleCylinder", "singleCone"],
   },
 
   level4: {
