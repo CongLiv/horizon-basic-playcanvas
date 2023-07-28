@@ -13,7 +13,8 @@ export class FallBox extends SuperObject {
     let direction = Utils.getChance(0.5) ? 1 : -1; // 1 for right, -1 for left
     for (let i = -20; i <= 20; i += 10) {
       let box = new Box(1.5, 20, 3);
-
+      box.rigidbody.angularFactor = new pc.Vec3(1, 1, 1);
+      box.rigidbody.linearFactor = new pc.Vec3(1, 1, 0);
       box.addComponent("script");
       box.script.create("fallBoxScript", {
         attributes: {
