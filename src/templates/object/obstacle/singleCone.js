@@ -6,7 +6,7 @@ export class SingleCone extends SuperObject {
   constructor() {
     super();
     this.tags.add("obstacle");
-    this.objectWidth = 15;
+    this.objectWidth = 18;
   }
 
   _createObject() {
