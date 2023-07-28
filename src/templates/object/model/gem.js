@@ -31,11 +31,7 @@ export class Gem extends Entity {
     this.rigidbody.mask |= pc.BODYGROUP_USER_1;
     this.rigidbody.mask |= pc.BODYGROUP_USER_2;
 
-    let material = new pc.StandardMaterial();
-    material.diffuse = new pc.Color(1, 1, 0.8);
-    material.update();
-
-    this.model.model.meshInstances[0].material = material;
+    this.model.model.meshInstances[0].material = Game.GEM_MATERIAL;
 
     this.gemParticle = new GemParticle();
     this.addChild(this.gemParticle);

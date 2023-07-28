@@ -62,6 +62,7 @@ export class Game {
   static currentGroundColor = null;
   static currentObjectMaterial = null;
   static currentGroundMaterial = null;
+  static GEM_MATERIAL = null;
 
   static init() {
     const canvas = document.createElement("canvas");

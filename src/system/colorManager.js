@@ -40,6 +40,10 @@ export function ColorManager() {
     Game.currentGroundMaterial.update();
     Game.currentObjectMaterial.update();
     this.app.on("colorManager:reset", this._resetColor, this);
+
+    Game.GEM_MATERIAL = new pc.StandardMaterial();
+    Game.GEM_MATERIAL.diffuse = Utils.getColor(242, 238, 157);
+    Game.GEM_MATERIAL.update();
   };
 
   colorManager.prototype.update = function (dt) {
