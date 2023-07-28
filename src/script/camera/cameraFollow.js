@@ -40,6 +40,10 @@ export function CameraFollow() {
 
   // update code called every frame
   cameraFollow.prototype.update = function (dt) {
+    if (Game.currentObjectMaterial) {
+      Game.currentObjectMaterial.setParameter("cameraPos", this.entity.getPosition().data);
+      Game.currentGroundMaterial.setParameter("cameraPos", this.entity.getPosition().data);
+    }
     if (!this._isStart) {
       // make camera move around the plane when the game starts
       this._moveCameraStart += dt / 10;
