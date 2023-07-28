@@ -7,16 +7,16 @@ export function ColorManager() {
   colorManager.prototype.initialize = function () {
     Game.skyboxColorList = [
       Utils.getColor(161, 204, 209), // gray
-      Utils.getColor(253, 216, 156), // orange
+      Utils.getColor(250, 216, 156), // orange
       Utils.getColor(161, 204, 209), // blue
       Utils.getColor(160, 216, 179), // green
-      Utils.getColor(229, 220, 195), // yellow
+      Utils.getColor(229, 220, 195), // white
     ];
 
     Game.groundColorList = [
       Utils.getColor(128, 128, 128), // gray
       Utils.getColor(241, 194, 123), 
-      Utils.getColor(233, 179, 132), 
+      Utils.getColor(253, 184, 144), 
       Utils.getColor(162, 163, 120),
       Utils.getColor(199, 190, 162),
     ];
