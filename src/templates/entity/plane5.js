@@ -28,7 +28,7 @@ export class Plane5 extends SuperPlayer {
     // });
     // this.rigidbody.angularFactor = pc.Vec3.ZERO;
     // this.rigidbody.linearFactor = pc.Vec3.ZERO;
-
+    this.addGroupAndMask();
     this.flyMesh = new FlyMesh();
 
     this.addChild(this.flyMesh);

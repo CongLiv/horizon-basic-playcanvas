@@ -14,7 +14,7 @@ export function PlaneControl() {
     this._maxLean = 2.5; // Góc nghiêng tối đa (tùy chỉnh theo nhu cầu)
     this._flyHeight = Game.player.flyHeight; // Độ cao khi máy bay bay
     this.entity.setPosition(0, this._flyHeight, 0);
-    this.entity.collision.on("triggerenter", this.onTriggerEnter, this);
+    this.entity.collision.on("collisionstart", this.onTriggerEnter, this);
     this._isStart = false;
     this._isEnd = false;
 
@@ -120,7 +120,7 @@ export function PlaneControl() {
   };
 
   planeControl.prototype.onTriggerEnter = function (env) {
-    if (env.tags.has("obstacle")) {
+    if (env.other.tags.has("obstacle")) {
       this._isEnd = true;
       Game.Sound.play("explosion");
       this.app.fire("managerUI:endGame", true);
@@ -134,11 +134,11 @@ export function PlaneControl() {
       // play particle before destroy
       this.entity.model.enabled = false;
       this.explosiveParticle.play();
-    } else if (env.tags.has("collectable")) {
-      if (env.tags.has("gem")) {
+    } else if (env.other.tags.has("collectable")) {
+      if (env.other.tags.has("gem")) {
         Game.Sound.playGemSound();
         // rest logic for gem in gemScript
-        env.gemCollected();
+        env.other.gemCollected();
       }
     }
   };

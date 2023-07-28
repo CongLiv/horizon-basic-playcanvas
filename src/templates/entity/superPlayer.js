@@ -24,5 +24,16 @@ export class SuperPlayer extends Entity {
     this.destroy();
   }
 
-  
+  addGroupAndMask() {
+    this.addComponent("rigidbody", {
+      type: "kinematic",
+      restitution: 0,
+    });
+    this.rigidbody.group = 0;
+    this.rigidbody.mask = 0;
+    this.rigidbody.group |= pc.BODYGROUP_USER_1;
+    this.rigidbody.mask |= pc.BODYGROUP_USER_1;
+    this.rigidbody.mask |= pc.BODYGROUP_USER_2;
+    this.rigidbody.mask |= pc.BODYGROUP_USER_3;
+  }
 }
