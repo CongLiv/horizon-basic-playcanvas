@@ -9,7 +9,7 @@ export class FlyMesh extends Entity {
         attributes: {
             yoffset: 0.4,
             xoffset: -0.4,
-            lifetime: 0.17
+            lifetime: 0.25,
         }
     })
   }
