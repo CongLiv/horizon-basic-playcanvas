@@ -144,6 +144,8 @@ export function SpawnObject() {
           new Vec3(i, 0, this.entity.getPosition().z),
           this.spawnContainer
         );
+
+        i += collectable.objectWidth;
       }
     }
   };

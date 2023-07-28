@@ -5,6 +5,7 @@ export class MoveSphere extends SuperObject {
   constructor() {
     super();
     this.tags.add("obstacle");
+    this.objectWidth = 8;
   }
 
   _createObject() {

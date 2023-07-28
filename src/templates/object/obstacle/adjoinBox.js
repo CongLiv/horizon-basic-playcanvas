@@ -5,7 +5,7 @@ export class AdjoinBox extends SuperObject {
   constructor() {
     super();
     this.tags.add("obstacle");
-    this.objectWidth = 10;
+    this.objectWidth = 20;
   }
 
   _createObject() {
