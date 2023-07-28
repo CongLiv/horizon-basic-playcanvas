@@ -14,6 +14,8 @@ export class SuperPlayer extends Entity {
     this.isTurnLeft = false;
     this.isTurnRight = false;
     this.isMovingStraight = true;
+
+    this.flyHeight = 5;
   }
 
   update(dt) {}

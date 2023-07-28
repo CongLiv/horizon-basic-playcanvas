@@ -12,7 +12,7 @@ export function PlaneControl() {
     this._leanAngle = 0; // Góc nghiêng hiện tại của máy bay
     this._leanSpeed = 8; // Tốc độ nghiêng (tùy chỉnh theo nhu cầu)
     this._maxLean = 2.5; // Góc nghiêng tối đa (tùy chỉnh theo nhu cầu)
-    this._flyHeight = 5; // Độ cao khi máy bay bay
+    this._flyHeight = Game.player.flyHeight; // Độ cao khi máy bay bay
     this.entity.setPosition(0, this._flyHeight, 0);
     this.entity.collision.on("triggerenter", this.onTriggerEnter, this);
     this._isStart = false;

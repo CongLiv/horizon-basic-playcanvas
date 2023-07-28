@@ -44,7 +44,7 @@ export function CameraFollow() {
       // make camera move around the plane when the game starts
       this._moveCameraStart += dt / 10;
 
-      this.entity.setPosition(Math.sin(this._moveCameraStart) * 5, 7, -12);
+      this.entity.setPosition(Math.sin(this._moveCameraStart) * 5, Game.player.flyHeight + 2, -12);
       this.entity.lookAt(Game.player.getPosition() + new Vec3(0, 2, 0));
 
       return;
