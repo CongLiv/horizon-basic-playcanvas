@@ -17,11 +17,7 @@ export function CameraFollow() {
     this._smoothTime = 1; // Thời gian mượn camera
     this._velocity = new pc.Vec3(); // Vận tốc của camera
     this._lastX = 0; // Vị trí x cuối cùng của camera
-    this.offset = new pc.Vec3(
-      this.Offset.x,
-      this.Offset.y,
-      this.Offset.z
-    );
+    this.offset = new pc.Vec3(this.Offset.x, this.Offset.y, this.Offset.z);
     this.entity.setLocalEulerAngles(-8, 180, 0);
     this.app.on("cameraFollow:startGame", this._startGame, this);
     this.app.on("cameraFollow:endGame", this._endGame, this);
@@ -40,11 +36,25 @@ export function CameraFollow() {
 
   // update code called every frame
   cameraFollow.prototype.update = function (dt) {
+    if (Game.currentObjectMaterial) {
+      Game.currentObjectMaterial.setParameter(
+        "cameraPos",
+        this.entity.getPosition().data
+      );
+      Game.currentGroundMaterial.setParameter(
+        "cameraPos",
+        this.entity.getPosition().data
+      );
+    }
     if (!this._isStart) {
       // make camera move around the plane when the game starts
       this._moveCameraStart += dt / 10;
 
-      this.entity.setPosition(Math.sin(this._moveCameraStart) * 5, Game.player.flyHeight + 2, -12);
+      this.entity.setPosition(
+        Math.sin(this._moveCameraStart) * 5,
+        Game.player.flyHeight + 2,
+        -12
+      );
       this.entity.lookAt(Game.player.getPosition() + new Vec3(0, 2, 0));
 
       return;
